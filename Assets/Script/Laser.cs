@@ -30,10 +30,6 @@ public class Laser : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// ”½ŽË‚·‚é
-    /// </summary>
-    /// <param name="collision"></param>
     void Reflect(Collision collision)
     {
         refrectVec = Vector3.Reflect(this.lastVelocity, collision.contacts[0].normal);
@@ -43,7 +39,7 @@ public class Laser : MonoBehaviour
 
     void OnTriggerStay(Collider collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" || collision.tag == "Barrier")
         {
             Destroy(gameObject);
         }

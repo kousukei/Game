@@ -44,7 +44,6 @@ public class ConvexMirror : MonoBehaviour
 
     void LaserInstatiate(Vector3 pos, Quaternion rot , Vector3 RefrectRot)
     {
-        Debug.Log("“®‚¢‚Ä‚é");
         GameObject newLaser = Instantiate(laserPrefab, pos, rot);
         newLaser.GetComponent<SphereCollider>().isTrigger = true;
         newLaser.GetComponent<Rigidbody>().velocity = RefrectRot;

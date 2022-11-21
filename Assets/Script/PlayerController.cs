@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public HpBar hpBar;
+    public GameObject planeMirror;
+    public GameObject convexMirror;
+    public GameObject concaveMirror;
     public float speed;
 
     Plane plane = new Plane();
@@ -12,15 +16,29 @@ public class PlayerController : MonoBehaviour
 
     float distance; //ray‚©‚ç‚Ì‹——£
     float horizontalKey, verticalKey;
+    bool isTrue = true;
+    bool isFalse = false;
 
+    Mirror mirror;
+    enum Mirror
+    {
+        planeMirror,
+        convexMirror,
+        concaveMirror
+    }
     void Start()
     {
+        mirror = Mirror.planeMirror;
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+
         horizontalKey = Input.GetAxis("Horizontal");
         verticalKey = Input.GetAxis("Vertical");
 
@@ -30,6 +48,19 @@ public class PlayerController : MonoBehaviour
         {
             var lookPoint = ray.GetPoint(distance);
             transform.LookAt(lookPoint);
+        }
+
+        if (mirror == Mirror.planeMirror)
+        {
+            MirrorChange(isTrue, isFalse, isFalse, Mirror.convexMirror);
+        }
+        else if (mirror == Mirror.convexMirror)
+        {
+            MirrorChange(isFalse, isTrue, isFalse, Mirror.concaveMirror);
+        }
+        else if (mirror == Mirror.concaveMirror)
+        {
+            MirrorChange(isFalse, isFalse, isTrue, Mirror.planeMirror);
         }
     }
 
@@ -44,6 +75,24 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.velocity = vec3 * speed ;
+        }
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Laser")
+        {
+            hpBar.Damage();
+        }
+    }
+
+    void MirrorChange(bool plaMirrorAct, bool conveMirrorAct, bool concaMirrorAct, Mirror nextMirror)
+    {
+        planeMirror.SetActive(plaMirrorAct);
+        convexMirror.SetActive(conveMirrorAct) ;
+        concaveMirror.SetActive(concaMirrorAct) ;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            mirror = nextMirror;
         }
     }
 }

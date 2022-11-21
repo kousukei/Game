@@ -6,17 +6,9 @@ public class ConvexMirror : MonoBehaviour
 {
     public GameObject laserPrefab;
 
-    private float  fowerdSpeed = 5.0f;
-    private float sideSpeed;
-
-    private float destroyTime = 1.5f;
-    private float timeleft;
-    private Rigidbody2D rb;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    float  fowerdSpeed = 5.0f;
+    float destroyTime = 1.5f;
+    float timeleft;
 
     void Update()
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,12 @@ public class SkillScript : MonoBehaviour
     [SerializeField, Header("表示させる画像")]
     private Sprite[] sprite;
     public Barrier barrierScript;
+    public HpBar HealScript;
+    public EnergyBar energyBar;
+
+    float healEneCost = 50f;
+    float barrierEneCost = 50f;
+    float decoyEneCost = 30f;
 
     SkillName skill;
     enum SkillName
@@ -26,20 +33,39 @@ public class SkillScript : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             if (skill == SkillName.heal)
             {
-                Debug.Log("回復した！");
+                if (energyBar.currentEne >= healEneCost)
+                {
+                    HealScript.Heal();
+                    energyBar.EneBarControll(healEneCost) ;
+                }
             }
             else if (skill == SkillName.barrier)
             {
-                Debug.Log("バリアを張った！");
-                barrierScript.BarrierSkill();
+
+                if (energyBar.currentEne >= barrierEneCost)
+                {
+                    if (!barrierScript.isBarrierSkill)
+                    {
+                        barrierScript.BarrierSkill();
+                        energyBar.EneBarControll(barrierEneCost);
+                    }
+                }
             }
             else if(skill == SkillName.decoy)
             {
-                Debug.Log("デコイを出した！");
+                if (energyBar.currentEne >= decoyEneCost)
+                {
+                    Debug.Log("デコイを出した！");
+                    energyBar.EneBarControll(decoyEneCost);
+                }
             }
         }
 
@@ -47,25 +73,30 @@ public class SkillScript : MonoBehaviour
         {
             if (skill == SkillName.heal)
             {
-                skill = SkillName.barrier;
-                image[0].sprite = sprite[1];
-                image[1].sprite = sprite[2];
-                image[2].sprite = sprite[0];
+                SkillChange(SkillName.barrier, sprite[1], sprite[2], sprite[0]);
             }
             else if (skill == SkillName.barrier)
             {
-                skill = SkillName.decoy;
-                image[0].sprite = sprite[2];
-                image[1].sprite = sprite[0];
-                image[2].sprite = sprite[1];
+                SkillChange(SkillName.decoy, sprite[2], sprite[0], sprite[1]);
             }
             else if (skill == SkillName.decoy)
             {
-                skill = SkillName.heal;
-                image[0].sprite = sprite[0];
-                image[1].sprite = sprite[1];
-                image[2].sprite = sprite[2];
+                SkillChange(SkillName.heal, sprite[0], sprite[1], sprite[2]);
             }
         }
     }
+
+    void SkillChange(SkillName skillname, Sprite first, Sprite second, Sprite third)
+    {
+        skill = skillname;
+        image[0].sprite = first ;
+        image[1].sprite = second ;
+        image[2].sprite = third ;
+    }
+
+    void SkillStatus()
+    {
+
+    }
+
 }

@@ -7,8 +7,8 @@ public class HpBar : MonoBehaviour
 {
     [Header("HP‚ÌSlider")] public Slider hpSlider;
 
-    int maxHp = 100;
-    int currentHp;
+    [System .NonSerialized]public int maxHp = 100;
+    [System.NonSerialized]public int currentHp;
     int damage = 10;
     int heal;
 

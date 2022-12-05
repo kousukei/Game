@@ -41,10 +41,13 @@ public class SkillScript : MonoBehaviour
         {
             if (skill == SkillName.heal)
             {
-                if (energyBar.currentEne >= healEneCost)
+                if (energyBar.currentEne > healEneCost)
                 {
-                    HealScript.Heal();
-                    energyBar.EneBarControll(healEneCost) ;
+                    if (HealScript.currentHp < HealScript.maxHp)
+                    {
+                        HealScript.Heal();
+                        energyBar.EneBarControll(healEneCost);
+                    }
                 }
             }
             else if (skill == SkillName.barrier)

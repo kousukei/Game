@@ -88,8 +88,8 @@ public class PlayerController : MonoBehaviour
     void MirrorChange(bool plaMirrorAct, bool conveMirrorAct, bool concaMirrorAct, Mirror nextMirror)
     {
         planeMirror.SetActive(plaMirrorAct);
-        convexMirror.SetActive(conveMirrorAct) ;
-        concaveMirror.SetActive(concaMirrorAct) ;
+        convexMirror.SetActive(conveMirrorAct);
+        concaveMirror.SetActive(concaMirrorAct);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             mirror = nextMirror;

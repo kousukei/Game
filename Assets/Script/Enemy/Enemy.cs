@@ -8,11 +8,14 @@ namespace enemy
     {
         Vector3 randomPosition;
         Vector3 u;
+        Vector3 difference;
         bool y;
         public float a=20;
+        GameObject player;
         void Start()
         {
             randomPosition = transform.position;
+            player = GameObject.Find("Player");
         }
 
         // Update is called once per frame
@@ -35,6 +38,11 @@ namespace enemy
 
             randomPosition = new Vector3(Random.Range(1f, 10f), 1, Random.Range(1f, 10f));
             return randomPosition;
+        }
+        public Vector3 Judgement(Transform player,Transform enemy)
+        {
+            difference = player.position - enemy.position;
+            return difference;
         }
 
     }

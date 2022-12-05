@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -432,7 +432,7 @@ MonoBehaviour:
   planeMirror: {fileID: 1110139648}
   convexMirror: {fileID: 1920254729}
   concaveMirror: {fileID: 1580112265}
-  speed: 4
+  speed: 10
 --- !u!1 &229171135
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,7 +646,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316362447}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 991542626db58f04f96b4f210b12c8a5, type: 3}
   m_Name: 
@@ -2048,8 +2048,9 @@ GameObject:
   - component: {fileID: 1515569307}
   - component: {fileID: 1515569306}
   - component: {fileID: 1515569305}
+  - component: {fileID: 1515569309}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: Enemy_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2134,6 +2135,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1515569309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1515569304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c757f4bacf5e44f81d90f6d12d926d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1 &1580112265
 GameObject:
   m_ObjectHideFlags: 0

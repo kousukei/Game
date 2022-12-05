@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 7393606498844978982}
   - component: {fileID: 4291769017400000006}
   - component: {fileID: -2565906792599558413}
+  - component: {fileID: 2000011988223803196}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,3 +115,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2000011988223803196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618306989853846486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ceb8c9b7a9bfb44af56d02b8d98340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastVelocity: {x: 0, y: 0, z: 0}
+  refrectVec: {x: 0, y: 0, z: 0}

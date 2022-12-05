@@ -20,7 +20,7 @@ public class Laser : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Mirror")
+        if (collision.gameObject.tag == "Mirror"|| collision.gameObject.tag == "Laser")
         {
             Reflect(collision);
         }

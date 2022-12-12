@@ -7,8 +7,9 @@ public class Enemy_1: MonoBehaviour
 {
     Enemy enemy = new Enemy();
     GameObject Player;
-    Vector3 difference;
+    //Vector3 difference;
     public float speed;
+    public float muki;
     float time;
     enum Mode
     {
@@ -18,12 +19,13 @@ public class Enemy_1: MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("Player");
+        Debug.Log(this.gameObject.name);
     }
 
     
     void Update()
     {
-        Debug.Log(enemy.Judgement(Player.transform,this.transform));
+        //Debug.Log(enemy.Judgement(Player.transform,this.transform));
         switch (mode)
         {
             case Mode.ë“ã@:
@@ -32,6 +34,7 @@ public class Enemy_1: MonoBehaviour
                 break;
             case Mode.à⁄ìÆ:
                 enemy.move(this.transform, speed);
+                enemy.Direction(Player, this.gameObject, muki);
                 break;
             case Mode.çUåÇ:
 

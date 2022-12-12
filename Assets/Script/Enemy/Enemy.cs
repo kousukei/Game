@@ -14,7 +14,7 @@ namespace enemy
         GameObject player;
         void Start()
         {
-            randomPosition = transform.position;
+            //randomPosition = transform.position;
             player = GameObject.Find("Player");
         }
 
@@ -32,17 +32,29 @@ namespace enemy
             }
             en.position = Vector3.MoveTowards(en.position, u, speed * Time.deltaTime);
         }
-
         Vector3 random()
         {
 
-            randomPosition = new Vector3(Random.Range(1f, 10f), 1, Random.Range(1f, 10f));
+            randomPosition = new Vector3(Random.Range(1f, 10f), 0.5f, Random.Range(1f, 10f));
             return randomPosition;
         }
         public Vector3 Judgement(Transform player,Transform enemy)
         {
             difference = player.position - enemy.position;
             return difference;
+        }
+        public void Direction(GameObject player,GameObject enemy,float speed)
+        {
+
+            Vector3 vector3 = u - enemy.transform.position;
+            Quaternion quaternion = Quaternion.LookRotation(vector3);
+            enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, quaternion, speed);
+            //if (/*ÉvÉåÉCÉÑÅ[Ç∆âÔÇ¡ÇΩÇÁ*/)
+            //{
+            //Vector3 vector3 = player.transform.position - enemy.transform.position;
+            //Quaternion quaternion = Quaternion.LookRotation(vector3);
+            //enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, quaternion, speed);
+            //}
         }
 
     }

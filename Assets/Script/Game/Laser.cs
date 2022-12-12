@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-    public Vector3 lastVelocity;
-    public Vector3 refrectVec;
+    [System.NonSerialized]public Vector3 lastVelocity;
+    [System.NonSerialized]public Vector3 refrectVec;
+    [System.NonSerialized]public bool onConcaveMirror = false;
+
     Rigidbody rb;
+    float destroyTime = 3f;
 
     void Start()
     {
@@ -18,11 +21,22 @@ public class Laser : MonoBehaviour
         lastVelocity = rb.velocity;
     }
 
+    void Reflect(Collision collision)
+    {
+        refrectVec = Vector3.Reflect(this.lastVelocity, collision.contacts[0].normal);
+        rb.velocity = refrectVec;
+        Destroy(gameObject, destroyTime);
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Mirror"|| collision.gameObject.tag == "Laser")
+        if (collision.gameObject.tag == "Mirror" || collision.gameObject.tag == "Laser")
         {
             Reflect(collision);
+        }
+        else if (collision.gameObject.tag == "Enemy" && onConcaveMirror)
+        {
+            onConcaveMirror = false;
         }
         else
         {
@@ -30,18 +44,20 @@ public class Laser : MonoBehaviour
         }
     }
 
-    void Reflect(Collision collision)
-    {
-        refrectVec = Vector3.Reflect(this.lastVelocity, collision.contacts[0].normal);
-        this.rb.velocity = refrectVec;
-        Destroy(gameObject, 3.0f);
-    }
 
-    void OnTriggerStay(Collider collision)
+    void OnTriggerStay(Collider other)
     {
-        if (collision.tag == "Player" || collision.tag == "Barrier")
+        if (other.tag == "Player" || other.tag == "Barrier" || other.tag == "Enemy")
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Laser")
+        {
+            GetComponent<SphereCollider>().isTrigger = false;
         }
     }
 }

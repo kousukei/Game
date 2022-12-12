@@ -9,17 +9,12 @@ public class EnergyBar : MonoBehaviour
     [System.NonSerialized] public float currentEne;
 
     int maxEne = 100;
-    int eneHeal= 3;
+    int eneHeal= 5;
 
     void Start()
     {
         eneSlider.value = 1;
         currentEne = maxEne;
-    }
-
-    void Update()
-    {
-
     }
 
     public void EneBarControll(float cost)

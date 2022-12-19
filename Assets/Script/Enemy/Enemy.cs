@@ -15,7 +15,7 @@ namespace enemy
         GameObject player;
         void Start()
         {
-            //randomPosition = transform.position;
+            randomPosition = transform.position;
             player = GameObject.Find("Player");
         }
 
@@ -25,12 +25,11 @@ namespace enemy
 
         }
 
-        public void move(GameObject Enemy,Vector3 vector3, float speed)
+        public void move(GameObject Enemy, float speed)
         {
-            
             if (randomPosition == Enemy.transform.position)
             {
-                u = vector3;
+                u = random();
             }
             Enemy.transform.position = Vector3.MoveTowards(Enemy.transform.position, u, speed * Time.deltaTime);
         }
@@ -40,11 +39,6 @@ namespace enemy
             randomPosition = new Vector3(Random.Range(1f, 10f), 0.5f, Random.Range(1f, 10f));
             return randomPosition;
         }
-        //public Vector3 Judgement(Transform player,Transform enemy)
-        //{
-        //    difference = player.position - enemy.position;
-        //    return difference;
-        //}
         public void Direction(GameObject Player,GameObject Enemy,float speed)
         {
             if (Attack_range(Player,Enemy))
@@ -68,15 +62,21 @@ namespace enemy
             var th = Mathf.Acos(dot) * Mathf.Rad2Deg;
             Material ma;
             ma = Player.GetComponent<Renderer>().material;
-            Debug.Log(th);
-            if (th < 45)
+            float dist_z = Player.transform.position.z - Enemy.transform.position.z;
+            float dist_x = Player.transform.position.x - Enemy.transform.position.x;
+            float distance = Mathf.Sqrt(dist_z * dist_z + dist_x * dist_x);
+            Debug.Log(distance);
+            if (distance < 10)
             {
-                ma.color = Color.red;
-                return true;
-            }
-            else
-            {
-                ma.color = Color.white;
+                if (th < 20)
+                {
+                    ma.color = Color.red;
+                    return true;
+                }
+                else
+                {
+                    ma.color = Color.white;
+                }
             }
 
             return false;

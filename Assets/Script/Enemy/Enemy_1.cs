@@ -34,11 +34,11 @@ public class Enemy_1: MonoBehaviour
                 break;
             case Mode.移動:
                 //指定した範囲でランダム移動
-                //enemy.move(this.gameObject, speed);
+                enemy.move(this.gameObject, speed);
                 //キャラクターの向き
                 enemy.Direction(Player, this.gameObject, muki);
                 //攻撃範囲
-                if (enemy.Attack_range(Player,this.gameObject))
+                if (enemy.Attack_range(Player, this.gameObject))
                 {
                     //攻撃モードへ移す
                     mode = Mode.攻撃;
@@ -56,9 +56,5 @@ public class Enemy_1: MonoBehaviour
         }
 
     }
-    Vector3 random()
-    {
-        randomPosition = new Vector3(Random.Range(1f, 10f), 0.5f, Random.Range(1f, 10f));
-        return randomPosition;
-    }
+
 }

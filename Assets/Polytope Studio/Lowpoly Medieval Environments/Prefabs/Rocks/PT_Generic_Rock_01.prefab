@@ -260,7 +260,6 @@ GameObject:
   - component: {fileID: 7225362262138510385}
   - component: {fileID: 2458889648278727488}
   - component: {fileID: -3563282396113264441}
-  - component: {fileID: 1679935921905180829}
   m_Layer: 0
   m_Name: PT_Generic_Rock_01
   m_TagString: Untagged
@@ -327,16 +326,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -3282209725294213285, guid: f226223b3a11d2d4b980aaa520301583, type: 3}
---- !u!65 &1679935921905180829
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8002461263218542219}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
-  m_Center: {x: 0, y: 0.12, z: 0}

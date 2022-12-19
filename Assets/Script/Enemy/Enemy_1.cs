@@ -7,7 +7,7 @@ public class Enemy_1: MonoBehaviour
 {
     Enemy enemy = new Enemy();
     GameObject Player;
-    //Vector3 difference;
+    Vector3 randomPosition;
     public float speed;
     public float muki;
     float time;
@@ -19,7 +19,7 @@ public class Enemy_1: MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("Player");
-        Debug.Log(this.gameObject.name);
+        
     }
 
     
@@ -33,15 +33,32 @@ public class Enemy_1: MonoBehaviour
                 if (time >= 2) { mode = Mode.移動; }
                 break;
             case Mode.移動:
-                enemy.move(this.transform, speed);
+                //指定した範囲でランダム移動
+                //enemy.move(this.gameObject, speed);
+                //キャラクターの向き
                 enemy.Direction(Player, this.gameObject, muki);
+                //攻撃範囲
+                if (enemy.Attack_range(Player,this.gameObject))
+                {
+                    //攻撃モードへ移す
+                    mode = Mode.攻撃;
+                }
                 break;
             case Mode.攻撃:
-
+                //Vector3 player = Player.transform.position;
+                ////プレイヤーの方へ移動
+                //enemy.move(this.gameObject, player, speed);
+                //enemy.Direction(Player, this.gameObject,muki);
+                //Debug.Log("1");
                 break;
             case Mode.死亡:
                 break;
         }
 
+    }
+    Vector3 random()
+    {
+        randomPosition = new Vector3(Random.Range(1f, 10f), 0.5f, Random.Range(1f, 10f));
+        return randomPosition;
     }
 }

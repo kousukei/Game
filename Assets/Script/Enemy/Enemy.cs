@@ -11,6 +11,7 @@ namespace enemy
         Vector3 difference;
         bool y;
         public float a=20;
+        Material ma;
         GameObject player;
         void Start()
         {
@@ -24,13 +25,14 @@ namespace enemy
 
         }
 
-        public void move(Transform en,float speed)
+        public void move(GameObject Enemy,Vector3 vector3, float speed)
         {
-            if (randomPosition == en.position)
+            
+            if (randomPosition == Enemy.transform.position)
             {
-                u = random();
+                u = vector3;
             }
-            en.position = Vector3.MoveTowards(en.position, u, speed * Time.deltaTime);
+            Enemy.transform.position = Vector3.MoveTowards(Enemy.transform.position, u, speed * Time.deltaTime);
         }
         Vector3 random()
         {
@@ -38,23 +40,46 @@ namespace enemy
             randomPosition = new Vector3(Random.Range(1f, 10f), 0.5f, Random.Range(1f, 10f));
             return randomPosition;
         }
-        public Vector3 Judgement(Transform player,Transform enemy)
+        //public Vector3 Judgement(Transform player,Transform enemy)
+        //{
+        //    difference = player.position - enemy.position;
+        //    return difference;
+        //}
+        public void Direction(GameObject Player,GameObject Enemy,float speed)
         {
-            difference = player.position - enemy.position;
-            return difference;
+            if (Attack_range(Player,Enemy))
+            {
+                Vector3 vector3 = Player.transform.position - Enemy.transform.position;
+                Quaternion quaternion = Quaternion.LookRotation(vector3);
+                Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, quaternion, speed);
+            }
+            else
+            {
+                Vector3 vector3 = u - Enemy.transform.position;
+                Quaternion quaternion = Quaternion.LookRotation(vector3);
+                Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, quaternion, speed);
+            }
         }
-        public void Direction(GameObject player,GameObject enemy,float speed)
+        public bool Attack_range(GameObject Player,GameObject Enemy)
         {
+            var v0 = Player.transform.position - Enemy.transform.position;
+            var v1 = Enemy.transform.forward;
+            var dot = Vector3.Dot(v0.normalized, v1.normalized);
+            var th = Mathf.Acos(dot) * Mathf.Rad2Deg;
+            Material ma;
+            ma = Player.GetComponent<Renderer>().material;
+            Debug.Log(th);
+            if (th < 45)
+            {
+                ma.color = Color.red;
+                return true;
+            }
+            else
+            {
+                ma.color = Color.white;
+            }
 
-            Vector3 vector3 = u - enemy.transform.position;
-            Quaternion quaternion = Quaternion.LookRotation(vector3);
-            enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, quaternion, speed);
-            //if (/*ƒvƒŒƒCƒ„[‚Æ‰ï‚Á‚½‚ç*/)
-            //{
-            //Vector3 vector3 = player.transform.position - enemy.transform.position;
-            //Quaternion quaternion = Quaternion.LookRotation(vector3);
-            //enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, quaternion, speed);
-            //}
+            return false;
         }
 
     }

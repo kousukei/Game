@@ -9,33 +9,42 @@ public class GameOver : MonoBehaviour
 {
     public Canvas canvas;
     public GameObject cmvcam;
-    public GameObject panel;
-    public bool isGameOver = false;
+    public GameObject gameOverPanel;
+
+    [System.NonSerialized] public bool isGameOver = false;
+    [System.NonSerialized] public bool isDead = false;
+    float maxFOVSpread = 50f;
+    float zoomOutSpeed = 3f;
+    float scaleChangeSpeed = 0.15f;
     CinemachineVirtualCamera vcam;
     CanvasScaler scaler;
-    // Start is called before the first frame update
+
     void Start()
     {
         vcam = cmvcam.GetComponent<CinemachineVirtualCamera>();
         scaler = canvas.GetComponent<CanvasScaler>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        GameOverScene();
-    }
-    void GameOverScene()
-    {
-        if (vcam.m_Lens.FieldOfView < 50)
+        if (isGameOver)
         {
-            scaler.referenceResolution -= new Vector2(-0.15f, 0);
-            vcam.m_Lens.FieldOfView += Time.deltaTime * 3;
-            isGameOver = true;
+            Time.timeScale = 0;
+        }
+    }
+
+   public  void GameOverScene()
+    {
+        if (vcam.m_Lens.FieldOfView < maxFOVSpread)
+        {
+            scaler.referenceResolution += new Vector2(scaleChangeSpeed, 0);
+            vcam.m_Lens.FieldOfView += Time.deltaTime * zoomOutSpeed ;
+            isDead = true;
         }
         else
         {
-            panel.SetActive(true);
+            gameOverPanel.SetActive(true);
+            isGameOver = true;
         }
     }
 }

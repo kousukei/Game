@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public MirrorStock mirrorStock;
     public HpBar hpBar;
+    public GameOver gameOver;
     public GameObject planeMirror;
     public GameObject convexMirror;
     public GameObject concaveMirror;
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale == 0)
+        if (Time.timeScale == 0 || gameOver.isDead)
         {
             return;
         }

@@ -39,7 +39,7 @@ public class Laser : MonoBehaviour
 
     void OnTriggerStay(Collider collision)
     {
-        if (collision.tag == "Player" || collision.tag == "Barrier")
+        if (collision.tag == "Player" || collision.tag == "Barrier"/*||collision.tag=="Enemy"*/)
         {
             Destroy(gameObject);
         }

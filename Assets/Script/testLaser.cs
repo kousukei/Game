@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class testLaser : MonoBehaviour
 {
-    float shootingTime = 5f;
+    public float shootingTime;
     float shootingTimeCount;
     public float speed;
     public GameObject laser;

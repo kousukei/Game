@@ -8,21 +8,17 @@ namespace enemy
     {
         Vector3 randomPosition;
         Vector3 u;
-        Vector3 difference;
+        Vector3 sss;
         bool y;
         public float a=20;
+        float shootingTimeCount;
         Material ma;
         GameObject player;
+        GameObject enemy;
         void Start()
         {
             randomPosition = transform.position;
             player = GameObject.Find("Player");
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
 
         public void move(GameObject Enemy, float speed)
@@ -65,7 +61,6 @@ namespace enemy
             float dist_z = Player.transform.position.z - Enemy.transform.position.z;
             float dist_x = Player.transform.position.x - Enemy.transform.position.x;
             float distance = Mathf.Sqrt(dist_z * dist_z + dist_x * dist_x);
-            Debug.Log(distance);
             if (distance < 10)
             {
                 if (th < 20)
@@ -80,6 +75,16 @@ namespace enemy
             }
 
             return false;
+        }
+        public void Attack(Transform transform,GameObject laser,float shootingTime,float laser_speed)
+        {
+            shootingTimeCount += Time.deltaTime;
+            if (shootingTime < shootingTimeCount)
+            {
+                var gameObject = Instantiate(laser, transform.position, transform.rotation);
+                gameObject.GetComponent<Rigidbody>().AddForce(Vector3.forward* laser_speed, ForceMode.Impulse);
+                shootingTimeCount = 0;
+            }
         }
 
     }

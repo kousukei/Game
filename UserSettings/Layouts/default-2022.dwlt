@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 98
+  controlID: 39
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 99
+  controlID: 40
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 52
+  controlID: 41
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -407,20 +407,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 4a840000
-      m_LastClickedID: 33866
-      m_ExpandedIDs: 3eceffff6ccfffff
+      m_SelectedIDs: bc5b0000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 98e5ffff62eaffffe8f7ffff2ef9ffff6c5b0000e25c0000925e0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Player
-        m_OriginalName: Player
+        m_Name: Sphere
+        m_OriginalName: Sphere
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 33846
+        m_UserData: 24972
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -538,7 +538,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -719,9 +719,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.0645437, y: -0.5333941, z: -1.2481234}
+    m_Target: {x: -1.3227849, y: 2.3201442, z: 8.884748}
     speed: 2
-    m_Value: {x: 2.0645437, y: -0.5333941, z: -1.2481234}
+    m_Value: {x: -1.3227849, y: 2.3201442, z: 8.884748}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -767,20 +767,20 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.096552245, y: -0.5948884, z: 0.07227885, w: -0.7947675}
+    m_Target: {x: 0.3469982, y: -0.12891434, z: 0.04818584, w: 0.9277817}
     speed: 2
-    m_Value: {x: -0.09514101, y: -0.5973501, z: 0.071668714, w: -0.7930856}
+    m_Value: {x: 0.34829438, y: -0.13022436, z: 0.048898622, w: 0.92700684}
   m_Size:
-    m_Target: 3.5383055
+    m_Target: 19.430899
     speed: 2
-    m_Value: 3.5383055
+    m_Value: 18.594162
   m_Ortho:
     m_Target: 0
     speed: 2
     m_Value: 0
   m_CameraSettings:
-    m_Speed: 1
-    m_SpeedNormalized: 0.5
+    m_Speed: 0.1294
+    m_SpeedNormalized: 0.06
     m_SpeedMin: 0.01
     m_SpeedMax: 2
     m_EasingEnabled: 1
@@ -880,22 +880,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script/Enemy
+    - Assets/Script
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Script/Enemy
+  - Assets/Script
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\student\Desktop\Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 04840000
-    m_LastClickedID: 33796
-    m_ExpandedIDs: 00000000028400000684000000ca9a3b
+    scrollPos: {x: 0, y: 7}
+    m_SelectedIDs: 285b0000
+    m_LastClickedID: 23336
+    m_ExpandedIDs: 00000000185b000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -923,7 +923,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 00000000185b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

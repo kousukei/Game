@@ -13,69 +13,109 @@ namespace enemy
         public float a=20;
         float shootingTimeCount;
         Material ma;
-        GameObject player;
-        GameObject enemy;
+        float speed;
         void Start()
         {
             randomPosition = transform.position;
-            player = GameObject.Find("Player");
         }
-
-        public void move(GameObject Enemy, float speed)
+        /// <summary>
+        /// プレイヤーに向かって移動
+        /// </summary>
+        /// <param name="Player"></param>
+        /// <param name="Enemy"></param>
+        public void Player_move(GameObject Player,GameObject Enemy)
+        {
+            Enemy.transform.position = Vector3.MoveTowards(Enemy.transform.position, Player.transform.position, speed * Time.deltaTime);
+        }
+        ///
+        /// <summary>
+        /// ランダム移動
+        /// </summary>
+        /// <param name="Enemy"></param>
+        /// <param name="speed"></param>
+        public void random_move(GameObject Enemy, float speed)
         {
             if (randomPosition == Enemy.transform.position)
             {
                 u = random();
             }
             Enemy.transform.position = Vector3.MoveTowards(Enemy.transform.position, u, speed * Time.deltaTime);
+            this.speed = speed;
         }
+        /// <summary>
+        /// ランダムに移動点の生成
+        /// </summary>
+        /// <returns></returns>
         Vector3 random()
         {
 
             randomPosition = new Vector3(Random.Range(1f, 10f), 0.5f, Random.Range(1f, 10f));
             return randomPosition;
         }
-        public void Direction(GameObject Player,GameObject Enemy,float speed)
+        /// <summary>
+        /// //向き
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="Enemy"></param>
+        void Direction(Vector3 target,GameObject Enemy)
         {
-            if (Attack_range(Player,Enemy))
-            {
-                Vector3 vector3 = Player.transform.position - Enemy.transform.position;
-                Quaternion quaternion = Quaternion.LookRotation(vector3);
-                Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, quaternion, speed);
-            }
-            else
-            {
-                Vector3 vector3 = u - Enemy.transform.position;
-                Quaternion quaternion = Quaternion.LookRotation(vector3);
-                Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, quaternion, speed);
-            }
+            Vector3 vector3 = target - Enemy.transform.position;
+            Quaternion quaternion = Quaternion.LookRotation(vector3);
+            Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, quaternion, 0.01f);
         }
-        public bool Attack_range(GameObject Player,GameObject Enemy)
+        /// <summary>
+        /// 角度の判定
+        /// </summary>
+        /// <param name="Player"></param>
+        /// <param name="Enemy"></param>
+        /// <returns></returns>
+        public bool Attack_range(GameObject Player, GameObject Enemy)
         {
             var v0 = Player.transform.position - Enemy.transform.position;
             var v1 = Enemy.transform.forward;
             var dot = Vector3.Dot(v0.normalized, v1.normalized);
             var th = Mathf.Acos(dot) * Mathf.Rad2Deg;
-            Material ma;
-            ma = Player.GetComponent<Renderer>().material;
-            float dist_z = Player.transform.position.z - Enemy.transform.position.z;
-            float dist_x = Player.transform.position.x - Enemy.transform.position.x;
-            float distance = Mathf.Sqrt(dist_z * dist_z + dist_x * dist_x);
-            if (distance < 10)
+            //45度以上ならば攻撃開始
+            if (th < 45)
             {
-                if (th < 20)
-                {
-                    ma.color = Color.red;
-                    return true;
-                }
-                else
-                {
-                    ma.color = Color.white;
-                }
+                Direction(Player.transform.position, Enemy);
+                return true;
             }
-
             return false;
         }
+        /// <summary>
+        /// 距離の判定
+        /// </summary>
+        /// <param name="Player"></param>
+        /// <param name="Enemy"></param>
+        /// <param name="withinRange"></param>
+        /// <param name="OutOfRange"></param>
+        /// <returns></returns>
+        public int tracking_range(GameObject Player,GameObject Enemy, float withinRange, float OutOfRange)
+        {
+            float dist_z = Player.transform.position.z - Enemy.transform.position.z;
+            float dist_x = Player.transform.position.x - Enemy.transform.position.x;
+            //プレイヤーと敵の距離
+            float distance = Mathf.Sqrt(dist_z * dist_z + dist_x * dist_x);
+            //一定の距離以下なら1を表示
+            if (distance < withinRange)
+            {
+                Debug.Log(distance);
+                return 1;
+            }
+            //一定の距離なら２を表示
+            if (distance< OutOfRange&&distance>withinRange)
+            {
+                //向き(目標)
+                Direction(Player.transform.position, Enemy);
+                return 2;
+            }
+            Debug.Log(distance);
+            //一定の距離以上なら0を表示
+            return 0;
+            
+        }
+
         public void Attack(Transform transform,GameObject laser,float shootingTime,float laser_speed)
         {
             shootingTimeCount += Time.deltaTime;

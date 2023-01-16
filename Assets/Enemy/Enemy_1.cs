@@ -4,24 +4,31 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using enemy;
 
+
+//[RequireComponent(typeof(MyButton))]
 public class Enemy_1: MonoBehaviour
 {
-    //[Header("")]
-    
-
+    [Header("鏡")]
+    public GameObject mirror;
     Enemy enemy = new Enemy();
     GameObject Player;
-    GameObject Player2;
     Vector3 randomPosition;
+    [Header("移動速度")]
     public float speed;
+    [Header("回転速度")]
     public float muki_speed;
     GameObject firing;
     public GameObject laser;
+    [Header("発射速度")]
     public float shootingTime;
+    [Header("レーザーの移動速度")]
     public float laser_speed;
     float time;
+    [Header("攻撃範囲")]
     public float withinRange;
+    [Header("追跡範囲")]
     public float OutOfRange;
+    [Header("死亡フラグ")]
     public bool death_falg=false;
     enum Mode
     {
@@ -31,7 +38,6 @@ public class Enemy_1: MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("Player");
-        Player2 = GameObject.Find("Player (1)");
         firing = gameObject.transform.Find("object").gameObject;
         Debug.Log(firing.transform.position);
 
@@ -40,7 +46,6 @@ public class Enemy_1: MonoBehaviour
     
     void Update()
     {
-        //enemy.Attack(firing.transform,laser, shootingTime, laser_speed);
         switch (mode)
         {
             case Mode.開始:
@@ -87,8 +92,7 @@ public class Enemy_1: MonoBehaviour
             case Mode.死亡:
                 if (death_falg)
                 {
-                Destroy(this.gameObject);
-                    //var gameObject=Instantiate()
+                    //GameObject gameObject = Instantiate(mirror, this.gameObject.transform);
                 }
                 break;
         }

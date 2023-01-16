@@ -10,7 +10,7 @@ public class HpBar : MonoBehaviour
 
     [System .NonSerialized]public int maxHp = 100;
     [System.NonSerialized]public int currentHp;
-    int damage = 100;
+    int damage = 1;
     int heal;
 
     void Start()

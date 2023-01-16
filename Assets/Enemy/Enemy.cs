@@ -104,7 +104,6 @@ namespace enemy
             //ˆê’è‚Ì‹——£ˆÈ‰º‚È‚ç1‚ð•\Ž¦
             if (distance < withinRange)
             {
-                Debug.Log(distance);
                 return 1;
             }
             //ˆê’è‚Ì‹——£‚È‚ç‚Q‚ð•\Ž¦
@@ -117,7 +116,6 @@ namespace enemy
                 Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, quaternion, 0.01f);
                 return 2;
             }
-            Debug.Log(distance);
             //ˆê’è‚Ì‹——£ˆÈã‚È‚ç0‚ð•\Ž¦
             return 0;
             

@@ -619,6 +619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c757f4bacf5e44f81d90f6d12d926d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mirror: {fileID: 0}
   speed: 5
   muki_speed: 0.01
   laser: {fileID: 618306989853846486, guid: 2138619c2e66bc845a826b8ccac8c0dc, type: 3}
@@ -750,6 +751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c757f4bacf5e44f81d90f6d12d926d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mirror: {fileID: 0}
   speed: 6.65
   muki_speed: 0
   laser: {fileID: 0}

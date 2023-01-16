@@ -11,10 +11,12 @@ public class PlayerController : MonoBehaviour
     public GameObject convexMirror;
     public GameObject concaveMirror;
     public float speed;
+    public Animator playerAnimator;
 
     Plane plane = new Plane();
     Vector3 vec3;
     Rigidbody rb;
+    Animator animator;
 
     float distance; //ray‚©‚ç‚Ì‹——£
     float horizontalKey, verticalKey;
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         mirror = Mirror.planeMirror;
         rb = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     void Update()
@@ -64,6 +67,15 @@ public class PlayerController : MonoBehaviour
         else if (mirror == Mirror.concaveMirror)
         {
             MirrorChange(mirrorStock.concaveMirrorStock, isFalse, isFalse, isTrue, Mirror.planeMirror);
+        }
+
+        if (vec3 != new Vector3(0,0,0))
+        {
+            playerAnimator.SetBool("IsRun", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("IsRun", false);
         }
     }
 

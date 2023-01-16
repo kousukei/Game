@@ -7,10 +7,12 @@ public class Laser : MonoBehaviour
     public Vector3 lastVelocity;
     public Vector3 refrectVec;
     Rigidbody rb;
+    Enemy_1 enemy;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        enemy = GameObject.Find("enemy1_2").GetComponent<Enemy_1>();
     }
 
     void FixedUpdate()
@@ -24,10 +26,10 @@ public class Laser : MonoBehaviour
         {
             Reflect(collision);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     void Reflect(Collision collision)
@@ -39,9 +41,13 @@ public class Laser : MonoBehaviour
 
     void OnTriggerStay(Collider collision)
     {
-        if (collision.tag == "Player" || collision.tag == "Barrier"/*||collision.tag=="Enemy"*/)
+        if (collision.tag == "Player" || collision.tag == "Barrier")
         {
             Destroy(gameObject);
+        }
+        if (collision.tag == "Enemy")
+        {
+            enemy.death_falg = true;
         }
     }
 }

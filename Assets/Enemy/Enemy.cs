@@ -129,7 +129,7 @@ namespace enemy
             if (shootingTime < shootingTimeCount)
             {
                 var gameObject = Instantiate(laser, transform.position, transform.rotation);
-                gameObject.GetComponent<Rigidbody>().AddForce(laser.transform.position* laser_speed, ForceMode.Impulse);
+                gameObject.GetComponent<Rigidbody>().AddForce(transform.forward* laser_speed, ForceMode.Impulse);
                 shootingTimeCount = 0;
             }
         }

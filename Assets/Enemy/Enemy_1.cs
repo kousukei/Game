@@ -22,6 +22,7 @@ public class Enemy_1: MonoBehaviour
     float time;
     public float withinRange;
     public float OutOfRange;
+    public bool death_falg=false;
     enum Mode
     {
         開始,移動,攻撃,死亡
@@ -32,13 +33,14 @@ public class Enemy_1: MonoBehaviour
         Player = GameObject.Find("Player");
         Player2 = GameObject.Find("Player (1)");
         firing = gameObject.transform.Find("object").gameObject;
+        Debug.Log(firing.transform.position);
 
     }
 
     
     void Update()
     {
-
+        //enemy.Attack(firing.transform,laser, shootingTime, laser_speed);
         switch (mode)
         {
             case Mode.開始:
@@ -52,20 +54,30 @@ public class Enemy_1: MonoBehaviour
                 //攻撃範囲
                 if (enemy.Attack_range(Player, this.gameObject))
                 {
-                    switch(enemy.tracking_range(Player, this.gameObject, withinRange, OutOfRange))
+                    switch (enemy.tracking_range(Player, this.gameObject, withinRange, OutOfRange))
                     {
                         case 1:
-                                mode = Mode.攻撃;
+                            mode = Mode.攻撃;
                             break;
                         case 2:
                             enemy.Player_move(Player, this.gameObject);
                             break;
                     }
-                        
                 }
                 break;
             case Mode.攻撃:
-                enemy.Attack(firing.transform, laser, shootingTime, laser_speed);
+                if (enemy.Attack_range(Player, this.gameObject))
+                {
+                    switch (enemy.tracking_range(Player, this.gameObject, withinRange, OutOfRange))
+                    {
+                        case 1:
+                            enemy.Attack(firing.transform, laser, shootingTime, laser_speed);
+                            break;
+                        case 2:
+                            enemy.Player_move(Player, this.gameObject);
+                            break;
+                    }
+                }
                 //攻撃範囲外なら移動へ戻る
                 if (!enemy.Attack_range(Player, this.gameObject))
                 {
@@ -73,7 +85,11 @@ public class Enemy_1: MonoBehaviour
                 }
                 break;
             case Mode.死亡:
+                if (death_falg)
+                {
                 Destroy(this.gameObject);
+                    //var gameObject=Instantiate()
+                }
                 break;
         }
 

@@ -13,6 +13,7 @@ public class SkillScript : MonoBehaviour
     public Barrier barrierScript;
     public HpBar HealScript;
     public EnergyBar energyBar;
+    public GameOver gameOver;
 
     float healEneCost = 50f;
     float barrierEneCost = 50f;
@@ -33,7 +34,7 @@ public class SkillScript : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale == 0)
+        if (Time.timeScale == 0 || gameOver.isDead)
         {
             return;
         }

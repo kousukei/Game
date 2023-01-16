@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class HpBar : MonoBehaviour
 {
-    [Header("HP‚ÌSlider")] public Slider hpSlider;
+    public GameOver gameOver;   
+    public Slider hpSlider;
 
     [System .NonSerialized]public int maxHp = 100;
     [System.NonSerialized]public int currentHp;
-    int damage = 10;
+    int damage = 100;
     int heal;
 
     void Start()
@@ -22,6 +23,7 @@ public class HpBar : MonoBehaviour
     {
         if (hpSlider.value <= 0)
         {
+            gameOver.GameOverScene();
         }
     }
 

@@ -18,7 +18,7 @@ public class testLaser : MonoBehaviour
     void Update()
     {
         shootingTimeCount += Time.deltaTime;
-        if (shootingTime < shootingTimeCount)
+        if (2f < shootingTimeCount)
         {
             var gameObject = Instantiate(laser, transform.position, transform.rotation) ;
             gameObject.GetComponent<Rigidbody>().AddForce(Vector3.forward*speed , ForceMode.VelocityChange);

@@ -57,11 +57,12 @@ namespace enemy
         /// </summary>
         /// <param name="target"></param>
         /// <param name="Enemy"></param>
-        void Direction(Vector3 target,GameObject Enemy)
+       public  void Direction(GameObject Enemy)
         {
-            Vector3 vector3 = target - Enemy.transform.position;
+            Vector3 vector3 = u - Enemy.transform.position;
             Quaternion quaternion = Quaternion.LookRotation(vector3);
             Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, quaternion, 0.01f);
+
         }
         /// <summary>
         /// 角度の判定
@@ -78,7 +79,10 @@ namespace enemy
             //45度以上ならば攻撃開始
             if (th < 45)
             {
-                Direction(Player.transform.position, Enemy);
+                //向き(目標)
+                Vector3 vector3 = Player.transform.position - Enemy.transform.position;
+                Quaternion quaternion = Quaternion.LookRotation(vector3);
+                Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, quaternion, 0.01f);
                 return true;
             }
             return false;
@@ -107,7 +111,10 @@ namespace enemy
             if (distance< OutOfRange&&distance>withinRange)
             {
                 //向き(目標)
-                Direction(Player.transform.position, Enemy);
+                //Direction(Player.transform.position, Enemy);
+                Vector3 vector3 = Player.transform.position - Enemy.transform.position;
+                Quaternion quaternion = Quaternion.LookRotation(vector3);
+                Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, quaternion, 0.01f);
                 return 2;
             }
             Debug.Log(distance);
@@ -122,7 +129,7 @@ namespace enemy
             if (shootingTime < shootingTimeCount)
             {
                 var gameObject = Instantiate(laser, transform.position, transform.rotation);
-                gameObject.GetComponent<Rigidbody>().AddForce(Vector3.forward* laser_speed, ForceMode.Impulse);
+                gameObject.GetComponent<Rigidbody>().AddForce(laser.transform.position* laser_speed, ForceMode.Impulse);
                 shootingTimeCount = 0;
             }
         }

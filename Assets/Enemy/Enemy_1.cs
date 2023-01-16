@@ -48,6 +48,7 @@ public class Enemy_1: MonoBehaviour
             case Mode.移動:
                 //移動目標
                 enemy.random_move(this.gameObject, speed);
+                enemy.Direction(this.gameObject);
                 //攻撃範囲
                 if (enemy.Attack_range(Player, this.gameObject))
                 {

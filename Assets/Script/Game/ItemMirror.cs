@@ -28,8 +28,6 @@ public class ItemMirror : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            Destroy(gameObject);
-
             if (mirrorstock.currentStock < mirrorstock.maxStock)
             {
                 if (mirror == Mirror.planeMirror)
@@ -63,7 +61,7 @@ public class ItemMirror : MonoBehaviour
                     reflectCount.CountTextChange(reflectCount.ccMirrorBreakNum, reflectCount.ccMirrorBreakNum);
                 }
             }
-
+            Destroy(gameObject);
         }
     }
 }

@@ -38,13 +38,4 @@ public class Pause : MonoBehaviour
         pauseUI.SetActive(!pauseUI.activeSelf);
         Time.timeScale = 1f;
 	}
-
-	/// <summary>
-	/// Exit‚ð‰Ÿ‚·
-	/// </summary>
-	public void ExitButton()
-	{
-		//SceneManager.LoadScene("TitleScene");
-		//Time.timeScale = 1f;
-	}
 }

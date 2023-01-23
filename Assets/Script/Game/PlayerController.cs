@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public MirrorStock mirrorStock;
     public HpBar hpBar;
+    public GameOver gameOver;
     public GameObject planeMirror;
     public GameObject convexMirror;
     public GameObject concaveMirror;
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
     bool isTrue = true;
     bool isFalse = false;
 
+    bool isGround = false ;
     Mirror mirror;
     enum Mirror
     {
@@ -34,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale == 0)
+        if (Time.timeScale == 0 || gameOver.isDead)
         {
             return;
         }
@@ -52,15 +55,15 @@ public class PlayerController : MonoBehaviour
 
         if (mirror == Mirror.planeMirror)
         {
-            MirrorChange(isTrue, isFalse, isFalse, Mirror.convexMirror);
+            MirrorChange(mirrorStock.planeMirrorStock,isTrue, isFalse, isFalse, Mirror.convexMirror);
         }
         else if (mirror == Mirror.convexMirror)
         {
-            MirrorChange(isFalse, isTrue, isFalse, Mirror.concaveMirror);
+            MirrorChange(mirrorStock.convexMirrorStock, isFalse, isTrue, isFalse, Mirror.concaveMirror);
         }
         else if (mirror == Mirror.concaveMirror)
         {
-            MirrorChange(isFalse, isFalse, isTrue, Mirror.planeMirror);
+            MirrorChange(mirrorStock.concaveMirrorStock, isFalse, isFalse, isTrue, Mirror.planeMirror);
         }
     }
 
@@ -68,13 +71,16 @@ public class PlayerController : MonoBehaviour
     {
         vec3 = new Vector3(horizontalKey, 0, verticalKey);
 
-        if (rb.velocity.magnitude > 1)
+        if (isGround )
         {
-            rb.velocity = vec3.normalized * speed;
-        }
-        else
-        {
-            rb.velocity = vec3 * speed ;
+            if (rb.velocity.magnitude > 1)
+            {
+                rb.velocity = vec3.normalized * speed;
+            }
+            else
+            {
+                rb.velocity = vec3 * speed;
+            }
         }
     }
     void OnCollisionEnter(Collision collision)
@@ -85,14 +91,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void MirrorChange(bool plaMirrorAct, bool conveMirrorAct, bool concaMirrorAct, Mirror nextMirror)
+    void MirrorChange(int mirrorNum, bool plaMirrorAct, bool conveMirrorAct, bool concaMirrorAct, Mirror nextMirror)
     {
-        planeMirror.SetActive(plaMirrorAct);
-        convexMirror.SetActive(conveMirrorAct) ;
-        concaveMirror.SetActive(concaMirrorAct) ;
+        if (mirrorNum != 0)
+        {
+            planeMirror.SetActive(plaMirrorAct);
+            convexMirror.SetActive(conveMirrorAct);
+            concaveMirror.SetActive(concaMirrorAct);
+        }
         if (Input.GetKeyDown(KeyCode.Space))
         {
             mirror = nextMirror;
+        }
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision .gameObject .tag =="Ground")
+        {
+            isGround = true;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGround = false ;
         }
     }
 }

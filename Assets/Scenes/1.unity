@@ -650,7 +650,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 974c5adc60dd3684daa578b17766cff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mirrorStock: {fileID: 0}
   hpBar: {fileID: 0}
+  gameOver: {fileID: 0}
   planeMirror: {fileID: 1088397536}
   convexMirror: {fileID: 1258594986}
   concaveMirror: {fileID: 765910097}
@@ -1186,7 +1188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 287281584510271446, guid: e2353d2c5f3002645968c8e313c6df95, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.2078
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 287281584510271446, guid: e2353d2c5f3002645968c8e313c6df95, type: 3}
       propertyPath: m_LocalPosition.y

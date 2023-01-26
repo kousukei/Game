@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ItemMirror : MonoBehaviour
 {
+    GameObject ScriptObject;
     public MirrorStock mirrorstock;
     public ReflectCount reflectCount;
     public Mirror mirror;
@@ -15,6 +16,11 @@ public class ItemMirror : MonoBehaviour
         planeMirror,
         convexMirror,
         concaveMirror
+    }
+    private void Start()
+    {
+        ScriptObject = GameObject.Find("ScriptObject");
+        mirrorstock = ScriptObject.GetComponent<MirrorStock>();
     }
 
     void Update()

@@ -42,7 +42,6 @@ public class Enemy_1: MonoBehaviour
     {
         Player = GameObject.Find("Player");
         firing = gameObject.transform.Find("object").gameObject;
-        Debug.Log(firing.transform.position);
         enemy = this.gameObject.GetComponent<Enemy>();
         skillScript = GameObject.Find("ScriptObject").GetComponent<SkillScript>();
     }
@@ -103,10 +102,6 @@ public class Enemy_1: MonoBehaviour
                 }
                 break;
             case Mode.死亡:
-                if (death_falg)
-                {
-                    
-                }
                 break;
         }
         if (HP <= 0)

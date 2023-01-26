@@ -7,7 +7,7 @@ public class Laser : MonoBehaviour
     [System.NonSerialized]public Vector3 lastVelocity;
     [System.NonSerialized]public Vector3 refrectVec;
     [System.NonSerialized]public bool onConcaveMirror = false;
-    Enemy_1 enemy;
+
 
     Rigidbody rb;
     float destroyTime = 3f;
@@ -15,7 +15,7 @@ public class Laser : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        enemy = GameObject.Find("enemy01").GetComponent<Enemy_1>();
+
     }
 
     void FixedUpdate()
@@ -53,10 +53,10 @@ public class Laser : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (other.tag == "Enemy")
-        {
-            enemy.death_falg = true;
-        }
+        //if (other.tag == "Enemy")
+        //{
+        //    enemy.death_falg = true;
+        //}
     }
 
     private void OnTriggerExit(Collider other)

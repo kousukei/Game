@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace enemy
-{
     public class Enemy : MonoBehaviour
     {
         Vector3 randomPosition;
         Vector3 u;
         Vector3 sss;
+        Vector3 range;
         bool y;
-        public float a=20;
+        //public float a=20;
         float shootingTimeCount;
         Material ma;
         float speed;
+    Enemy_1 enemy_1;
+
         void Start()
         {
             randomPosition = transform.position;
-        }
+            range = GameObject.Find("GameObject").transform.position;
+        enemy_1 = this.gameObject.GetComponent<Enemy_1>();
+         }
         /// <summary>
         /// ÉvÉåÉCÉÑÅ[Ç…å¸Ç©Ç¡Çƒà⁄ìÆ
         /// </summary>
@@ -35,11 +38,17 @@ namespace enemy
         /// <param name="speed"></param>
         public void random_move(GameObject Enemy, float speed)
         {
+        Debug.Log(randomPosition);
             if (randomPosition == Enemy.transform.position)
             {
                 u = random();
             }
-            Enemy.transform.position = Vector3.MoveTowards(Enemy.transform.position, u, speed * Time.deltaTime);
+            else if (enemy_1.hit)
+            {
+                u = random();
+            enemy_1.hit = false;
+            }
+        Enemy.transform.position = Vector3.MoveTowards(Enemy.transform.position, u, speed * Time.deltaTime);
             this.speed = speed;
         }
         /// <summary>
@@ -47,9 +56,8 @@ namespace enemy
         /// </summary>
         /// <returns></returns>
         Vector3 random()
-        {
-
-            randomPosition = new Vector3(Random.Range(1f, 10f), 0.5f, Random.Range(1f, 10f));
+        { 
+            randomPosition = new Vector3(Random.Range(range.x+24, range.x-24), range.y-11, Random.Range(range.z+10, range.z-10));
             return randomPosition;
         }
         /// <summary>
@@ -131,7 +139,6 @@ namespace enemy
                 shootingTimeCount = 0;
             }
         }
-
-    }
 }
+
 

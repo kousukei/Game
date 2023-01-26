@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
-using enemy;
 
 
 //[RequireComponent(typeof(MyButton))]
@@ -32,6 +31,7 @@ public class Enemy_1: MonoBehaviour
     public bool death_falg;
     public float HP;
     public GameObject effect;
+    public bool hit=false;
     enum Mode
     {
         開始,移動,攻撃,死亡
@@ -42,6 +42,7 @@ public class Enemy_1: MonoBehaviour
         Player = GameObject.Find("Player");
         firing = gameObject.transform.Find("object").gameObject;
         Debug.Log(firing.transform.position);
+        enemy = this.gameObject.GetComponent<Enemy>();
     }
 
     
@@ -100,6 +101,7 @@ public class Enemy_1: MonoBehaviour
         if (HP <= 0)
         {
             Instantiate(effect, this.transform.position, this.transform.rotation);
+            Instantiate(mirror, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }
 
@@ -112,8 +114,16 @@ public class Enemy_1: MonoBehaviour
         }
         if (collision.gameObject.tag == "Enemy")
         {
-            //移動方向変わる
+            hit = true;
         }
     }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            hit=false;
+        }
+    }
+
 
 }

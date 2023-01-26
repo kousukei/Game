@@ -10,7 +10,7 @@ public class Enemy_1: MonoBehaviour
 {
     [Header("鏡")]
     public GameObject mirror;
-    Enemy enemy = new Enemy();
+    Enemy enemy;
     GameObject Player;
     Vector3 randomPosition;
     [Header("移動速度")]
@@ -31,6 +31,7 @@ public class Enemy_1: MonoBehaviour
     [Header("死亡フラグ")]
     public bool death_falg;
     public float HP;
+    public GameObject effect;
     enum Mode
     {
         開始,移動,攻撃,死亡
@@ -92,14 +93,14 @@ public class Enemy_1: MonoBehaviour
             case Mode.死亡:
                 if (death_falg)
                 {
-                    //GameObject gameObject = Instantiate(mirror, this.gameObject.transform);
+                    
                 }
                 break;
         }
         if (HP <= 0)
         {
-            death_falg = true;
-            Debug.Log(death_falg);
+            Instantiate(effect, this.transform.position, this.transform.rotation);
+            Destroy(this.gameObject);
         }
 
     }

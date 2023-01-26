@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     bool isTrue = true;
     bool isFalse = false;
 
-    bool isGround = false ;
+    //bool isGround = false ;
     Mirror mirror;
     enum Mirror
     {

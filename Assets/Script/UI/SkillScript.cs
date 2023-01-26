@@ -14,11 +14,17 @@ public class SkillScript : MonoBehaviour
     public HpBar HealScript;
     public EnergyBar energyBar;
     public GameOver gameOver;
+    public GameObject Player;
+    public bool CobyTime_flag;
+    GameObject CobyObject;
 
+    Vector3 za;
     float healEneCost = 50f;
     float barrierEneCost = 50f;
     float decoyEneCost = 30f;
+    float coby;
 
+    bool Coby_flag =true;
     SkillName skill;
     enum SkillName
     {
@@ -67,8 +73,18 @@ public class SkillScript : MonoBehaviour
             {
                 if (energyBar.currentEne >= decoyEneCost)
                 {
+                    //分身の時間制限のフラグ
+                    CobyTime_flag = true;
+                    if (Coby_flag)
+                    {
+                        //分身作る
+                        Coby();
+                        //時間切る前に二回不能
+                        Coby_flag = false;
+                        energyBar.EneBarControll(decoyEneCost);
+                    }
                     Debug.Log("デコイを出した！");
-                    energyBar.EneBarControll(decoyEneCost);
+                    
                 }
             }
         }
@@ -88,6 +104,21 @@ public class SkillScript : MonoBehaviour
                 SkillChange(SkillName.heal, sprite[0], sprite[1], sprite[2]);
             }
         }
+        //分身の時間制限のフラグ
+        if (CobyTime_flag)
+        {
+            coby += Time.deltaTime;
+            if (coby >= 5)
+            {
+                //時間切ったら
+                //分身の方を消す
+                Destroy(CobyObject);
+                CobyTime_flag = false;
+                Coby_flag = true;
+                coby = 0;
+            }
+        }
+
     }
 
     void SkillChange(SkillName skillname, Sprite first, Sprite second, Sprite third)
@@ -101,6 +132,13 @@ public class SkillScript : MonoBehaviour
     void SkillStatus()
     {
 
+    }
+    void Coby()
+    {
+        za = Player.transform.position;
+        za.x = za.x + 1.5f;
+        CobyObject=Instantiate(Player, za, Player.transform.rotation);
+        CobyObject.name = "Coby";
     }
 
 }

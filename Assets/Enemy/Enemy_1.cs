@@ -32,6 +32,7 @@ public class Enemy_1: MonoBehaviour
     public float HP;
     public GameObject effect;
     public bool hit=false;
+    SkillScript skillScript;
     enum Mode
     {
         開始,移動,攻撃,死亡
@@ -43,6 +44,7 @@ public class Enemy_1: MonoBehaviour
         firing = gameObject.transform.Find("object").gameObject;
         Debug.Log(firing.transform.position);
         enemy = this.gameObject.GetComponent<Enemy>();
+        skillScript = GameObject.Find("ScriptObject").GetComponent<SkillScript>();
     }
 
     
@@ -73,6 +75,15 @@ public class Enemy_1: MonoBehaviour
                 }
                 break;
             case Mode.攻撃:
+                //分身している時間内分身を攻撃
+                if (skillScript.CobyTime_flag)
+                {
+                    Player = GameObject.Find("Coby");
+                }
+                else
+                {
+                    Player = GameObject.Find("Player");
+                }
                 if (enemy.Attack_range(Player, this.gameObject))
                 {
                     switch (enemy.tracking_range(Player, this.gameObject, withinRange, OutOfRange))
@@ -101,7 +112,7 @@ public class Enemy_1: MonoBehaviour
         if (HP <= 0)
         {
             Instantiate(effect, this.transform.position, this.transform.rotation);
-            Instantiate(mirror, this.transform.position, this.transform.rotation);
+            //Instantiate(mirror, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }
 

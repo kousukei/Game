@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    Vector3 randomPosition;
-    Vector3 u;
+    Vector3 Position;
     Vector3 sss;
-    Vector3 range;
+    GameObject range;
     bool y;
     //public float a=20;
     float shootingTimeCount;
@@ -17,9 +16,14 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        randomPosition = transform.position;
-        range = GameObject.Find("GameObject").transform.position;
+        Position = random();
         enemy_1 = this.gameObject.GetComponent<Enemy_1>();
+
+        
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        range = other.gameObject;
     }
     /// <summary>
     /// プレイヤーに向かって移動
@@ -38,17 +42,17 @@ public class Enemy : MonoBehaviour
     /// <param name="speed"></param>
     public void random_move(GameObject Enemy, float speed)
     {
-        if (randomPosition == Enemy.transform.position)
+        if ((Enemy.transform.position.x-Position.x)<=1&&(Enemy.transform.position.z-Position.z)<=1)
         {
-            u = random();
+            Position = random();
         }
         else if (enemy_1.hit)
         {
-            u = random();
+            Position = random();
             enemy_1.hit = false;
         }
-        Enemy.transform.position = Vector3.MoveTowards(Enemy.transform.position, u, speed * Time.deltaTime);
         this.speed = speed;
+        Enemy.transform.position = Vector3.MoveTowards(Enemy.transform.position, Position, speed * Time.deltaTime);
     }
     /// <summary>
     /// ランダムに移動点の生成
@@ -56,7 +60,8 @@ public class Enemy : MonoBehaviour
     /// <returns></returns>
     Vector3 random()
     {
-        randomPosition = new Vector3(Random.Range(range.x + 24, range.x - 24), range.y - 11, Random.Range(range.z + 10, range.z - 10));
+
+        Vector3 randomPosition = new Vector3(Random.Range(range.transform.position.x + (range.transform.localScale.x/2), range.transform.position.x - (range.transform.localScale.x / 2)), range.transform.position.y - (range.transform.localScale.y/2), Random.Range(range.transform.position.z + (range.transform.localScale.z/2), range.transform.position.z - (range.transform.localScale.z / 2)));
         return randomPosition;
     }
     /// <summary>
@@ -66,9 +71,9 @@ public class Enemy : MonoBehaviour
     /// <param name="Enemy"></param>
     public void Direction(GameObject Enemy)
     {
-        Vector3 vector3 = u - Enemy.transform.position;
+        Vector3 vector3 = Position - Enemy.transform.position;
         Quaternion quaternion = Quaternion.LookRotation(vector3);
-        Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, quaternion, 0.01f);
+        Enemy.transform.rotation = Quaternion.Slerp(Enemy.transform.rotation, quaternion, 0.1f);
 
     }
     /// <summary>

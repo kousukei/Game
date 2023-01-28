@@ -16,4 +16,8 @@ public class ButtonScript : MonoBehaviour
         //SceneManager.LoadScene("タイトルシーン");
         //Time.timeScale = 1f;
     }
+    public void end()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
 }

@@ -33,6 +33,7 @@ public class Enemy_1: MonoBehaviour
     public GameObject effect;
     public bool hit=false;
     SkillScript skillScript;
+    Score_Script score;
     enum Mode
     {
         開始,移動,攻撃,死亡
@@ -44,6 +45,7 @@ public class Enemy_1: MonoBehaviour
         firing = gameObject.transform.Find("object").gameObject;
         enemy = this.gameObject.GetComponent<Enemy>();
         skillScript = GameObject.Find("ScriptObject").GetComponent<SkillScript>();
+        score = GameObject.Find("ScriptObject").GetComponent<Score_Script>();
     }
 
     
@@ -107,6 +109,7 @@ public class Enemy_1: MonoBehaviour
         if (HP <= 0)
         {
             Instantiate(effect, this.transform.position, this.transform.rotation);
+            score.score(100);
             //Instantiate(mirror, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }
@@ -118,18 +121,12 @@ public class Enemy_1: MonoBehaviour
         {
             HP--;
         }
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Ground")
         {
             hit = true;
         }
     }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            hit=false;
-        }
-    }
+
 
 
 }

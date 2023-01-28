@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class title : MonoBehaviour
 {
@@ -16,11 +17,16 @@ public class title : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        a += 0.01f;
-        if (a >= 1)
-        {
-            a = 0;
-        }
-        text.color = new Color(1.0f, 1.0f, 1.0f, a);
+        //a += 0.01f;
+        //if (a >= 1)
+        //{
+        //    a = 0;
+        //}
+        //text.color = new Color(1.0f, 1.0f, 1.0f, a);
+    }
+    public void start()
+    {
+        SceneManager.LoadScene("GameScene");
+        Debug.Log("asd");
     }
 }

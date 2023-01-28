@@ -8,7 +8,6 @@ public class Enemy_start : MonoBehaviour
     Vector3 vector3;
     void Start()
     {
-        Debug.Log(this.gameObject.transform.localScale);
         vector3 = this.gameObject.transform.position;
         for(int i = 0; i < 10; i++)
         {

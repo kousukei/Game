@@ -13,11 +13,15 @@ public class ButtonScript : MonoBehaviour
 
     public void ExitButton()
     {
-        //SceneManager.LoadScene("タイトルシーン");
-        //Time.timeScale = 1f;
+        SceneManager.LoadScene("StartScene");
+        Time.timeScale = 1f;
     }
     public void end()
     {
-        SceneManager.LoadScene("StartScene");
+        Application.Quit();
+    }
+    public void start()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }

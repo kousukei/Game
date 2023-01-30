@@ -35,7 +35,7 @@ public class Pause : MonoBehaviour
 	/// </summary>
 	public void RestartButton()
     {
-        pauseUI.SetActive(!pauseUI.activeSelf);
+		pauseUI.SetActive(!pauseUI.activeSelf);
         Time.timeScale = 1f;
 	}
 }

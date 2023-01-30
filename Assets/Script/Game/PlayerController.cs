@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     bool isTrue = true;
     bool isFalse = false;
 
-    //bool isGround = false ;
+    bool isGround = false ;
     Mirror mirror;
     enum Mirror
     {
@@ -83,8 +83,8 @@ public class PlayerController : MonoBehaviour
     {
         vec3 = new Vector3(horizontalKey, 0, verticalKey);
 
-        //if (isGround )
-        //{
+        if (isGround)
+        {
             if (rb.velocity.magnitude > 1)
             {
                 rb.velocity = vec3.normalized * speed;
@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = vec3 * speed;
             }
-        //}
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -116,18 +116,18 @@ public class PlayerController : MonoBehaviour
             mirror = nextMirror;
         }
     }
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground")
-    //    {
-    //        isGround = true;
-    //    }
-    //}
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground")
-    //    {
-    //        isGround = false;
-    //    }
-    //}
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGround = true;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGround = false;
+        }
+    }
 }

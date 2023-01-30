@@ -9,6 +9,7 @@ public class Laser : MonoBehaviour
     [System.NonSerialized]public bool onConcaveMirror = false;
 
 
+
     Rigidbody rb;
     float destroyTime = 3f;
 
@@ -53,10 +54,10 @@ public class Laser : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //if (other.tag == "Enemy")
-        //{
-        //    enemy.death_falg = true;
-        //}
+        if (other.tag == "Laser")
+        {
+            GetComponent<SphereCollider>().isTrigger = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)

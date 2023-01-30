@@ -2258,7 +2258,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &820378613
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3032,7 +3032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 186, y: 184}
+  m_AnchoredPosition: {x: 194.1, y: 183.9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1067732470
@@ -6540,6 +6540,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemConcaveMirror
       objectReference: {fileID: 0}
+    - target: {fileID: 3161965195114484698, guid: cf606f16dd9612745a252bf8fd3508a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3161965195114484700, guid: cf606f16dd9612745a252bf8fd3508a7, type: 3}
       propertyPath: mirrorstock
       value: 
@@ -6687,6 +6691,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemPlaneMirror
       objectReference: {fileID: 0}
+    - target: {fileID: 6151857941161225164, guid: 458695b3b76e9074482cd30aeaba4184, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 458695b3b76e9074482cd30aeaba4184, type: 3}
@@ -6705,6 +6713,10 @@ PrefabInstance:
     - target: {fileID: 8607876331337431498, guid: ead1628ec7734a741bb3eead385f376e, type: 3}
       propertyPath: m_Name
       value: ItemConvexMirror
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607876331337431498, guid: ead1628ec7734a741bb3eead385f376e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8607876331337431536, guid: ead1628ec7734a741bb3eead385f376e, type: 3}
       propertyPath: m_RootOrder

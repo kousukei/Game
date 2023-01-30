@@ -9,8 +9,8 @@ public class GameClear : MonoBehaviour
     Score_Script score;
     void Start()
     {
-        ranking = GameObject.Find("Ranking").GetComponent<Ranking>();
-        animator = GameObject.Find("Ranking").GetComponent<Animator>();
+        //ranking = GameObject.Find("Ranking").GetComponent<Ranking>();
+        //animator = GameObject.Find("Ranking").GetComponent<Animator>();
         score = GameObject.Find("ScriptObject").GetComponent<Score_Script>();
     }
 

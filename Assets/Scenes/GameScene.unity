@@ -5287,7 +5287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 407132050}
   cmvcam: {fileID: 575464412}
-  gameOverPanel: {fileID: 0}
+  gameOverPanel: {fileID: 1703878900}
 --- !u!114 &1509443282
 MonoBehaviour:
   m_ObjectHideFlags: 0

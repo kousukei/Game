@@ -18,9 +18,13 @@ public class SkillScript : MonoBehaviour
     public bool CobyTime_flag;
     GameObject CobyObject;
 
-    int skillTimeNumber;
+
     bool barrierSkillFlag=true;
     bool healSkillFlag=true;
+    bool Coby_flag =true;
+    float healSkillTime, barrierSkillTime, Coby_time;
+    public GameObject Im;
+    Image II;
 
     Vector3 za;
     float healEneCost = 50f;
@@ -28,7 +32,6 @@ public class SkillScript : MonoBehaviour
     float decoyEneCost = 30f;
     float skillTime;
 
-    bool Coby_flag =true;
     SkillName skill;
     enum SkillName
     {
@@ -39,6 +42,8 @@ public class SkillScript : MonoBehaviour
 
     void Start()
     {
+        II = Im.GetComponent<Image>();
+        II.fillAmount = 0;
         skill = SkillName.heal;
     }
 
@@ -61,7 +66,6 @@ public class SkillScript : MonoBehaviour
                             HealScript.Heal();
                             energyBar.EneBarControll(healEneCost);
                             healSkillFlag = false;
-                            skillTimeNumber = 1;
                         }
                     }
                 }
@@ -80,7 +84,6 @@ public class SkillScript : MonoBehaviour
                             energyBar.EneBarControll(barrierEneCost);
                             //バリアーの冷却時間の処理
                             barrierSkillFlag = false;
-                            skillTimeNumber = 2;
                         }
                     }
                 }
@@ -97,7 +100,6 @@ public class SkillScript : MonoBehaviour
                         //時間切る前に二回不能
                         Coby_flag = false;
                         energyBar.EneBarControll(decoyEneCost);
-                        skillTimeNumber = 3;
                     }
                     Debug.Log("デコイを出した！");
                     
@@ -120,57 +122,42 @@ public class SkillScript : MonoBehaviour
                 SkillChange(SkillName.heal, sprite[0], sprite[1], sprite[2]);
             }
         }
-        switch (skillTimeNumber)
-        {
-            case 0:
-                break;
-            case 1:
-                skillTime += Time.deltaTime;
-                if (skillTime >= 10)
-                {
-                    healSkillFlag = true;
-                    skillTimeNumber = 0;
-                }
-                break;
-            case 2:
-                //バリアーの冷却時間を10に設定します。
-                skillTime += Time.deltaTime;
-                if (skillTime >= 10)
-                {
-                    barrierSkillFlag = true;
-                    skillTimeNumber = 0;
-                }
-                break;
-            case 3:
-                //分身の冷却時間を5秒を設定します。
-                skillTime += Time.deltaTime;
-                if (skillTime > 5)
-                {
-                    Destroy(CobyObject);
-                    Coby_flag = true;
-                    skillTime = 0;
-                    skillTimeNumber = 0;
-                }
-                break;
 
-        }
-        //分身の時間制限のフラグ
-        //if (CobyTime_flag)
-        //{
-        //    coby += Time.deltaTime;
-        //    if (coby >= 5)
-        //    {
-        //        //時間切ったら
-        //        //分身の方を消す
-        //        Destroy(CobyObject);
-        //        CobyTime_flag = false;
-        //        Coby_flag = true;
-        //        coby = 0;
-        //    }
-        //}
-
+        SkillTime();
     }
-
+    void SkillTime()
+    {
+        if (!healSkillFlag)
+        {
+            healSkillTime += Time.deltaTime;
+            II.fillAmount = healSkillTime / 10;
+            if (healSkillTime >= 10)
+            {
+                II.fillAmount = 0;
+                healSkillFlag = true;
+                healSkillTime = 0;
+            }
+        }
+        if (!barrierSkillFlag)
+        {
+            barrierSkillTime += Time.deltaTime;
+            if (barrierSkillTime >= 10)
+            {
+                barrierSkillFlag = true;
+                barrierSkillTime = 0;
+            }
+        }
+        if (!Coby_flag)
+        {
+            Coby_time += Time.deltaTime;
+            if (Coby_time > 5)
+            {
+                Destroy(CobyObject);
+                Coby_flag = true;
+                Coby_time = 0;
+            }
+        }
+    }
     void SkillChange(SkillName skillname, Sprite first, Sprite second, Sprite third)
     {
         skill = skillname;

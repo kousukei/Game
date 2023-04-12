@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Inspector
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -242,8 +242,8 @@ MonoBehaviour:
     y: 0
     width: 783
     height: 584
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 13}
@@ -296,8 +296,8 @@ MonoBehaviour:
     y: 0
     width: 453
     height: 939
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -438,8 +438,8 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: a6de0100
-    m_LastClickedID: 122534
+    m_SelectedIDs: 1efa0000
+    m_LastClickedID: 64030
     m_ExpandedIDs: 00000000f8f900000afa000018fa000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -555,9 +555,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: cafb0000
-      m_LastClickedID: 64458
-      m_ExpandedIDs: 74effeff34f1feffbafa0000
+      m_SelectedIDs: 08fc0000
+      m_LastClickedID: 64520
+      m_ExpandedIDs: a4effeff34f1feff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.0617707, y: 0.009300647, z: -0.0005686825, w: 0.99808294}
     speed: 2
-    m_Value: {x: 0.061768476, y: 0.009300312, z: -0.000568662, w: 0.998047}
+    m_Value: {x: -0.061770704, y: -0.009300647, z: 0.0005686825, w: -0.99808294}
   m_Size:
     m_Target: 687.9133
     speed: 2

@@ -24,7 +24,7 @@ public class SkillScript : MonoBehaviour
     bool Coby_flag =true;
     float healSkillTime, barrierSkillTime, Coby_time;
     public GameObject Im;
-    Image II;
+    Image healImage;
 
     Vector3 za;
     float healEneCost = 50f;
@@ -42,9 +42,14 @@ public class SkillScript : MonoBehaviour
 
     void Start()
     {
-        II = Im.GetComponent<Image>();
-        II.fillAmount = 0;
+        //for(int i = 0; i < image.Length; i++)
+        //{
+        //    image[i] = GetComponent<Image>();
+        //}
+        //healImage = Im.GetComponent<Image>();
+        //healImage.fillAmount = 0;
         skill = SkillName.heal;
+       
     }
 
     void Update()
@@ -112,6 +117,7 @@ public class SkillScript : MonoBehaviour
             if (skill == SkillName.heal)
             {
                 SkillChange(SkillName.barrier, sprite[1], sprite[2], sprite[0]);
+
             }
             else if (skill == SkillName.barrier)
             {
@@ -122,22 +128,24 @@ public class SkillScript : MonoBehaviour
                 SkillChange(SkillName.heal, sprite[0], sprite[1], sprite[2]);
             }
         }
-
+        //スキルの時間計算
         SkillTime();
     }
     void SkillTime()
     {
+        //ヒールのスキル冷却計算
         if (!healSkillFlag)
         {
             healSkillTime += Time.deltaTime;
-            II.fillAmount = healSkillTime / 10;
+             //= healSkillTime / 10;
             if (healSkillTime >= 10)
             {
-                II.fillAmount = 0;
+                healImage.fillAmount = 0;
                 healSkillFlag = true;
                 healSkillTime = 0;
             }
         }
+        //バリアのスキル冷却計算
         if (!barrierSkillFlag)
         {
             barrierSkillTime += Time.deltaTime;
@@ -147,6 +155,7 @@ public class SkillScript : MonoBehaviour
                 barrierSkillTime = 0;
             }
         }
+        ////コビーのスキル冷却計算
         if (!Coby_flag)
         {
             Coby_time += Time.deltaTime;
@@ -157,6 +166,22 @@ public class SkillScript : MonoBehaviour
                 Coby_time = 0;
             }
         }
+    }
+    void Skill(SkillName skill)
+    {
+        switch (skill)
+        {
+            case SkillName.heal:
+                image[0].fillAmount= healSkillTime / 10;
+                image[1].fillAmount=barrierSkillTime / 10;
+                image[2].fillAmount=Coby_time / 5;
+                break;
+                case SkillName.barrier:
+
+                break;
+
+        }
+
     }
     void SkillChange(SkillName skillname, Sprite first, Sprite second, Sprite third)
     {

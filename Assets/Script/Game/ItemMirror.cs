@@ -36,15 +36,15 @@ public class ItemMirror : MonoBehaviour
         {
             if (mirrorstock.currentStock < mirrorstock.maxStock)
             {
-                if (mirror == Mirror.planeMirror)
+                if (mirror == Mirror.planeMirror&& mirrorstock.planeMirrorStock==0)
                 {
                     mirrorstock.planeMirrorStock++;
                 }
-                else if (mirror == Mirror.convexMirror)
+                else if (mirror == Mirror.convexMirror&& mirrorstock.convexMirrorStock==0)
                 {
                     mirrorstock.convexMirrorStock++;
                 }
-                else if (mirror == Mirror.concaveMirror)
+                else if (mirror == Mirror.concaveMirror&& mirrorstock.concaveMirrorStock==0)
                 {
                     mirrorstock.concaveMirrorStock++;
                 }

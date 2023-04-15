@@ -30,7 +30,6 @@ public class SkillScript : MonoBehaviour
     float healEneCost = 50f;
     float barrierEneCost = 50f;
     float decoyEneCost = 30f;
-    float skillTime;
 
     SkillName skill;
     enum SkillName

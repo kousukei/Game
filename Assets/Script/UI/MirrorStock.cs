@@ -42,8 +42,8 @@ public class MirrorStock : MonoBehaviour
         {
             image[2].color = Color.white;
         }
-        planeMirrorText.text = "Å~" + planeMirrorStock;
-        convexMirrorText.text = "Å~" + convexMirrorStock;
-        concaveMirrorText.text = "Å~" + concaveMirrorStock;
+        //planeMirrorText.text = "Å~" + planeMirrorStock;
+        //convexMirrorText.text = "Å~" + convexMirrorStock;
+        //concaveMirrorText.text = "Å~" + concaveMirrorStock;
     }
 }

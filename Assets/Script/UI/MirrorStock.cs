@@ -22,13 +22,25 @@ public class MirrorStock : MonoBehaviour
         {
             image[0].color = Color.black;
         }
+        else
+        {
+            image[0].color=Color.white;
+        }
         if (convexMirrorStock == 0)
         {
             image[1].color=Color.black;
         }
+        else
+        {
+            image[1].color = Color.white;
+        }
         if(concaveMirrorStock == 0)
         {
             image[2].color=Color.black;
+        }
+        else
+        {
+            image[2].color = Color.white;
         }
         planeMirrorText.text = "Å~" + planeMirrorStock;
         convexMirrorText.text = "Å~" + convexMirrorStock;

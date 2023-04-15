@@ -42,8 +42,8 @@ public class SkillScript : MonoBehaviour
 
     void Start()
     {
-        II = Im.GetComponent<Image>();
-        II.fillAmount = 0;
+        //II = Im.GetComponent<Image>();
+        //II.fillAmount = 0;
         skill = SkillName.heal;
     }
 

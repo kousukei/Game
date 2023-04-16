@@ -21,14 +21,13 @@ public class SkillScript : MonoBehaviour
     public GameObject Player;
     public bool CobyTime_flag;
     GameObject CobyObject;
+    public Animator animator;
 
 
     bool barrierSkillFlag=true;
     bool healSkillFlag=true;
     bool Coby_flag =true;
     float healSkillTime, barrierSkillTime, Coby_time;
-    public GameObject Im;
-    Image healImage;
 
     Vector3 za;
     float healEneCost = 50f;
@@ -45,12 +44,6 @@ public class SkillScript : MonoBehaviour
 
     void Start()
     {
-        //for(int i = 0; i < image.Length; i++)
-        //{
-        //    image[i] = GetComponent<Image>();
-        //}
-        //healImage = Im.GetComponent<Image>();
-        //healImage.fillAmount = 0;
         skill = SkillName.heal;
        
     }
@@ -61,60 +54,60 @@ public class SkillScript : MonoBehaviour
         {
             return;
         }
+
         if (Input.GetMouseButtonDown(0))
         {
-            if (skill == SkillName.heal)
+            switch (skill)
             {
-                if (energyBar.currentEne > healEneCost)
-                {
-                    if (HealScript.currentHp < HealScript.maxHp)
+                case SkillName.heal:
+                    if (energyBar.currentEne > healEneCost)
                     {
-                        if (healSkillFlag)
+                        if (HealScript.currentHp < HealScript.maxHp)
                         {
-                            source[0].PlayOneShot(audio[0]);
-                            HealScript.Heal();
-                            energyBar.EneBarControll(healEneCost);
-                            healSkillFlag = false;
+                            if (healSkillFlag)
+                            {
+                                source[0].PlayOneShot(audio[0]);
+                                HealScript.Heal();
+                                energyBar.EneBarControll(healEneCost);
+                                healSkillFlag = false;
+                            }
                         }
                     }
-                }
-            }
-            else if (skill == SkillName.barrier)
-            {
+                    break;
+                case SkillName.barrier:
+                    if (energyBar.currentEne >= barrierEneCost)
+                    {
+                        if (!barrierScript.isBarrierSkill)
+                        {
+                            //バリアーの時間制限のフラグ
+                            if (barrierSkillFlag)
+                            {
+                                source[1].PlayOneShot(audio[1]);
+                                barrierScript.BarrierSkill();
+                                energyBar.EneBarControll(barrierEneCost);
+                                //バリアーの冷却時間の処理
+                                barrierSkillFlag = false;
 
-                if (energyBar.currentEne >= barrierEneCost)
-                {
-                    if (!barrierScript.isBarrierSkill)
-                    {
-                        //バリアーの時間制限のフラグ
-                        if (barrierSkillFlag)
-                        {
-                            source[1].PlayOneShot(audio[1]);
-                            barrierScript.BarrierSkill();
-                            energyBar.EneBarControll(barrierEneCost);
-                            //バリアーの冷却時間の処理
-                            barrierSkillFlag = false;
+                            }
                         }
                     }
-                }
-            }
-            else if(skill == SkillName.decoy)
-            {
-                if (energyBar.currentEne >= decoyEneCost)
-                {
-                    //分身の時間制限のフラグ
-                    if (Coby_flag)
+                    break;
+                case SkillName.decoy:
+                    if (energyBar.currentEne >= decoyEneCost)
                     {
-                        source[2].PlayOneShot(audio[2]);
-                        //分身作る
-                        Coby();
-                        //時間切る前に二回不能
-                        Coby_flag = false;
-                        energyBar.EneBarControll(decoyEneCost);
+                        //分身の時間制限のフラグ
+                        if (Coby_flag)
+                        {
+                            source[2].PlayOneShot(audio[2]);
+                            //分身作る
+                            Coby();
+                            //時間切る前に二回不能
+                            Coby_flag = false;
+                            energyBar.EneBarControll(decoyEneCost);
+                        }
                     }
-                    Debug.Log("デコイを出した！");
-                    
-                }
+                    break;
+
             }
         }
 
@@ -122,16 +115,27 @@ public class SkillScript : MonoBehaviour
         {
             if (skill == SkillName.heal)
             {
-                SkillChange(SkillName.barrier, sprite[1], sprite[2], sprite[0]);
-
+                //SkillChange(SkillName.barrier, sprite[1], sprite[2], sprite[0]);
+                animator.SetBool("Second", true);
+                animator.SetBool("Third", false);
+                animator.SetBool("First", false);
+                skill = SkillName.barrier;
             }
             else if (skill == SkillName.barrier)
             {
-                SkillChange(SkillName.decoy, sprite[2], sprite[0], sprite[1]);
+                //SkillChange(SkillName.decoy, sprite[2], sprite[0], sprite[1]);
+                animator.SetBool("Third", true);
+                animator.SetBool("Second", false);
+                animator.SetBool("First", false);
+                skill = SkillName.decoy;
             }
             else if (skill == SkillName.decoy)
             {
-                SkillChange(SkillName.heal, sprite[0], sprite[1], sprite[2]);
+                //SkillChange(SkillName.heal, sprite[0], sprite[1], sprite[2]);
+                animator.SetBool("First", true);
+                animator.SetBool("Third", false);
+                animator.SetBool("Second", false);
+                skill = SkillName.heal;
             }
         }
         //スキルの時間計算

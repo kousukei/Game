@@ -1216,7 +1216,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 4.7, y: -157.4}
-  m_SizeDelta: {x: 100, y: 94.8}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &229171137
 CanvasRenderer:
@@ -2092,6 +2092,7 @@ GameObject:
   - component: {fileID: 407132050}
   - component: {fileID: 407132049}
   - component: {fileID: 407132048}
+  - component: {fileID: 407132051}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2206,6 +2207,26 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &407132051
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407132046}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 05f60c08cdd75ca45be9997d750ccc17, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &423183213
 GameObject:
   m_ObjectHideFlags: 0
@@ -5849,7 +5870,7 @@ MonoBehaviour:
   gameOver: {fileID: 1509443281}
   Player: {fileID: 928716008}
   CobyTime_flag: 0
-  Im: {fileID: 0}
+  animator: {fileID: 407132051}
 --- !u!114 &1509443280
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -57,6 +57,7 @@ public class SkillScript : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            
             switch (skill)
             {
                 case SkillName.heal:
@@ -113,29 +114,28 @@ public class SkillScript : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (skill == SkillName.heal)
+            animator.SetBool("SkillStart", true);
+            switch (skill)
             {
-                //SkillChange(SkillName.barrier, sprite[1], sprite[2], sprite[0]);
-                animator.SetBool("Second", true);
-                animator.SetBool("Third", false);
-                animator.SetBool("First", false);
-                skill = SkillName.barrier;
-            }
-            else if (skill == SkillName.barrier)
-            {
-                //SkillChange(SkillName.decoy, sprite[2], sprite[0], sprite[1]);
-                animator.SetBool("Third", true);
-                animator.SetBool("Second", false);
-                animator.SetBool("First", false);
-                skill = SkillName.decoy;
-            }
-            else if (skill == SkillName.decoy)
-            {
-                //SkillChange(SkillName.heal, sprite[0], sprite[1], sprite[2]);
-                animator.SetBool("First", true);
-                animator.SetBool("Third", false);
-                animator.SetBool("Second", false);
-                skill = SkillName.heal;
+                case SkillName.heal:
+                    animator.SetBool("Second", true);
+                    animator.SetBool("Third", false);
+                    animator.SetBool("First", false);
+                    skill = SkillName.barrier;
+                    break;
+                case SkillName.barrier:
+                    animator.SetBool("Third", true);
+                    animator.SetBool("Second", false);
+                    animator.SetBool("First", false);
+                    skill = SkillName.decoy;
+                    break;
+                case SkillName.decoy:
+                    animator.SetBool("First", true);
+                    animator.SetBool("Third", false);
+                    animator.SetBool("Second", false);
+                    skill = SkillName.heal;
+                    break;
+
             }
         }
         //ƒXƒLƒ‹‚ÌŽžŠÔŒvŽZ

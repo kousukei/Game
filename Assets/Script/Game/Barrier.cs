@@ -8,9 +8,9 @@ public class Barrier : MonoBehaviour
     [Header("ƒoƒŠƒA")] public GameObject barrier;
 
     MeshRenderer mr = null;
-    float barrierTime = 10.0f;
+    float barrierTime = 4.0f;
     float barrierTimeCount;
-    float blinkStartTime = 8.0f;
+    float blinkStartTime = 2.0f;
     float colorA;
     bool isTransparency = false;
     [System.NonSerialized] public bool isBarrierSkill = false;

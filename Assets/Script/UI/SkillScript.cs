@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -71,6 +72,7 @@ public class SkillScript : MonoBehaviour
                                 HealScript.Heal();
                                 energyBar.EneBarControll(healEneCost);
                                 healSkillFlag = false;
+                                image[0].fillAmount = 0;
                             }
                         }
                     }
@@ -88,6 +90,7 @@ public class SkillScript : MonoBehaviour
                                 energyBar.EneBarControll(barrierEneCost);
                                 //バリアーの冷却時間の処理
                                 barrierSkillFlag = false;
+                                image[1].fillAmount = 0;
 
                             }
                         }
@@ -105,6 +108,7 @@ public class SkillScript : MonoBehaviour
                             //時間切る前に二回不能
                             Coby_flag = false;
                             energyBar.EneBarControll(decoyEneCost);
+                            image[2].fillAmount = 0;
                         }
                     }
                     break;
@@ -114,7 +118,9 @@ public class SkillScript : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
+            //最初の時のSkillの位置
             animator.SetBool("SkillStart", true);
+            //skillによってアニメションを動く
             switch (skill)
             {
                 case SkillName.heal:
@@ -147,10 +153,10 @@ public class SkillScript : MonoBehaviour
         if (!healSkillFlag)
         {
             healSkillTime += Time.deltaTime;
-             //= healSkillTime / 10;
+            image[0].fillAmount= healSkillTime / 10;
             if (healSkillTime >= 10)
             {
-                //healImage.fillAmount = 0;
+                image[0].fillAmount = 1;
                 healSkillFlag = true;
                 healSkillTime = 0;
             }
@@ -159,8 +165,10 @@ public class SkillScript : MonoBehaviour
         if (!barrierSkillFlag)
         {
             barrierSkillTime += Time.deltaTime;
+            image[1].fillAmount= barrierSkillTime / 10;
             if (barrierSkillTime >= 10)
             {
+                image[1].fillAmount = 1;
                 barrierSkillFlag = true;
                 barrierSkillTime = 0;
             }
@@ -169,8 +177,10 @@ public class SkillScript : MonoBehaviour
         if (!Coby_flag)
         {
             Coby_time += Time.deltaTime;
+            image[2].fillAmount = Coby_time / 5;
             if (Coby_time > 5)
             {
+                image[2].fillAmount = 1;
                 Destroy(CobyObject);
                 Coby_flag = true;
                 Coby_time = 0;
@@ -200,11 +210,7 @@ public class SkillScript : MonoBehaviour
         image[1].sprite = second ;
         image[2].sprite = third ;
     }
-
-    void SkillStatus()
-    {
-
-    }
+    //分身
     void Coby()
     {
         za = Player.transform.position;

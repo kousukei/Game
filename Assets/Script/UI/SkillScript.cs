@@ -53,58 +53,115 @@ public class SkillScript : MonoBehaviour
         {
             return;
         }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    if (skill == SkillName.heal)
+        //    {
+        //        if (energyBar.currentEne > healEneCost)
+        //        {
+        //            if (HealScript.currentHp < HealScript.maxHp)
+        //            {
+        //                if (healSkillFlag)
+        //                {
+        //                    HealScript.Heal();
+        //                    energyBar.EneBarControll(healEneCost);
+        //                    healSkillFlag = false;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    else if (skill == SkillName.barrier)
+        //    {
+
+        //        if (energyBar.currentEne >= barrierEneCost)
+        //        {
+        //            if (!barrierScript.isBarrierSkill)
+        //            {
+        //                //バリアーの時間制限のフラグ
+        //                if (barrierSkillFlag)
+        //                {
+        //                    barrierScript.BarrierSkill();
+        //                    energyBar.EneBarControll(barrierEneCost);
+        //                    //バリアーの冷却時間の処理
+        //                    barrierSkillFlag = false;
+        //                }
+        //            }
+        //        }
+        //    }
+        //    else if(skill == SkillName.decoy)
+        //    {
+        //        if (energyBar.currentEne >= decoyEneCost)
+        //        {
+        //            //分身の時間制限のフラグ
+        //            if (Coby_flag)
+        //            {
+        //                //分身作る
+        //                Coby();
+        //                //時間切る前に二回不能
+        //                Coby_flag = false;
+        //                energyBar.EneBarControll(decoyEneCost);
+        //            }
+        //            Debug.Log("デコイを出した！");
+                    
+        //        }
+        //    }
+        //}
         if (Input.GetMouseButtonDown(0))
         {
-            if (skill == SkillName.heal)
+            switch (skill)
             {
-                if (energyBar.currentEne > healEneCost)
-                {
-                    if (HealScript.currentHp < HealScript.maxHp)
+                case SkillName.heal:
+                    if (energyBar.currentEne > healEneCost)
                     {
-                        if (healSkillFlag)
+                        if (HealScript.currentHp < HealScript.maxHp)
                         {
-                            HealScript.Heal();
-                            energyBar.EneBarControll(healEneCost);
-                            healSkillFlag = false;
+                            if (healSkillFlag)
+                            {
+                                HealScript.Heal();
+                                energyBar.EneBarControll(healEneCost);
+                                healSkillFlag = false;
+                            }
                         }
                     }
-                }
-            }
-            else if (skill == SkillName.barrier)
-            {
-
-                if (energyBar.currentEne >= barrierEneCost)
-                {
+                    break;
+                case SkillName.barrier:
+                    if (energyBar.currentEne >= barrierEneCost)
+                    {
+                        if (!barrierScript.isBarrierSkill)
+                        {
+                            //バリアーの時間制限のフラグ
+                            if (barrierSkillFlag)
+                            {
+                                barrierScript.BarrierSkill();
+                                energyBar.EneBarControll(barrierEneCost);
+                                //バリアーの冷却時間の処理
+                                barrierSkillFlag = false;
+                            }
+                        }
+                    }
+                    break;
+                case SkillName.decoy:
                     if (!barrierScript.isBarrierSkill)
                     {
-                        //バリアーの時間制限のフラグ
-                        if (barrierSkillFlag)
+                        if (energyBar.currentEne >= decoyEneCost)
                         {
-                            barrierScript.BarrierSkill();
-                            energyBar.EneBarControll(barrierEneCost);
-                            //バリアーの冷却時間の処理
-                            barrierSkillFlag = false;
+                            //分身の時間制限のフラグ
+                            if (Coby_flag)
+                            {
+                                //分身作る
+                                Coby();
+                                //時間切る前に二回不能
+                                Coby_flag = false;
+                                energyBar.EneBarControll(decoyEneCost);
+                            }
+                            Debug.Log("デコイを出した！");
+
                         }
                     }
-                }
+                    break;
+
             }
-            else if(skill == SkillName.decoy)
-            {
-                if (energyBar.currentEne >= decoyEneCost)
-                {
-                    //分身の時間制限のフラグ
-                    if (Coby_flag)
-                    {
-                        //分身作る
-                        Coby();
-                        //時間切る前に二回不能
-                        Coby_flag = false;
-                        energyBar.EneBarControll(decoyEneCost);
-                    }
-                    Debug.Log("デコイを出した！");
-                    
-                }
-            }
+
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -123,6 +180,7 @@ public class SkillScript : MonoBehaviour
             }
         }
 
+
         SkillTime();
     }
     void SkillTime()
@@ -130,10 +188,10 @@ public class SkillScript : MonoBehaviour
         if (!healSkillFlag)
         {
             healSkillTime += Time.deltaTime;
-            II.fillAmount = healSkillTime / 10;
+            //II.fillAmount = healSkillTime / 10;
             if (healSkillTime >= 10)
             {
-                II.fillAmount = 0;
+                //II.fillAmount = 0;
                 healSkillFlag = true;
                 healSkillTime = 0;
             }

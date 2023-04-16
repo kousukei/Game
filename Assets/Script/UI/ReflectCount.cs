@@ -14,7 +14,7 @@ public class ReflectCount : MonoBehaviour
     [System .NonSerialized]public int countPlaneMirror, countConvexMirror, countConcaveMirror;
 
     //‘Ï‹v—Í
-    [System.NonSerialized] public int mirrorBreakNum = 2, cvMirrorBreakNum = 2, ccMirrorBreakNum = 2;
+    [System.NonSerialized] public int mirrorBreakNum = 20, cvMirrorBreakNum = 20, ccMirrorBreakNum = 20;
 
     public enum Mirror
     {

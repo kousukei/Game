@@ -10,6 +10,10 @@ public class SkillScript : MonoBehaviour
     private Image[] image;
     [SerializeField, Header("表示させる画像")]
     private Sprite[] sprite;
+    [SerializeField, Header("効果音")]
+    private AudioClip[] audio;
+    [SerializeField, Header("効果音Component")]
+    private AudioSource[] source; 
     public Barrier barrierScript;
     public HpBar HealScript;
     public EnergyBar energyBar;
@@ -67,6 +71,7 @@ public class SkillScript : MonoBehaviour
                     {
                         if (healSkillFlag)
                         {
+                            source[0].PlayOneShot(audio[0]);
                             HealScript.Heal();
                             energyBar.EneBarControll(healEneCost);
                             healSkillFlag = false;
@@ -84,6 +89,7 @@ public class SkillScript : MonoBehaviour
                         //バリアーの時間制限のフラグ
                         if (barrierSkillFlag)
                         {
+                            source[1].PlayOneShot(audio[1]);
                             barrierScript.BarrierSkill();
                             energyBar.EneBarControll(barrierEneCost);
                             //バリアーの冷却時間の処理
@@ -99,6 +105,7 @@ public class SkillScript : MonoBehaviour
                     //分身の時間制限のフラグ
                     if (Coby_flag)
                     {
+                        source[2].PlayOneShot(audio[2]);
                         //分身作る
                         Coby();
                         //時間切る前に二回不能
@@ -139,7 +146,7 @@ public class SkillScript : MonoBehaviour
              //= healSkillTime / 10;
             if (healSkillTime >= 10)
             {
-                healImage.fillAmount = 0;
+                //healImage.fillAmount = 0;
                 healSkillFlag = true;
                 healSkillTime = 0;
             }

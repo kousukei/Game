@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 
-//[RequireComponent(typeof(MyButton))]
+
 public class Enemy_1: MonoBehaviour
 {
     [Header("鏡")]
-    public GameObject mirror;
+    //public GameObject[] mirror;
     Enemy enemy;
     GameObject Player;
-    Vector3 randomPosition;
+    //Vector3 randomPosition;
     [Header("移動速度")]
     public float speed;
     [Header("回転速度")]
@@ -27,16 +27,21 @@ public class Enemy_1: MonoBehaviour
     public float withinRange;
     [Header("追跡範囲")]
     public float OutOfRange;
-    [Header("死亡フラグ")]
-    public bool death_falg;
     public float HP;
-    public GameObject effect;
     public bool hit=false;
+    //死亡フラグ
+    public bool deathFlag;
+    //エフェクト
+    public GameObject effect;
+    //アイテムミラー
+    public GameObject[] mirror;
     SkillScript skillScript;
     Score_Script score;
+
+
     enum Mode
     {
-        開始,移動,攻撃,死亡
+        開始,移動,攻撃
     }
      Mode mode = Mode.開始;
     void Start()
@@ -103,14 +108,13 @@ public class Enemy_1: MonoBehaviour
                     mode = Mode.移動;
                 }
                 break;
-            case Mode.死亡:
-                break;
+
         }
         if (HP <= 0)
         {
             Instantiate(effect, this.transform.position, this.transform.rotation);
             score.score(100);
-            //Instantiate(mirror, this.transform.position, this.transform.rotation);
+            MirrorProbability();
             Destroy(this.gameObject);
         }
 
@@ -127,6 +131,23 @@ public class Enemy_1: MonoBehaviour
         }
     }
 
+    void MirrorProbability()
+    {
+        int i = Random.Range(0, 20);
 
+        switch (i)
+        {
+            case 1:
+                Instantiate(mirror[0], this.transform.position, this.transform.rotation);
+                break;
+            case 2:
+                Instantiate(mirror[1], this.transform.position, this.transform.rotation);
+                break;
+            case 3:
+                Instantiate(mirror[2], this.transform.position, this.transform.rotation);
+                break;
+        }
+            
+    }
 
 }

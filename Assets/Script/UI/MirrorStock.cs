@@ -11,6 +11,7 @@ public class MirrorStock : MonoBehaviour
     [System.NonSerialized] public int convexMirrorStock = 1;
     [System.NonSerialized] public int concaveMirrorStock = 1;
     public Image[] image;
+    public GameObject mirrer;
     public Text planeMirrorText;
     public Text convexMirrorText;
     public Text concaveMirrorText;
@@ -42,8 +43,7 @@ public class MirrorStock : MonoBehaviour
         {
             image[2].color = Color.white;
         }
-        //planeMirrorText.text = "Å~" + planeMirrorStock;
-        //convexMirrorText.text = "Å~" + convexMirrorStock;
-        //concaveMirrorText.text = "Å~" + concaveMirrorStock;
+
     }
+
 }

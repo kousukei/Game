@@ -7,8 +7,6 @@ public class Enemy : MonoBehaviour
     Vector3 Position;
     Vector3 sss;
     GameObject range;
-    bool y;
-    //public float a=20;
     float shootingTimeCount;
     Material ma;
     float speed;

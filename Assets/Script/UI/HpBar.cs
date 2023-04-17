@@ -17,7 +17,7 @@ public class HpBar : MonoBehaviour
     {
         hpSlider.value = 1;
         currentHp = maxHp;
-        heal = maxHp;
+        heal = 20;
     }
     void Update()
     {

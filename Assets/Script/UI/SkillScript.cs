@@ -68,10 +68,13 @@ public class SkillScript : MonoBehaviour
                         {
                             if (healSkillFlag)
                             {
+                                //効果音
                                 source[0].PlayOneShot(audio[0]);
                                 HealScript.Heal();
                                 energyBar.EneBarControll(healEneCost);
+                                //スキル冷却時間フラグ
                                 healSkillFlag = false;
+                                //スキル冷却時間のUI
                                 image[0].fillAmount = 0;
                             }
                         }
@@ -85,11 +88,13 @@ public class SkillScript : MonoBehaviour
                             //バリアーの時間制限のフラグ
                             if (barrierSkillFlag)
                             {
+                                //効果音
                                 source[1].PlayOneShot(audio[1]);
                                 barrierScript.BarrierSkill();
                                 energyBar.EneBarControll(barrierEneCost);
                                 //バリアーの冷却時間の処理
                                 barrierSkillFlag = false;
+                                //スキル冷却時間のUI
                                 image[1].fillAmount = 0;
 
                             }
@@ -102,12 +107,14 @@ public class SkillScript : MonoBehaviour
                         //分身の時間制限のフラグ
                         if (Coby_flag)
                         {
+                            //効果音
                             source[2].PlayOneShot(audio[2]);
                             //分身作る
                             Coby();
                             //時間切る前に二回不能
                             Coby_flag = false;
                             energyBar.EneBarControll(decoyEneCost);
+                            //スキル冷却時間のUI
                             image[2].fillAmount = 0;
                         }
                     }

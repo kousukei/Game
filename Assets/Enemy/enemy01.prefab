@@ -632,7 +632,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c757f4bacf5e44f81d90f6d12d926d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mirror: {fileID: 0}
   speed: 10
   muki_speed: 0.04
   laser: {fileID: 618306989853846486, guid: 2138619c2e66bc845a826b8ccac8c0dc, type: 3}
@@ -640,10 +639,14 @@ MonoBehaviour:
   laser_speed: 20
   withinRange: 10
   OutOfRange: 30
-  death_falg: 0
   HP: 3
-  effect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
   hit: 0
+  deathFlag: 0
+  effect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
+  mirror:
+  - {fileID: 6151857941161225164, guid: 458695b3b76e9074482cd30aeaba4184, type: 3}
+  - {fileID: 8607876331337431498, guid: ead1628ec7734a741bb3eead385f376e, type: 3}
+  - {fileID: 3161965195114484698, guid: cf606f16dd9612745a252bf8fd3508a7, type: 3}
 --- !u!1 &5452692998591581347
 GameObject:
   m_ObjectHideFlags: 0

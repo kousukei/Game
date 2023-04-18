@@ -119,6 +119,7 @@ public class Enemy_1: MonoBehaviour
         {
             Instantiate(effect, this.transform.position, this.transform.rotation);
             score.score(100);
+            //アイテムミラーを生成します。
             MirrorProbability();
             Destroy(this.gameObject);
         }

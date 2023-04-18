@@ -12178,6 +12178,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOver: {fileID: 1509443281}
   hpSlider: {fileID: 1782849249}
+  effect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
+  player: {fileID: 928716008}
 --- !u!1 &1798248391 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5650602826578702360, guid: e2353d2c5f3002645968c8e313c6df95, type: 3}

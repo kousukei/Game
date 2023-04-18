@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.Serialization;
 
 
 
 public class Enemy_1: MonoBehaviour
 {
-    [Header("鏡")]
-    //public GameObject[] mirror;
     Enemy enemy;
     GameObject Player;
-    //Vector3 randomPosition;
     [Header("移動速度")]
     public float speed;
     [Header("回転速度")]
@@ -56,6 +55,11 @@ public class Enemy_1: MonoBehaviour
     
     void Update()
     {
+        //プレイヤーがいるがどうか
+        if (!Player.activeSelf)
+        {
+            mode = Mode.移動;
+        }
         switch (mode)
         {
             case Mode.開始:
@@ -66,7 +70,7 @@ public class Enemy_1: MonoBehaviour
                 //移動目標
                 enemy.random_move(this.gameObject, speed);
                 enemy.Direction(this.gameObject);
-                //攻撃範囲
+                //敵の目の前
                 if (enemy.Attack_range(Player, this.gameObject))
                 {
                     switch (enemy.tracking_range(Player, this.gameObject, withinRange, OutOfRange))
@@ -84,32 +88,33 @@ public class Enemy_1: MonoBehaviour
                 //分身している時間内分身を攻撃
                 if (skillScript.CobyTime_flag)
                 {
+                    //分身を目標します。
                     Player = GameObject.Find("Coby");
                 }
                 else
                 {
+                    //じゃなかったらプレイヤーにします。
                     Player = GameObject.Find("Player");
                 }
+                //敵の角度内
                 if (enemy.Attack_range(Player, this.gameObject))
                 {
+                    //敵の距離内
                     switch (enemy.tracking_range(Player, this.gameObject, withinRange, OutOfRange))
                     {
                         case 1:
+                            //距離内と角度内なら攻撃
                             enemy.Attack(firing.transform, laser, shootingTime, laser_speed);
                             break;
                         case 2:
+                            //距離外なら追跡
                             enemy.Player_move(Player, this.gameObject);
                             break;
                     }
                 }
-                //攻撃範囲外なら移動へ戻る
-                if (!enemy.Attack_range(Player, this.gameObject))
-                {
-                    mode = Mode.移動;
-                }
                 break;
-
         }
+
         if (HP <= 0)
         {
             Instantiate(effect, this.transform.position, this.transform.rotation);

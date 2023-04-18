@@ -7,6 +7,12 @@ public class HpBar : MonoBehaviour
 {
     public GameOver gameOver;   
     public Slider hpSlider;
+    bool once = false;
+
+    [SerializeField, Header("エフェクト")]
+    private GameObject effect;
+    [SerializeField, Header("プレイヤー")]
+    private GameObject player;
 
     [System .NonSerialized]public int maxHp = 100;
     [System.NonSerialized]public int currentHp;
@@ -23,6 +29,12 @@ public class HpBar : MonoBehaviour
     {
         if (hpSlider.value <= 0)
         {
+            if (!once)
+            {
+                player.SetActive(false);
+                Instantiate(effect, player.transform.position, Quaternion.identity);
+                once = true;
+            }
             gameOver.GameOverScene();
         }
     }

@@ -6,9 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class title : MonoBehaviour
 {
-    Text text;
-    float a = 0;
-     GameObject test;
+
     void Start()
     {
 

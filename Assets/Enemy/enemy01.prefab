@@ -642,11 +642,12 @@ MonoBehaviour:
   HP: 3
   hit: 0
   deathFlag: 0
-  effect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
+  deathEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
   mirror:
   - {fileID: 6151857941161225164, guid: 458695b3b76e9074482cd30aeaba4184, type: 3}
   - {fileID: 8607876331337431498, guid: ead1628ec7734a741bb3eead385f376e, type: 3}
   - {fileID: 3161965195114484698, guid: cf606f16dd9612745a252bf8fd3508a7, type: 3}
+  damageEffect: {fileID: 7131401307255788800, guid: 4d9a3b35b3bc07649b697df7fb497b6d, type: 3}
 --- !u!1 &5452692998591581347
 GameObject:
   m_ObjectHideFlags: 0

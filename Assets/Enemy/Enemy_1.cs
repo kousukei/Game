@@ -31,9 +31,12 @@ public class Enemy_1: MonoBehaviour
     //死亡フラグ
     public bool deathFlag;
     //エフェクト
-    public GameObject effect;
+    public GameObject deathEffect;
     //アイテムミラー
     public GameObject[] mirror;
+    public GameObject damageEffect;
+    float damageEffectTime;
+    bool famageEffectFlag;
     SkillScript skillScript;
     Score_Script score;
 
@@ -117,11 +120,20 @@ public class Enemy_1: MonoBehaviour
 
         if (HP <= 0)
         {
-            Instantiate(effect, this.transform.position, this.transform.rotation);
+            Instantiate(deathEffect, this.transform.position, this.transform.rotation);
             score.score(100);
             //アイテムミラーを生成します。
             MirrorProbability();
             Destroy(this.gameObject);
+        }
+        if (famageEffectFlag)
+        {
+            damageEffectTime += Time.deltaTime;
+            if (damageEffectTime >= 0.5f)
+            {
+                Destroy(damageEffect);
+                damageEffectTime = 0;
+            }
         }
 
     }
@@ -130,6 +142,8 @@ public class Enemy_1: MonoBehaviour
         if (collision.gameObject.tag == "Laser")
         {
             HP--;
+            Instantiate(damageEffect, this.transform.position, this.transform.rotation);
+            famageEffectFlag = true;
         }
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Ground")
         {

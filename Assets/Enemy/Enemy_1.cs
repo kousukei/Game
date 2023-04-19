@@ -133,6 +133,7 @@ public class Enemy_1: MonoBehaviour
             {
                 Destroy(damageEffect);
                 damageEffectTime = 0;
+                famageEffectFlag = false;
             }
         }
 

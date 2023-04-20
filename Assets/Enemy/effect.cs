@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class effect : MonoBehaviour
 {
+
+    public GameObject enemyDamageEffect;
     float time;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         time += Time.deltaTime;
-        if (time >= 1.5f)
+    }
+    public void EnemyDamageEffect(Collision collision,Transform enemy)
+    {
+        if (collision.gameObject.tag == "Laser")
         {
-            Destroy(this.gameObject);
+            Instantiate(enemyDamageEffect, enemy.position, enemy.rotation);
             time = 0;
+        }
+        else if (time >= 1)
+        {
+            //Destroy(enemyDamageEffect);
         }
     }
 }

@@ -35,10 +35,9 @@ public class Enemy_1: MonoBehaviour
     //アイテムミラー
     public GameObject[] mirror;
     public GameObject damageEffect;
-    float damageEffectTime;
-    bool famageEffectFlag;
     SkillScript skillScript;
     Score_Script score;
+    effect eff;
 
 
     enum Mode
@@ -53,6 +52,7 @@ public class Enemy_1: MonoBehaviour
         enemy = this.gameObject.GetComponent<Enemy>();
         skillScript = GameObject.Find("ScriptObject").GetComponent<SkillScript>();
         score = GameObject.Find("ScriptObject").GetComponent<Score_Script>();
+        eff = GameObject.Find("EffectControl").GetComponent<effect>();
     }
 
     
@@ -126,16 +126,7 @@ public class Enemy_1: MonoBehaviour
             MirrorProbability();
             Destroy(this.gameObject);
         }
-        if (famageEffectFlag)
-        {
-            damageEffectTime += Time.deltaTime;
-            if (damageEffectTime >= 0.5f)
-            {
-                Destroy(damageEffect);
-                damageEffectTime = 0;
-                famageEffectFlag = false;
-            }
-        }
+
 
     }
     private void OnCollisionEnter(Collision collision)
@@ -143,9 +134,8 @@ public class Enemy_1: MonoBehaviour
         if (collision.gameObject.tag == "Laser")
         {
             HP--;
-            Instantiate(damageEffect, this.transform.position, this.transform.rotation);
-            famageEffectFlag = true;
         }
+        eff.EnemyDamageEffect(collision, this.transform);
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Ground")
         {
             hit = true;

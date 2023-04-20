@@ -24,10 +24,7 @@ public class title : MonoBehaviour
             
             Instantiate(ll, k.transform.position, k.transform.rotation);
         }
-        if (Input.GetMouseButtonUp(0))
-        {
-            Destroy(ll);
-        }
+
     }
     public void start()
     {

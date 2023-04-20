@@ -5,8 +5,14 @@ using UnityEngine;
 public class effect : MonoBehaviour
 {
 
-    public GameObject enemyDamageEffect;
     float time;
+    public Effect eff;
+    public enum Effect
+    {
+        DamageEffect,
+        DeathEffect,
+        HealEffect
+    }
     void Start()
     {
         
@@ -16,17 +22,30 @@ public class effect : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-    }
-    public void EnemyDamageEffect(Collision collision,Transform enemy)
-    {
-        if (collision.gameObject.tag == "Laser")
+        switch (eff)
         {
-            Instantiate(enemyDamageEffect, enemy.position, enemy.rotation);
-            time = 0;
-        }
-        else if (time >= 1)
-        {
-            //Destroy(enemyDamageEffect);
+            case Effect.DamageEffect:
+                if (time >= 0.5)
+                {
+                    Destroy(this.gameObject);
+                    time = 0;
+                }
+                break;
+            case Effect.DeathEffect:
+                if (time >= 1)
+                {
+                    Destroy(this.gameObject);
+                    time = 0;
+                }
+                break;
+            case Effect.HealEffect:
+                if (time >= 1)
+                {
+                    Destroy(this.gameObject);
+                    time = 0;
+                }
+                break;
         }
     }
+
 }

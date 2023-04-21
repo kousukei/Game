@@ -20,6 +20,7 @@ public class SkillScript : MonoBehaviour
     public EnergyBar energyBar;
     public GameOver gameOver;
     public GameObject Player;
+    public GameObject healEffect;
     public bool CobyTime_flag;
     GameObject CobyObject;
     public Animator animator;
@@ -70,6 +71,8 @@ public class SkillScript : MonoBehaviour
                             {
                                 //効果音
                                 source[0].PlayOneShot(audio[0]);
+                                //エフェクト
+                                Instantiate(healEffect, Player.transform.position, Player.transform.rotation);
                                 HealScript.Heal();
                                 energyBar.EneBarControll(healEneCost);
                                 //スキル冷却時間フラグ

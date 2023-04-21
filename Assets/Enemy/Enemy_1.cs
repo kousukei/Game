@@ -35,6 +35,7 @@ public class Enemy_1: MonoBehaviour
     //アイテムミラー
     public GameObject[] mirror;
     public GameObject damageEffect;
+    GameObject damageEffectPosition;
     SkillScript skillScript;
     Score_Script score;
 
@@ -51,7 +52,6 @@ public class Enemy_1: MonoBehaviour
         enemy = this.gameObject.GetComponent<Enemy>();
         skillScript = GameObject.Find("ScriptObject").GetComponent<SkillScript>();
         score = GameObject.Find("ScriptObject").GetComponent<Score_Script>();
-        
     }
 
     
@@ -125,7 +125,10 @@ public class Enemy_1: MonoBehaviour
             MirrorProbability();
             Destroy(this.gameObject);
         }
-        damageEffect.transform.position = this.transform.position;
+        if (damageEffectPosition != null)
+        {
+            damageEffectPosition.transform.position = this.transform.position;
+        }
 
 
     }
@@ -136,7 +139,7 @@ public class Enemy_1: MonoBehaviour
             HP--;
             if (HP >= 1)
             {
-                Instantiate(damageEffect, this.transform.position, this.transform.rotation);
+                damageEffectPosition=Instantiate(damageEffect, this.transform.position, this.transform.rotation);
             }
         }
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Ground")

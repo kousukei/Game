@@ -6,10 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class title : MonoBehaviour
 {
-    float i;
-    public GameObject k;
-    GameObject ll;
-    bool oo;
+    public GameObject test1;
     void Start()
     {
         
@@ -18,12 +15,7 @@ public class title : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ll = k;
-        if (Input.GetMouseButtonDown(0))
-        {
-            
-            Instantiate(ll, k.transform.position, k.transform.rotation);
-        }
+        
 
     }
     public void start()

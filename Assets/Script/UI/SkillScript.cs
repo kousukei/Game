@@ -72,7 +72,7 @@ public class SkillScript : MonoBehaviour
                             if (healSkillFlag)
                             {
                                 //効果音
-                                source[0].PlayOneShot(audio[0]);
+                                source[0].PlayOneShot(audio[0],0.5f);
                                 //エフェクト
                                 healEffectPosioion=Instantiate(healEffect, player.transform.position, player.transform.rotation);
 
@@ -95,7 +95,7 @@ public class SkillScript : MonoBehaviour
                             if (barrierSkillFlag)
                             {
                                 //効果音
-                                source[1].PlayOneShot(audio[1]);
+                                source[1].PlayOneShot(audio[1],0.5f);
                                 barrierScript.BarrierSkill();
                                 energyBar.EneBarControll(barrierEneCost);
                                 //バリアーの冷却時間の処理
@@ -114,7 +114,7 @@ public class SkillScript : MonoBehaviour
                         if (Coby_flag)
                         {
                             //効果音
-                            source[2].PlayOneShot(audio[2]);
+                            source[2].PlayOneShot(audio[2], 0.5f);
                             //分身作る
                             Coby();
                             //時間切る前に二回不能

@@ -26,6 +26,10 @@ public class Enemy_1: MonoBehaviour
     public float withinRange;
     [Header("追跡範囲")]
     public float OutOfRange;
+    [SerializeField, Header("効果音")]
+    private AudioClip[] audio;
+    [SerializeField, Header("効果音Component")]
+    private AudioSource source;
     public float HP;
     public bool hit=false;
     //死亡フラグ
@@ -119,8 +123,12 @@ public class Enemy_1: MonoBehaviour
 
         if (HP <= 0)
         {
+            //エフェクト
             Instantiate(deathEffect, this.transform.position, this.transform.rotation);
+            //スコア
             score.score(100);
+            //効果音
+            source.PlayOneShot(audio[0]);
             //アイテムミラーを生成します。
             MirrorProbability();
             Destroy(this.gameObject);

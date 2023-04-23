@@ -128,6 +128,31 @@ public class SkillScript : MonoBehaviour
 
             }
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            animator.SetBool("SkillStart", true);
+            switch (skill)
+            {
+                case SkillName.heal:
+                    animator.SetBool("Second", true);
+                    animator.SetBool("Third", false);
+                    animator.SetBool("First", false);
+                    skill = SkillName.barrier;
+                    break;
+                case SkillName.barrier:
+                    animator.SetBool("Third", true);
+                    animator.SetBool("Second", false);
+                    animator.SetBool("First", false);
+                    skill = SkillName.decoy;
+                    break;
+                case SkillName.decoy:
+                    animator.SetBool("First", true);
+                    animator.SetBool("Scond", false);
+                    animator.SetBool("Third", false);
+                    skill = SkillName.heal;
+                    break;
+            }
+        }
         if (healEffectPosioion != null)
         {
             //エフェクトをプレイヤーの位置で出る

@@ -19,8 +19,11 @@ public class SkillScript : MonoBehaviour
     public HpBar HealScript;
     public EnergyBar energyBar;
     public GameOver gameOver;
-    public GameObject Player;
+    public GameObject player;
+    //エフェクト
     public GameObject healEffect;
+    //エフェクトのポジション
+    GameObject healEffectPosioion;
     public bool CobyTime_flag;
     GameObject CobyObject;
     public Animator animator;
@@ -47,7 +50,6 @@ public class SkillScript : MonoBehaviour
     void Start()
     {
         skill = SkillName.heal;
-       
     }
 
     void Update()
@@ -72,7 +74,8 @@ public class SkillScript : MonoBehaviour
                                 //効果音
                                 source[0].PlayOneShot(audio[0]);
                                 //エフェクト
-                                Instantiate(healEffect, Player.transform.position, Player.transform.rotation);
+                                healEffectPosioion=Instantiate(healEffect, player.transform.position, player.transform.rotation);
+
                                 HealScript.Heal();
                                 energyBar.EneBarControll(healEneCost);
                                 //スキル冷却時間フラグ
@@ -125,34 +128,11 @@ public class SkillScript : MonoBehaviour
 
             }
         }
-
-        if (Input.GetMouseButtonDown(1))
+        if (healEffectPosioion != null)
         {
-            //最初の時のSkillの位置
-            animator.SetBool("SkillStart", true);
-            //skillによってアニメションを動く
-            switch (skill)
-            {
-                case SkillName.heal:
-                    animator.SetBool("Second", true);
-                    animator.SetBool("Third", false);
-                    animator.SetBool("First", false);
-                    skill = SkillName.barrier;
-                    break;
-                case SkillName.barrier:
-                    animator.SetBool("Third", true);
-                    animator.SetBool("Second", false);
-                    animator.SetBool("First", false);
-                    skill = SkillName.decoy;
-                    break;
-                case SkillName.decoy:
-                    animator.SetBool("First", true);
-                    animator.SetBool("Third", false);
-                    animator.SetBool("Second", false);
-                    skill = SkillName.heal;
-                    break;
+            //エフェクトをプレイヤーの位置で出る
+            healEffectPosioion.transform.position = player.transform.position;
 
-            }
         }
         //スキルの時間計算
         SkillTime();
@@ -197,35 +177,12 @@ public class SkillScript : MonoBehaviour
             }
         }
     }
-    void Skill(SkillName skill)
-    {
-        switch (skill)
-        {
-            case SkillName.heal:
-                image[0].fillAmount= healSkillTime / 10;
-                image[1].fillAmount=barrierSkillTime / 10;
-                image[2].fillAmount=Coby_time / 5;
-                break;
-                case SkillName.barrier:
-
-                break;
-
-        }
-
-    }
-    void SkillChange(SkillName skillname, Sprite first, Sprite second, Sprite third)
-    {
-        skill = skillname;
-        image[0].sprite = first ;
-        image[1].sprite = second ;
-        image[2].sprite = third ;
-    }
     //分身
     void Coby()
     {
-        za = Player.transform.position;
+        za = player.transform.position;
         za.x = za.x + 1.5f;
-        CobyObject=Instantiate(Player, za, Player.transform.rotation);
+        CobyObject=Instantiate(player, za, player.transform.rotation);
         CobyObject.name = "Coby";
     }
 

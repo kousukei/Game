@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
         {
             playerAnimator.SetBool("IsRun", false);
         }
+        
     }
 
     private void FixedUpdate()

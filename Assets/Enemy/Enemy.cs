@@ -1,27 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class Enemy : MonoBehaviour
 {
     Vector3 Position;
-    Vector3 sss;
     GameObject range;
     float shootingTimeCount;
     Material ma;
     float speed;
     Enemy_1 enemy_1;
-
-    void Start()
+    IEnumerator st()
     {
         Position = random();
         enemy_1 = this.gameObject.GetComponent<Enemy_1>();
-
-        
+        yield return null;
     }
-    private void OnTriggerStay(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
         range = other.gameObject;
+        StartCoroutine(st());
     }
     /// <summary>
     /// ƒvƒŒƒCƒ„[‚ÉŒü‚©‚Á‚ÄˆÚ“®

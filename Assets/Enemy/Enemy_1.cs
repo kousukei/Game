@@ -125,6 +125,7 @@ public class Enemy_1: MonoBehaviour
             MirrorProbability();
             Destroy(this.gameObject);
         }
+        //ダメージを受けたエフェクトのposition
         if (damageEffectPosition != null)
         {
             damageEffectPosition.transform.position = this.transform.position;

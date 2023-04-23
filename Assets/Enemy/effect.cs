@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class effect : MonoBehaviour
 {
-     GameObject player;
-     GameObject enemy;
+
     float time;
-    GameObject damageEffect;
     public Effect eff;
     public enum Effect
     {
@@ -17,8 +15,7 @@ public class effect : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.Find("Player");
-        enemy = GameObject.Find("enemy01");
+
     }
 
 
@@ -51,8 +48,5 @@ public class effect : MonoBehaviour
                 break;
         }
     }
-    void DamageEffect()
-    {
 
-    }
 }

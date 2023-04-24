@@ -5,10 +5,9 @@ using UnityEngine;
 public class Enemy_start : MonoBehaviour
 {
     public GameObject Enemy;
-    [SerializeField, Header("Œø‰Ê‰¹")]
-    AudioClip audioclip;
+
     [SerializeField, Header("Œø‰Ê‰¹Component")]
-    AudioSource audioSource;
+    AudioControl audioControl;
     Vector3 vector3;
     public Stage stage;
     bool stage1Flag = true;
@@ -39,7 +38,8 @@ public class Enemy_start : MonoBehaviour
                             vector3.z = Random.Range(this.gameObject.transform.position.z - this.gameObject.transform.localScale.z / 2, this.gameObject.transform.position.z + this.gameObject.transform.localScale.z / 2);
                             Instantiate(Enemy, vector3, this.gameObject.transform.rotation);
                         }
-                        audioSource.PlayOneShot(audioclip);
+                        audioControl.StageSound(stage);
+                        //audioSource.PlayOneShot(audioclip);
                         stage1Flag = false;
                     }
                     break;
@@ -53,7 +53,8 @@ public class Enemy_start : MonoBehaviour
                             vector3.z = Random.Range(this.gameObject.transform.position.z - this.gameObject.transform.localScale.z / 2, this.gameObject.transform.position.z + this.gameObject.transform.localScale.z / 2);
                             Instantiate(Enemy, vector3, this.gameObject.transform.rotation);
                         }
-                        audioSource.PlayOneShot(audioclip);
+                        audioControl.StageSound(stage);
+                        //audioSource.PlayOneShot(audioclip);
                         stage2Flag = false;
                     }
                     break;
@@ -67,7 +68,8 @@ public class Enemy_start : MonoBehaviour
                             vector3.z = Random.Range(this.gameObject.transform.position.z - this.gameObject.transform.localScale.z / 2, this.gameObject.transform.position.z + this.gameObject.transform.localScale.z / 2);
                             Instantiate(Enemy, vector3, this.gameObject.transform.rotation);
                         }
-                        audioSource.PlayOneShot(audioclip);
+                        audioControl.StageSound(stage);
+                        //audioSource.PlayOneShot(audioclip);
                         stage3Flag = false;
                     }
                     break;

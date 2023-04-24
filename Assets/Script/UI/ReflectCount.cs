@@ -9,8 +9,7 @@ public class ReflectCount : MonoBehaviour
     public EnergyBar energyBar;
     public Mirror mirror;
     public Text countNum;
-    public AudioClip clip;
-    public AudioSource source;
+    public AudioControl audioControl;
 
     //反射した回数
     [System .NonSerialized]public int countPlaneMirror, countConvexMirror, countConcaveMirror;
@@ -30,6 +29,7 @@ public class ReflectCount : MonoBehaviour
         countPlaneMirror = mirrorBreakNum; 
         countConvexMirror = cvMirrorBreakNum;
         countConcaveMirror=ccMirrorBreakNum;
+        
     }
 
     void Update()
@@ -40,8 +40,8 @@ public class ReflectCount : MonoBehaviour
             if (countPlaneMirror <= 0)
             {
                 gameObject.SetActive(false);
-                //ミラー壊れたら時の音
-                source.PlayOneShot(clip);
+                //ミラーが壊れた音
+                audioControl.PlayerSound();
                 mirrorStock.planeMirrorStock--;
                 countPlaneMirror = mirrorBreakNum;
             }
@@ -52,8 +52,8 @@ public class ReflectCount : MonoBehaviour
             if (countConvexMirror <= 0)
             {
                 gameObject.SetActive(false);
-                //ミラー壊れたら時の音
-                source.PlayOneShot(clip);
+                //ミラーが壊れた音
+                audioControl.PlayerSound();
                 mirrorStock.convexMirrorStock--;
                 countConvexMirror = cvMirrorBreakNum;
             }
@@ -64,8 +64,8 @@ public class ReflectCount : MonoBehaviour
             if (countConcaveMirror <= 0)
             {
                 gameObject.SetActive(false);
-                //ミラー壊れたら時の音
-                source.PlayOneShot(clip);
+                //ミラーが壊れた音
+                audioControl.PlayerSound();
                 mirrorStock.concaveMirrorStock--;
                 countConcaveMirror = ccMirrorBreakNum;
             }

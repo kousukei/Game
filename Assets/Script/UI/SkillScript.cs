@@ -9,12 +9,9 @@ public class SkillScript : MonoBehaviour
 {
     [SerializeField, Header("表示させるImage")]
     private Image[] image;
-    [SerializeField, Header("表示させる画像")]
-    private Sprite[] sprite;
     [SerializeField, Header("効果音")]
-    private AudioClip[] audio;
-    [SerializeField, Header("効果音Component")]
-    private AudioSource[] source; 
+    private AudioControl audioControl;
+
     public Barrier barrierScript;
     public HpBar HealScript;
     public EnergyBar energyBar;
@@ -26,8 +23,8 @@ public class SkillScript : MonoBehaviour
     GameObject healEffectPosioion;
     public bool CobyTime_flag;
     GameObject CobyObject;
+    //スキルのアニメーション
     public Animator animator;
-
 
     bool barrierSkillFlag=true;
     bool healSkillFlag=true;
@@ -40,7 +37,7 @@ public class SkillScript : MonoBehaviour
     float decoyEneCost = 30f;
 
     SkillName skill;
-    enum SkillName
+    public enum SkillName
     {
         heal,
         barrier,
@@ -72,9 +69,9 @@ public class SkillScript : MonoBehaviour
                             if (healSkillFlag)
                             {
                                 //効果音
-                                source[0].PlayOneShot(audio[0],0.5f);
+                                audioControl.SkillSound(skill);
                                 //エフェクト
-                                healEffectPosioion=Instantiate(healEffect, player.transform.position, player.transform.rotation);
+                                healEffectPosioion =Instantiate(healEffect, player.transform.position, player.transform.rotation);
 
                                 HealScript.Heal();
                                 energyBar.EneBarControll(healEneCost);
@@ -95,7 +92,7 @@ public class SkillScript : MonoBehaviour
                             if (barrierSkillFlag)
                             {
                                 //効果音
-                                source[1].PlayOneShot(audio[1],0.5f);
+                                audioControl.SkillSound(skill);
                                 barrierScript.BarrierSkill();
                                 energyBar.EneBarControll(barrierEneCost);
                                 //バリアーの冷却時間の処理
@@ -114,7 +111,7 @@ public class SkillScript : MonoBehaviour
                         if (Coby_flag)
                         {
                             //効果音
-                            source[2].PlayOneShot(audio[2], 0.5f);
+                            audioControl.SkillSound(skill);
                             //分身作る
                             Coby();
                             //時間切る前に二回不能

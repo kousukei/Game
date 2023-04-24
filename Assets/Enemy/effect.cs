@@ -6,6 +6,9 @@ public class effect : MonoBehaviour
 {
 
     float time;
+    
+    public GameObject damageEffect;
+    GameObject damageObject;
     public Effect eff;
     public enum Effect
     {
@@ -48,5 +51,9 @@ public class effect : MonoBehaviour
                 break;
         }
     }
+    //public void DamageEffect()
+    //{
+    //    damageObject = Instantiate(damageEffect);
+    //}
 
 }

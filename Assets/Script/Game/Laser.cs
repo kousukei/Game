@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Laser : MonoBehaviour
 {
     [System.NonSerialized]public Vector3 lastVelocity;
     [System.NonSerialized]public Vector3 refrectVec;
     [System.NonSerialized]public bool onConcaveMirror = false;
-
-
+    public Enemy enemy;
 
     Rigidbody rb;
     float destroyTime = 3f;
@@ -16,19 +16,31 @@ public class Laser : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        this.gameObject.SetActive(false);
+    }
+    IEnumerator LaserStop()
+    {//É{Å[ÉãèoÇ»Ç¢
+        yield return new WaitForSeconds(5f);
+        this.gameObject.SetActive(false);
+        enemy.EraseLaser(this);
+        yield return null;
     }
 
     void FixedUpdate()
     {
         lastVelocity = rb.velocity;
     }
-
+    public void Reatart(Transform pos,float laserSpeed)
+    {
+        transform.position = pos.position;
+        this.gameObject.SetActive(true);
+        rb.AddForce(pos.transform.forward * laserSpeed, ForceMode.Impulse);
+    }
     void Reflect(Collision collision)
     {
         refrectVec = Vector3.Reflect(this.lastVelocity, collision.contacts[0].normal);
         rb.velocity = refrectVec;
-        Destroy(gameObject, destroyTime);
+
     }
 
     void OnCollisionEnter(Collision collision)
@@ -43,16 +55,16 @@ public class Laser : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
+            enemy.EraseLaser(this);
         }
     }
-
-
     void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player" || other.tag == "Barrier" || other.tag == "Enemy")
         {
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
+            enemy.EraseLaser(this);
         }
         if (other.tag == "Laser")
         {

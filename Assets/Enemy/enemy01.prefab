@@ -621,6 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2805a2a34e3df15488a2f65097f517f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 618306989853846486, guid: 2138619c2e66bc845a826b8ccac8c0dc, type: 3}
 --- !u!114 &9129436963264155195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,9 +641,6 @@ MonoBehaviour:
   laser_speed: 20
   withinRange: 10
   OutOfRange: 30
-  audio:
-  - {fileID: 8300000, guid: 561c1363b6b72db42a4a7a6391bb2e9e, type: 3}
-  source: {fileID: 3672773058840678066}
   HP: 3
   hit: 0
   deathFlag: 0

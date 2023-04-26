@@ -8,16 +8,19 @@ public class Enemy : MonoBehaviour
     Vector3 Position;
     GameObject range;
     float shootingTimeCount;
-    Material ma;
+    //Material ma;
     float speed;
     Enemy_1 enemy_1;
+    [SerializeField]
+    GameObject laserPrefab;
+    List<Laser> laserss=new List<Laser>();
+
     IEnumerator st()
     {
         Position = random();
         enemy_1 = this.gameObject.GetComponent<Enemy_1>();
         yield return null;
     }
-
     private void OnTriggerEnter(Collider other)
     {
         range = other.gameObject;
@@ -136,10 +139,36 @@ public class Enemy : MonoBehaviour
         shootingTimeCount += Time.deltaTime;
         if (shootingTime < shootingTimeCount)
         {
-            var gameObject = Instantiate(laser, transform.position, transform.rotation);
-            gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * laser_speed, ForceMode.Impulse);
+            //var gameObject = Instantiate(laser, transform.position, transform.rotation);
+            //gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * laser_speed, ForceMode.Impulse);
             shootingTimeCount = 0;
+
+            StartCoroutine(LaserMaker(transform,laser_speed));
         }
+
+    }
+    IEnumerator LaserMaker(Transform transform,float laserSpeed)
+    {
+        while (true)
+        {
+            Vector3 pos = transform.position;
+            if (laserss.Count > 0)
+            {
+                Laser laser = laserss[0];
+                laserss.RemoveAt(0);
+                laser.Reatart(transform, laserSpeed);
+            }
+            else
+            {
+                var gameObject = Instantiate(laserPrefab, pos, Quaternion.identity);
+                gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * laserSpeed, ForceMode.Impulse);
+            }
+            yield return new WaitForSeconds(5f);
+        }
+    }
+    public void EraseLaser(Laser laser)
+    {
+        laserss.Add(laser);
     }
 }
 

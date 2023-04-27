@@ -16,8 +16,8 @@ public class Enemy_1: MonoBehaviour
     [Header("回転速度")]
     public float muki_speed;
     GameObject firing;
-    public GameObject laser;
-    [Header("発射速度")]
+
+    [Header("発射時間")]
     public float shootingTime;
     [Header("レーザーの移動速度")]
     public float laser_speed;
@@ -106,7 +106,7 @@ public class Enemy_1: MonoBehaviour
                     {
                         case 1:
                             //距離内と角度内なら攻撃
-                            enemy.Attack(firing.transform, laser, shootingTime, laser_speed);
+                            enemy.Attack(firing.transform,  shootingTime, laser_speed);
                             break;
                         case 2:
                             //距離外なら追跡
@@ -142,13 +142,11 @@ public class Enemy_1: MonoBehaviour
             HP--;
             if (HP >= 1)
             {
+                //攻撃されたエフェクト
                 damageEffectPosition=Instantiate(damageEffect, this.transform.position, this.transform.rotation);
             }
         }
-        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Ground")
-        {
-            hit = true;
-        }
+
     }
 
     void MirrorProbability()

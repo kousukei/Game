@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     Vector3 Position;
     GameObject range;
     float shootingTimeCount;
-    //Material ma;
+
     float speed;
     Enemy_1 enemy_1;
     [SerializeField]
@@ -133,41 +133,49 @@ public class Enemy : MonoBehaviour
         return 0;
 
     }
-
-    public void Attack(Transform transform, GameObject laser, float shootingTime, float laser_speed)
+    //攻撃
+    public void Attack(Transform transform,  float shootingTime, float laser_speed)
     {
+        //時間
         shootingTimeCount += Time.deltaTime;
+        //何秒間一回攻撃
         if (shootingTime < shootingTimeCount)
         {
-            //var gameObject = Instantiate(laser, transform.position, transform.rotation);
-            //gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * laser_speed, ForceMode.Impulse);
             shootingTimeCount = 0;
-
+            //レザーの生産
             StartCoroutine(LaserMaker(transform,laser_speed));
         }
 
     }
     IEnumerator LaserMaker(Transform transform,float laserSpeed)
     {
-        while (true)
+        //敵のpositionを取得
+        Vector3 pos = transform.position;
+        //保存したレザーがあったら
+        if (laserss.Count > 0)
         {
-            Vector3 pos = transform.position;
-            if (laserss.Count > 0)
-            {
-                Laser laser = laserss[0];
-                laserss.RemoveAt(0);
-                laser.Reatart(transform, laserSpeed);
-            }
-            else
-            {
-                var gameObject = Instantiate(laserPrefab, pos, Quaternion.identity);
-                gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * laserSpeed, ForceMode.Impulse);
-            }
-            yield return new WaitForSeconds(5f);
+            //保存したレザーを取得
+            Laser laser = laserss[0];
+            //レザーの０番を削除
+            laserss.RemoveAt(0);
+            //レザーを出す
+            laser.Reatart(transform, laserSpeed);
         }
+        //保存レザーがなかったら
+        else
+        {
+            //レザーを生成します。
+            var gameObject = Instantiate(laserPrefab, pos, Quaternion.identity);
+            //レザーの移動
+            gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * laserSpeed, ForceMode.Impulse);
+        }
+
+        yield return null;
+
     }
     public void EraseLaser(Laser laser)
     {
+        //生成したレザーを保存
         laserss.Add(laser);
     }
 }

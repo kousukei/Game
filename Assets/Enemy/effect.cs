@@ -6,7 +6,9 @@ public class effect : MonoBehaviour
 {
 
     float time;
-    
+
+    public EffectControl effectControl;
+
     public GameObject damageEffect;
     GameObject damageObject;
     public Effect eff;
@@ -20,8 +22,6 @@ public class effect : MonoBehaviour
     {
 
     }
-
-
     void Update()
     {
         time += Time.deltaTime;
@@ -51,9 +51,22 @@ public class effect : MonoBehaviour
                 break;
         }
     }
-    //public void DamageEffect()
+    public void DamageEffect()
+    {
+        gameObject.SetActive(true);
+        StartCoroutine(Stop());
+    }
+    IEnumerator Stop()
+    {
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
+    }
+    //void Stop()
     //{
-    //    damageObject = Instantiate(damageEffect);
+    //    if (time > 0.5f)
+    //    {
+            
+    //    }
     //}
 
 }

@@ -636,7 +636,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   muki_speed: 0.04
-  laser: {fileID: 618306989853846486, guid: 2138619c2e66bc845a826b8ccac8c0dc, type: 3}
   shootingTime: 1
   laser_speed: 20
   withinRange: 10

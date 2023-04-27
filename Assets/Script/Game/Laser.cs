@@ -11,7 +11,7 @@ public class Laser : MonoBehaviour
     public Enemy enemy;
 
     Rigidbody rb;
-    float destroyTime = 3f;
+    
 
     void Start()
     {

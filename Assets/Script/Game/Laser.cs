@@ -16,7 +16,7 @@ public class Laser : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        this.gameObject.SetActive(false);
+        
     }
     IEnumerator LaserStop()
     {//É{Å[ÉãèoÇ»Ç¢
@@ -40,6 +40,7 @@ public class Laser : MonoBehaviour
     {
         refrectVec = Vector3.Reflect(this.lastVelocity, collision.contacts[0].normal);
         rb.velocity = refrectVec;
+        StartCoroutine(LaserStop());
 
     }
 

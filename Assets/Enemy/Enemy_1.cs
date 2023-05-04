@@ -32,12 +32,17 @@ public class Enemy_1: MonoBehaviour
     public bool deathFlag;
     //エフェクト
     public GameObject deathEffect;
+    //エフェクトコントロール
+    //public GameObject effectObject;
+    EffectControl effectControl;
     //アイテムミラー
     public GameObject[] mirror;
     public GameObject damageEffect;
     GameObject damageEffectPosition;
     SkillScript skillScript;
     Score_Script score;
+    //エフェクト用ポジション
+    Vector3 position;
 
 
     enum Mode
@@ -45,8 +50,10 @@ public class Enemy_1: MonoBehaviour
         開始,移動,攻撃
     }
      Mode mode = Mode.開始;
+    public EffectObject effect;
     void Start()
     {
+        effectControl= GameObject.Find("EffectObject").GetComponent<EffectControl>();
         Player = GameObject.Find("Player");
         firing = gameObject.transform.Find("object").gameObject;
         enemy = this.gameObject.GetComponent<Enemy>();
@@ -120,7 +127,9 @@ public class Enemy_1: MonoBehaviour
         if (HP <= 0)
         {
             //エフェクト
-            Instantiate(deathEffect, this.transform.position, this.transform.rotation);
+            ///////////////Instantiate(deathEffect, this.transform.position, this.transform.rotation);
+            //effectControl.EffectMaker(this.gameObject.transform, "Death");
+            effectControl.effectMaker(this.gameObject, "Death");
             //スコア
             score.score(100);
             //アイテムミラーを生成します。
@@ -132,7 +141,8 @@ public class Enemy_1: MonoBehaviour
         {
             damageEffectPosition.transform.position = this.transform.position;
         }
-
+        //エフェクト用ポジション
+        position=this.transform.position;
 
     }
     private void OnCollisionEnter(Collision collision)
@@ -142,8 +152,10 @@ public class Enemy_1: MonoBehaviour
             HP--;
             if (HP >= 1)
             {
+                effectControl.effectMaker(this.gameObject, "Damage");
                 //攻撃されたエフェクト
-                damageEffectPosition=Instantiate(damageEffect, this.transform.position, this.transform.rotation);
+                /////////////damageEffectPosition=Instantiate(damageEffect, this.transform.position, this.transform.rotation);
+                //effectControl.EffectMaker(this.gameObject.transform, "Damage");
             }
         }
 

@@ -1,16 +1,18 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class effect : MonoBehaviour
 {
+    GameObject enemy;
+    GameObject player;
 
-    float time;
+    private EffectControl effectControl;
+    
+    public EffectObject effectObject;
 
-    public EffectControl effectControl;
-
-    public GameObject damageEffect;
-    GameObject damageObject;
     public Effect eff;
     public enum Effect
     {
@@ -20,40 +22,28 @@ public class effect : MonoBehaviour
     }
     void Start()
     {
-
+        //enemy = GameObject.Find("enemy");
+        player = GameObject.Find("Player");
+        effectObject = new EffectObject();
+        effectControl = GameObject.Find("EffectObject").GetComponent<EffectControl>();
+        effectObject.type = eff.ToString();
+        effectObject.gameObject = this;
+        effectControl.EffectKeep(effectObject);
+        StartCoroutine(Stop());
     }
     void Update()
     {
-        time += Time.deltaTime;
         switch (eff)
         {
-            case Effect.DamageEffect:
-
-                if (time >= 0.5)
-                {
-                    Destroy(this.gameObject);
-                    time = 0;
-                }
-                break;
-            case Effect.DeathEffect:
-                if (time >= 1)
-                {
-                    Destroy(this.gameObject);
-                    time = 0;
-                }
-                break;
             case Effect.HealEffect:
-                if (time >= 1)
-                {
-                    Destroy(this.gameObject);
-                    time = 0;
-                }
+                this.transform.position = player.transform.position;
                 break;
         }
+
     }
-    public void DamageEffect()
-    {
-        gameObject.SetActive(true);
+    public void EffectReatart()
+    { 
+        this.gameObject.SetActive(true);
         StartCoroutine(Stop());
     }
     IEnumerator Stop()
@@ -61,12 +51,4 @@ public class effect : MonoBehaviour
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
     }
-    //void Stop()
-    //{
-    //    if (time > 0.5f)
-    //    {
-            
-    //    }
-    //}
-
 }

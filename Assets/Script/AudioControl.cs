@@ -28,7 +28,6 @@ public class AudioControl : MonoBehaviour
     public void SkillSound(SkillScript.SkillName skillName)
     {
         skill = skillName.ToString();
-        Debug.Log(skill);
         switch (skill)
         {
             case"heal":

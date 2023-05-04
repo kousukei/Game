@@ -25,6 +25,8 @@ public class SkillScript : MonoBehaviour
     GameObject CobyObject;
     //スキルのアニメーション
     public Animator animator;
+    //エフェクトコントロール
+    public EffectControl effectControl;
 
     bool barrierSkillFlag=true;
     bool healSkillFlag=true;
@@ -71,8 +73,8 @@ public class SkillScript : MonoBehaviour
                                 //効果音
                                 audioControl.SkillSound(skill);
                                 //エフェクト
-                                healEffectPosioion =Instantiate(healEffect, player.transform.position, player.transform.rotation);
-
+                                //healEffectPosioion =Instantiate(healEffect, player.transform.position, player.transform.rotation);
+                                effectControl.PlayerEffect(player.transform, "Heal");
                                 HealScript.Heal();
                                 energyBar.EneBarControll(healEneCost);
                                 //スキル冷却時間フラグ
@@ -153,7 +155,8 @@ public class SkillScript : MonoBehaviour
         if (healEffectPosioion != null)
         {
             //エフェクトをプレイヤーの位置で出る
-            healEffectPosioion.transform.position = player.transform.position;
+            //////////healEffectPosioion.transform.position = player.transform.position;
+            //////////healEffectPosioion.transform.position = player.transform.position;
 
         }
         //スキルの時間計算

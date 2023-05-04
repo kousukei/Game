@@ -36,7 +36,7 @@ public class Enemy_start : MonoBehaviour
                             vector3.x = Random.Range(this.gameObject.transform.position.x - this.gameObject.transform.localScale.x / 2, this.gameObject.transform.position.x + this.gameObject.transform.localScale.x / 2);
                             vector3.y = Random.Range(this.gameObject.transform.position.y, this.gameObject.transform.position.y + this.gameObject.transform.localScale.y / 2);
                             vector3.z = Random.Range(this.gameObject.transform.position.z - this.gameObject.transform.localScale.z / 2, this.gameObject.transform.position.z + this.gameObject.transform.localScale.z / 2);
-                            Instantiate(Enemy, vector3, this.gameObject.transform.rotation);
+                            Instantiate(Enemy, vector3, this.gameObject.transform.rotation).name="enemy";
                         }
                         audioControl.StageSound(stage);
                         //audioSource.PlayOneShot(audioclip);

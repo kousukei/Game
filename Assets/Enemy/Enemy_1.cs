@@ -16,7 +16,6 @@ public class Enemy_1: MonoBehaviour
     [Header("回転速度")]
     public float muki_speed;
     GameObject firing;
-
     [Header("発射時間")]
     public float shootingTime;
     [Header("レーザーの移動速度")]
@@ -28,12 +27,9 @@ public class Enemy_1: MonoBehaviour
     public float OutOfRange;
     public float HP;
     public bool hit=false;
-    //死亡フラグ
-    public bool deathFlag;
-    //エフェクト
-    public GameObject deathEffect;
+    ////死亡フラグ
+    //public bool deathFlag;
     //エフェクトコントロール
-    //public GameObject effectObject;
     EffectControl effectControl;
     //アイテムミラー
     public GameObject[] mirror;
@@ -41,8 +37,8 @@ public class Enemy_1: MonoBehaviour
     GameObject damageEffectPosition;
     SkillScript skillScript;
     Score_Script score;
-    //エフェクト用ポジション
-    Vector3 position;
+    Enemy_start _Start;
+
 
 
     enum Mode
@@ -53,6 +49,7 @@ public class Enemy_1: MonoBehaviour
     public EffectObject effect;
     void Start()
     {
+        _Start = GameObject.Find("stage_1").GetComponent<Enemy_start>();
         effectControl= GameObject.Find("EffectObject").GetComponent<EffectControl>();
         Player = GameObject.Find("Player");
         firing = gameObject.transform.Find("object").gameObject;
@@ -124,40 +121,45 @@ public class Enemy_1: MonoBehaviour
                 break;
         }
 
-        if (HP <= 0)
+        if (HP == 0)
         {
+            HP = -1;
             //エフェクト
-            ///////////////Instantiate(deathEffect, this.transform.position, this.transform.rotation);
-            //effectControl.EffectMaker(this.gameObject.transform, "Death");
             effectControl.effectMaker(this.gameObject, "Death");
             //スコア
             score.score(100);
             //アイテムミラーを生成します。
             MirrorProbability();
-            Destroy(this.gameObject);
+            _Start.EnemyLeep(this);
+            this.gameObject.SetActive(false);
         }
         //ダメージを受けたエフェクトのposition
         if (damageEffectPosition != null)
         {
             damageEffectPosition.transform.position = this.transform.position;
         }
-        //エフェクト用ポジション
-        position=this.transform.position;
 
     }
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("1");
         if (collision.gameObject.tag == "Laser")
         {
             HP--;
             if (HP >= 1)
             {
-                effectControl.effectMaker(this.gameObject, "Damage");
                 //攻撃されたエフェクト
-                /////////////damageEffectPosition=Instantiate(damageEffect, this.transform.position, this.transform.rotation);
-                //effectControl.EffectMaker(this.gameObject.transform, "Damage");
+                effectControl.effectMaker(this.gameObject, "Damage");
             }
         }
+        if (collision.gameObject.tag == "field")
+        {
+            _Start.StageName(collision.gameObject.name);
+        }
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
 
     }
 

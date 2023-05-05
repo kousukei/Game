@@ -4076,7 +4076,7 @@ GameObject:
   - component: {fileID: 1008774250}
   m_Layer: 0
   m_Name: field_1
-  m_TagString: Untagged
+  m_TagString: field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4121,9 +4121,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2407fde9b3055458e281a36fad7405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 5102411452346843132, guid: 496a0a5eca789fe4b828bee9f8ba53c1, type: 3}
-  audioControl: {fileID: 1808675327}
+  enemy_1: {fileID: 9129436963264155195, guid: 496a0a5eca789fe4b828bee9f8ba53c1, type: 3}
   stage: 0
+  stageObject:
+  - {fileID: 1008774246}
+  - {fileID: 1818386923}
+  - {fileID: 2102391132}
+  pieces: 10
+  audio: {fileID: 1808675327}
 --- !u!82 &1008774250
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7292,12 +7297,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1818386926}
-  - component: {fileID: 1818386925}
   - component: {fileID: 1818386924}
   - component: {fileID: 1818386927}
   m_Layer: 0
   m_Name: field_2
-  m_TagString: Untagged
+  m_TagString: field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7315,21 +7319,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1818386925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1818386923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d2407fde9b3055458e281a36fad7405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Enemy: {fileID: 5102411452346843132, guid: 496a0a5eca789fe4b828bee9f8ba53c1, type: 3}
-  audioControl: {fileID: 1808675327}
-  stage: 1
 --- !u!4 &1818386926
 Transform:
   m_ObjectHideFlags: 0
@@ -8295,30 +8284,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2102391135}
   - component: {fileID: 2102391134}
-  - component: {fileID: 2102391133}
   - component: {fileID: 2102391136}
   m_Layer: 0
   m_Name: field_3
-  m_TagString: Untagged
+  m_TagString: field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2102391133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2102391132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d2407fde9b3055458e281a36fad7405, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Enemy: {fileID: 5102411452346843132, guid: 496a0a5eca789fe4b828bee9f8ba53c1, type: 3}
-  audioControl: {fileID: 1808675327}
-  stage: 2
 --- !u!65 &2102391134
 BoxCollider:
   m_ObjectHideFlags: 0

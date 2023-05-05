@@ -152,16 +152,9 @@ public class Enemy_1: MonoBehaviour
                 effectControl.effectMaker(this.gameObject, "Damage");
             }
         }
-        if (collision.gameObject.tag == "field")
-        {
-            _Start.StageName(collision.gameObject.name);
-        }
 
     }
-    private void OnTriggerEnter(Collider other)
-    {
 
-    }
 
     void MirrorProbability()
     {

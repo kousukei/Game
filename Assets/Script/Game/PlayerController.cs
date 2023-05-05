@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject concaveMirror;
     public float speed;
     public Animator playerAnimator;
+    Enemy_start _Start;
 
     Plane plane = new Plane();
     Vector3 vec3;
@@ -102,6 +104,16 @@ public class PlayerController : MonoBehaviour
         {
             hpBar.Damage();
         }
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "field")
+        {
+            _Start = other.gameObject.GetComponent<Enemy_start>();
+            _Start.StageName(other.gameObject.name);
+        }
+
     }
 
     void MirrorChange(int mirrorNum, bool plaMirrorAct, bool conveMirrorAct, bool concaMirrorAct, Mirror nextMirror)

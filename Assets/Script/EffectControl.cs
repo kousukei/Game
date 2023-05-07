@@ -36,7 +36,7 @@ public class EffectControl : MonoBehaviour
     }
     public void effectMaker(GameObject gameObject,string name)
     {
-        if(name== "Damage")
+        if (name== "Damage")
         {
             GameObject damageObject = gameObject.transform.Find("DamageEffect").gameObject;
             damageObject.SetActive(true);
@@ -44,18 +44,23 @@ public class EffectControl : MonoBehaviour
         }
         if(name== "Death")
         {
-            GameObject deathObject = gameObject.transform.Find("DeathEffect").gameObject;
-            deathObject.SetActive(true);
+
+            //GameObject deathObject = gameObject.transform.Find("DeathEffect").gameObject;
+            GameObject deathObject = gameObject;
+            deathObject.transform.Find("DeathEffect").gameObject.SetActive(true);
             StartCoroutine(EffectStop(deathObject));
+
         }
         
     }
     IEnumerator EffectStop(GameObject effect)
     {
-        if(effect.gameObject.name== "DeathEffect")
+        if(effect.transform.Find("DeathEffect").gameObject.name== "DeathEffect")
         {
             yield return new WaitForSeconds(0.5f);
+            effect.transform.Find("DeathEffect").gameObject.SetActive(false);
             effect.SetActive(false);
+            //effect.SetActive(false);
             deatEffectFlag = true;
         }
         else

@@ -4121,13 +4121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2407fde9b3055458e281a36fad7405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy_1: {fileID: 9129436963264155195, guid: 496a0a5eca789fe4b828bee9f8ba53c1, type: 3}
+  enemy_1: {fileID: 5102411452346843132, guid: 496a0a5eca789fe4b828bee9f8ba53c1, type: 3}
   stage: 0
   stageObject:
   - {fileID: 1008774246}
   - {fileID: 1818386923}
   - {fileID: 2102391132}
-  pieces: 2
+  pieces: 10
   audio: {fileID: 1808675327}
 --- !u!82 &1008774250
 AudioSource:

@@ -21,8 +21,8 @@ public class Laser : MonoBehaviour
     IEnumerator LaserStop()
     {//ƒ{[ƒ‹o‚È‚¢
         yield return new WaitForSeconds(1f);
-        this.gameObject.SetActive(false);
         enemy.EraseLaser(this);
+        this.gameObject.SetActive(false);
         yield return null;
     }
 

@@ -125,28 +125,23 @@ public class Enemy_1: MonoBehaviour
                 break;
         }
 
-        if (HP <= 0)
+        if (this.HP <= 0)
         {
             if (deatFlag)
             {
-                //エフェクト
                 effectControl.effectMaker(this.gameObject, "Death");
-                //Debug.Log(this.gameObject.GetComponent<Enemy_1>().HP);
-                deatFlag=false;
+                //スコア
+                score.score(100);
+                //アイテムミラーを生成します。
+                MirrorProbability();
+                _Start.EnemyLeep(this);
+                
+                deatFlag = false;
             }
         }
-        if (effectControl.deatEffectFlag)
-        {
-            //スコア
-            score.score(100);
-            //アイテムミラーを生成します。
-            MirrorProbability();
-            _Start.EnemyLeep(this);
-            this.gameObject.SetActive(false);
-            effectControl.deatEffectFlag = false;
-        }
-        //ダメージを受けたエフェクトのposition
-        if (damageEffectPosition != null)
+
+            //ダメージを受けたエフェクトのposition
+            if (damageEffectPosition != null)
         {
             damageEffectPosition.transform.position = this.transform.position;
         }
@@ -154,8 +149,7 @@ public class Enemy_1: MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(this.name);
-        Debug.Log(this.gameObject.name);
+
         if (collision.gameObject.tag == "Laser")
         {
             HP--;

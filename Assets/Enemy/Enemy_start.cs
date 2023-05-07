@@ -26,98 +26,86 @@ public class Enemy_start : MonoBehaviour
     {
 
     }
-    public void EnemyMaker(int quantity)
-    {
-        for(int i = 0; i < quantity; i++)
-        {
-            Instantiate(enemy_1.gameObject,RandomPosition(), this.gameObject.transform.rotation).name = "enemy";
-        }
-    }
     public void EnemyLeep(Enemy_1 enemy_1)
     {
         enemy.Add(enemy_1);
     }
-    Vector3 RandomPosition()
+    Vector3 RandomPosition(Transform transform)
     {
-        vector3 = this.gameObject.transform.position;
-        vector3.x = Random.Range(this.gameObject.transform.position.x - this.gameObject.transform.localScale.x / 2, this.gameObject.transform.position.x + this.gameObject.transform.localScale.x / 2);
-        vector3.y = Random.Range(this.gameObject.transform.position.y, this.gameObject.transform.position.y + this.gameObject.transform.localScale.y / 2);
-        vector3.z = Random.Range(this.gameObject.transform.position.z - this.gameObject.transform.localScale.z / 2, this.gameObject.transform.position.z + this.gameObject.transform.localScale.z / 2);
+        vector3 = transform.position;
+        vector3.x = Random.Range(transform.position.x - transform.localScale.x / 2, transform.position.x + transform.localScale.x / 2);
+        vector3.y = Random.Range(transform.position.y, transform.position.y + transform.localScale.y / 2);
+        vector3.z = Random.Range(transform.position.z - transform.localScale.z / 2, transform.position.z + transform.localScale.z / 2);
         return vector3;
     }
     public void StageName(string name)
     {
         stageName = name;
     }
-    private void OnTriggerEnter(Collider other)
+    public void EnemyMaker(string name,Transform transform)
     {
-
-
-
-
-        if (other.gameObject.tag == "Player")
+        int ju = pieces;
+        stageName = name;
+        switch (stageName)
         {
-            vector3 = this.gameObject.transform.position;
-            
-            switch (stageName)
-            {
-                case "field_1":
-                    if (stage1Flag)
+            case "field_1":
+                if (stage1Flag)
+                {
+                    for(int i = 0; i < pieces; i++)
                     {
-                        EnemyMaker(pieces);
-                        audio.StageSound(stage);
-                        stage1Flag = false;
+                        Instantiate(enemy_1.gameObject, RandomPosition(transform), transform.rotation).name = "enemy";
                     }
-                    break;
-                case "field_2":
                     audio.StageSound(stage);
-                    int ju = pieces;
-                    if (stage2Flag)
+                    stage1Flag = false;
+                }
+                break;
+            case "field_2":
+                audio.StageSound(stage);
+                
+                if (stage2Flag)
+                {
+                    for (int o = 0; o < pieces; o++)
                     {
-                        for (int o = 0; o < pieces; o++)
+                        if (enemy.Count > ju)
                         {
-                            if (enemy.Count > ju)
-                            {
-                                Enemy_1 stage2Enemy = enemy[o];
-                                stage2Enemy.gameObject.SetActive(true);
-                                enemy.RemoveAt(o);
-                                ju--;
-                            }
-                            else
-                            {
-                                EnemyMaker(ju);
-                                ju--;
-                            }
+                            Enemy_1 stage2Enemy = enemy[o];
+                            stage2Enemy.gameObject.SetActive(true);
+                            enemy.RemoveAt(o);
+                            ju--;
                         }
-                        stage2Flag = false;
+                        else
+                        {
+                            Instantiate(enemy_1.gameObject, RandomPosition(transform), transform.rotation).name = "enemy";
+                            ju--;
+                        }
                     }
-                    break;
-                case "field_3":
-                    audio.StageSound(stage);
-                    int io= pieces;
-                    if (stage3Flag)
+                    stage2Flag = false;
+                }
+                break;
+            case "field_3":
+                audio.StageSound(stage);
+                if (stage3Flag)
+                {
+                    for (int o = 0; o < pieces; o++)
                     {
-                        for (int o = 0; o < pieces; o++)
+                        if (enemy.Count > ju)
                         {
-                            if (enemy.Count > io)
-                            {
-                                Enemy_1 stage2Enemy = enemy[o];
-                                stage2Enemy.gameObject.SetActive(true);
-                                enemy.RemoveAt(o);
-                                io--;
-                            }
-                            else
-                            {
-                                EnemyMaker(io);
-                                io--;
-                            }
+                            Enemy_1 stage2Enemy = enemy[o];
+                            stage2Enemy.gameObject.SetActive(true);
+                            enemy.RemoveAt(o);
+                            ju--;
                         }
-                        stage3Flag = false;
+                        else
+                        {
+                            Instantiate(enemy_1.gameObject, RandomPosition(transform), transform.rotation).name = "enemy";
+                            ju--;
+                        }
                     }
-                    break;
-            }
-
+                    stage3Flag = false;
+                }
+                break;
         }
     }
+
 
 }

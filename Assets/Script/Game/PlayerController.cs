@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        _Start = GameObject.Find("field_1").GetComponent<Enemy_start>();
         mirror = Mirror.planeMirror;
         rb = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
@@ -110,8 +111,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "field")
         {
-            _Start = other.gameObject.GetComponent<Enemy_start>();
-            _Start.StageName(other.gameObject.name);
+
+            _Start.EnemyMaker(other.gameObject.name,other.gameObject.transform);
         }
 
     }

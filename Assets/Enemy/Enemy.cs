@@ -133,6 +133,10 @@ public class Enemy : MonoBehaviour
         return 0;
 
     }
+    void Death(float hp)
+    {
+
+    }
     //UŒ‚
     public void Attack(Transform transform,  float shootingTime, float laser_speed)
     {

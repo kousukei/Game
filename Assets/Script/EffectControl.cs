@@ -13,6 +13,7 @@ public class EffectControl : MonoBehaviour
     private GameObject deathEffect;
     [SerializeField, Header("回復エフェクト")]
     private GameObject healEffect;
+    public bool deatEffectFlag;
     Vector3 playerPos;
     Vector3 enemyPos;
     int num;
@@ -22,7 +23,7 @@ public class EffectControl : MonoBehaviour
 
     private void Start()
     {
-
+        deatEffectFlag = false;
     }
 
     void Update()
@@ -51,8 +52,17 @@ public class EffectControl : MonoBehaviour
     }
     IEnumerator EffectStop(GameObject effect)
     {
-        yield return new WaitForSeconds(1f);
-        effect.SetActive(false);
+        if(effect.gameObject.name== "DeathEffect")
+        {
+            yield return new WaitForSeconds(0.5f);
+            effect.SetActive(false);
+            deatEffectFlag = true;
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+            effect.SetActive(false);
+        }
 
     }
     IEnumerator EffectStart(Transform effectpos,string name)

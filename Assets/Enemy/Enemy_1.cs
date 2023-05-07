@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.Serialization;
@@ -39,6 +40,8 @@ public class Enemy_1: MonoBehaviour
     Score_Script score;
     Enemy_start _Start;
 
+    public bool deatFlag;
+
 
 
     enum Mode
@@ -49,7 +52,8 @@ public class Enemy_1: MonoBehaviour
     public EffectObject effect;
     void Start()
     {
-        _Start = GameObject.Find("stage_1").GetComponent<Enemy_start>();
+        deatFlag = true;
+        _Start = GameObject.Find("field_1").GetComponent<Enemy_start>();
         effectControl= GameObject.Find("EffectObject").GetComponent<EffectControl>();
         Player = GameObject.Find("Player");
         firing = gameObject.transform.Find("object").gameObject;
@@ -121,17 +125,25 @@ public class Enemy_1: MonoBehaviour
                 break;
         }
 
-        if (HP == 0)
+        if (HP <= 0)
         {
-            HP = -1;
-            //エフェクト
-            effectControl.effectMaker(this.gameObject, "Death");
+            if (deatFlag)
+            {
+                //エフェクト
+                effectControl.effectMaker(this.gameObject, "Death");
+                //Debug.Log(this.gameObject.GetComponent<Enemy_1>().HP);
+                deatFlag=false;
+            }
+        }
+        if (effectControl.deatEffectFlag)
+        {
             //スコア
             score.score(100);
             //アイテムミラーを生成します。
             MirrorProbability();
             _Start.EnemyLeep(this);
             this.gameObject.SetActive(false);
+            effectControl.deatEffectFlag = false;
         }
         //ダメージを受けたエフェクトのposition
         if (damageEffectPosition != null)
@@ -142,7 +154,8 @@ public class Enemy_1: MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("1");
+        Debug.Log(this.name);
+        Debug.Log(this.gameObject.name);
         if (collision.gameObject.tag == "Laser")
         {
             HP--;

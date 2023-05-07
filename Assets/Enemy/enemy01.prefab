@@ -644,8 +644,6 @@ MonoBehaviour:
   OutOfRange: 30
   HP: 3
   hit: 0
-  deathFlag: 0
-  deathEffect: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
   mirror:
   - {fileID: 6151857941161225164, guid: 458695b3b76e9074482cd30aeaba4184, type: 3}
   - {fileID: 8607876331337431498, guid: ead1628ec7734a741bb3eead385f376e, type: 3}

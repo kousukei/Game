@@ -9,21 +9,27 @@ public class Laser : MonoBehaviour
     [System.NonSerialized]public Vector3 refrectVec;
     [System.NonSerialized]public bool onConcaveMirror = false;
     public Enemy enemy;
-
+    
+    LaserController laserController;
+    Vector3 voctor;
     Rigidbody rb;
     
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        
+        rb = this.gameObject.GetComponent<Rigidbody>();
+        laserController=GameObject.Find("LaserController").GetComponent<LaserController>();
+    }
+    public void Position(Vector3 ed)
+    {
+        voctor = ed;
     }
     IEnumerator LaserStop()
     {//É{Å[ÉãèoÇ»Ç¢
         yield return new WaitForSeconds(1f);
-        enemy.EraseLaser(this);
+        laserController.EraseLaser(this);
         this.gameObject.SetActive(false);
-        yield return null;
+        
     }
 
     void FixedUpdate()
@@ -32,10 +38,16 @@ public class Laser : MonoBehaviour
     }
     public void Reatart(Transform pos,float laserSpeed)
     {
-        transform.position = pos.position;
+        
         this.gameObject.SetActive(true);
-        rb.AddForce(pos.transform.forward * laserSpeed, ForceMode.Impulse);
+        this.gameObject.transform.rotation = Quaternion.identity;
+        this.gameObject.transform.position = pos.position;
+        //SetActive(true)ÇÃObjectÇÃRigidbodyÇéÊìæ
+        this.gameObject.GetComponent<Rigidbody>().AddForce(pos.forward * laserSpeed, ForceMode.Impulse); ;
+
+        
     }
+    //Ç‘Ç¬ÇØÇΩÇÁÇÃîΩéÀä÷êî
     void Reflect(Collision collision)
     {
         refrectVec = Vector3.Reflect(this.lastVelocity, collision.contacts[0].normal);
@@ -57,7 +69,7 @@ public class Laser : MonoBehaviour
         else
         {
             this.gameObject.SetActive(false);
-            enemy.EraseLaser(this);
+            laserController.EraseLaser(this);
         }
     }
     void OnTriggerStay(Collider other)
@@ -65,7 +77,7 @@ public class Laser : MonoBehaviour
         if (other.tag == "Player" || other.tag == "Barrier" || other.tag == "Enemy")
         {
             this.gameObject.SetActive(false);
-            enemy.EraseLaser(this);
+            laserController.EraseLaser(this);
         }
         if (other.tag == "Laser")
         {

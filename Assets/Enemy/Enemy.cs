@@ -5,6 +5,8 @@ using UnityEngine.PlayerLoop;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField]
+    LaserController laserController;
     Vector3 Position;
     GameObject range;
     float shootingTimeCount;
@@ -14,7 +16,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     GameObject laserPrefab;
     List<Laser> laserss=new List<Laser>();
+    int lllll = 0;
 
+    private void Start()
+    {
+        laserController=GameObject.Find("LaserController").GetComponent<LaserController>();
+    }
     IEnumerator st()
     {
         Position = random();
@@ -133,10 +140,6 @@ public class Enemy : MonoBehaviour
         return 0;
 
     }
-    void Death(float hp)
-    {
-
-    }
     //攻撃
     public void Attack(Transform transform,  float shootingTime, float laser_speed)
     {
@@ -147,41 +150,12 @@ public class Enemy : MonoBehaviour
         {
             shootingTimeCount = 0;
             //レザーの生産
-            StartCoroutine(LaserMaker(transform,laser_speed));
+            laserController.Attack(transform, laser_speed);
+            //StartCoroutine(LaserMaker(transform,laser_speed));
         }
 
     }
-    IEnumerator LaserMaker(Transform transform,float laserSpeed)
-    {
-        //敵のpositionを取得
-        Vector3 pos = transform.position;
-        //保存したレザーがあったら
-        if (laserss.Count > 0)
-        {
-            //保存したレザーを取得
-            Laser laser = laserss[0];
-            //レザーの０番を削除
-            laserss.RemoveAt(0);
-            //レザーを出す
-            laser.Reatart(transform, laserSpeed);
-        }
-        //保存レザーがなかったら
-        else
-        {
-            //レザーを生成します。
-            var gameObject = Instantiate(laserPrefab, pos, Quaternion.identity);
-            //レザーの移動
-            gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * laserSpeed, ForceMode.Impulse);
-        }
 
-        yield return null;
-
-    }
-    public void EraseLaser(Laser laser)
-    {
-        //生成したレザーを保存
-        laserss.Add(laser);
-    }
 }
 
 

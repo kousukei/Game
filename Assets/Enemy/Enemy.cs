@@ -16,22 +16,26 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     GameObject laserPrefab;
     List<Laser> laserss=new List<Laser>();
-    int lllll = 0;
+
 
     private void Start()
     {
         laserController=GameObject.Find("LaserController").GetComponent<LaserController>();
-    }
-    IEnumerator st()
-    {
-        Position = random();
         enemy_1 = this.gameObject.GetComponent<Enemy_1>();
+    }
+    //方向転換の関数
+    IEnumerator ChangeDirection()
+    {
+        //新しい座標を取得
+        Position = random();
         yield return null;
     }
     private void OnTriggerEnter(Collider other)
     {
+        //ぶつけたObjectを取得
         range = other.gameObject;
-        StartCoroutine(st());
+        //方向転換
+        StartCoroutine(ChangeDirection());
     }
     /// <summary>
     /// プレイヤーに向かって移動
@@ -50,12 +54,16 @@ public class Enemy : MonoBehaviour
     /// <param name="speed"></param>
     public void random_move(GameObject Enemy, float speed)
     {
+        //EnemyのPositionは指定したPositionと近いなら
         if ((Enemy.transform.position.x-Position.x)<=1&&(Enemy.transform.position.z-Position.z)<=1)
         {
+            //Positionを新しく指定します。
             Position = random();
         }
+        //もし指定した場所に移動中でぶつけたら
         else if (enemy_1.hit)
         {
+            //Positionを新しく指定します。
             Position = random();
             enemy_1.hit = false;
         }
@@ -68,7 +76,6 @@ public class Enemy : MonoBehaviour
     /// <returns></returns>
     Vector3 random()
     {
-
         Vector3 randomPosition = new Vector3(Random.Range(range.transform.position.x + (range.transform.localScale.x/2), range.transform.position.x - (range.transform.localScale.x / 2)), range.transform.position.y - (range.transform.localScale.y/2), Random.Range(range.transform.position.z + (range.transform.localScale.z/2), range.transform.position.z - (range.transform.localScale.z / 2)));
         return randomPosition;
     }

@@ -122,6 +122,11 @@ public class Enemy_1: MonoBehaviour
                             break;
                     }
                 }
+                else
+                {
+                    //範囲外なら移動モードへ帰る
+                    mode = Mode.移動;
+                }
                 break;
         }
 
@@ -129,13 +134,15 @@ public class Enemy_1: MonoBehaviour
         {
             if (deatFlag)
             {
+                //死亡のエフェクト
                 effectControl.effectMaker(this.gameObject, "Death");
                 //スコア
                 score.score(100);
                 //アイテムミラーを生成します。
                 MirrorProbability();
-                _Start.EnemyLeep(this);
-                
+                //Enemy生成するListにキップします
+                _Start.EnemyKeep(this);
+                //一回だけ処理するBool
                 deatFlag = false;
             }
         }
@@ -159,10 +166,11 @@ public class Enemy_1: MonoBehaviour
                 effectControl.effectMaker(this.gameObject, "Damage");
             }
         }
+        hit = true;
 
     }
 
-
+    //アイテムミラーをランダムで生成
     void MirrorProbability()
     {
         int i = Random.Range(0, 20);

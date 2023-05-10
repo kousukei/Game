@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Enemy_start : MonoBehaviour
 {
-    //public Enemy_1 enemy_1;
     public GameObject enemy_1;
-
     Vector3 vector3;
     public Stage stage;
     bool stage1Flag = true;
@@ -23,14 +21,12 @@ public class Enemy_start : MonoBehaviour
     {
         stage_1, stage_2, stage_3
     }
-    void Start()
-    {
-
-    }
-    public void EnemyLeep(Enemy_1 enemy_1)
+    //Enemy死亡した時にキップする関数
+    public void EnemyKeep(Enemy_1 enemy_1)
     {
         enemy.Add(enemy_1);
     }
+    //ランダムに決めた場所に座標を出す
     Vector3 RandomPosition(Transform transform)
     {
         vector3 = transform.position;
@@ -43,6 +39,7 @@ public class Enemy_start : MonoBehaviour
     {
         stageName = name;
     }
+    //Enemyを生成する関数
     public void EnemyMaker(string name,Transform transform)
     {
         int ju = pieces;
@@ -54,59 +51,38 @@ public class Enemy_start : MonoBehaviour
                 {
                     for(int i = 0; i < pieces; i++)
                     {
-
-                        Instantiate(enemy_1, RandomPosition(transform), transform.rotation).name = "enemy"+i;
+                        Instantiate(enemy_1, RandomPosition(transform), transform.rotation).name = "enemy";
                     }
                     audio.StageSound(stage);
                     stage1Flag = false;
                 }
                 break;
-            //case "field_2":
-            //    audio.StageSound(stage);
-                
-            //    if (stage2Flag)
-            //    {
-            //        audio.StageSound(stage);
-            //        for (int o = 0; o < pieces; o++)
-            //        {
-            //            if (enemy.Count > ju)
-            //            {
-            //                Enemy_1 stage2Enemy = enemy[o];
-            //                stage2Enemy.gameObject.SetActive(true);
-            //                enemy.RemoveAt(o);
-            //                ju--;
-            //            }
-            //            else
-            //            {
-            //                Instantiate(enemy_1,RandomPosition(transform), transform.rotation).name = "enemy";
-            //                ju--;
-            //            }
-            //        }
-            //        stage2Flag = false;
-            //    }
-            //    break;
-            //case "field_3":
-            //    audio.StageSound(stage);
-            //    if (stage3Flag)
-            //    {
-            //        for (int o = 0; o < pieces; o++)
-            //        {
-            //            if (enemy.Count > ju)
-            //            {
-            //                Enemy_1 stage2Enemy = enemy[o];
-            //                stage2Enemy.gameObject.SetActive(true);
-            //                enemy.RemoveAt(o);
-            //                ju--;
-            //            }
-            //            else
-            //            {
-            //                Instantiate(enemy_1, RandomPosition(transform), transform.rotation).name = "enemy";
-            //                ju--;
-            //            }
-            //        }
-            //        stage3Flag = false;
-            //    }
-            //    break;
+            case "field_2":
+                if (stage2Flag)
+                {
+                    if (enemy.Count > 0)
+                    {
+                        for(int i = 0; i < pieces; i++)
+                        {
+                            GameObject enemy_1 = enemy[i].gameObject;
+                            enemy.RemoveAt(0);
+                            enemy_1.SetActive(true);
+                            
+                        }
+                    }
+                    else
+                    {
+                        Instantiate(enemy_1, RandomPosition(transform), transform.rotation).name = "enemy";
+                    }
+                    stage2Flag = false;
+                }
+                break;
+            case "field_3":
+                if (stage3Flag)
+                {
+
+                }
+                break;
         }
     }
 

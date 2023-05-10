@@ -4172,7 +4172,7 @@ MonoBehaviour:
   - {fileID: 1008774246}
   - {fileID: 1818386923}
   - {fileID: 2102391132}
-  pieces: 10
+  pieces: 5
   audio: {fileID: 1808675327}
 --- !u!82 &1008774250
 AudioSource:

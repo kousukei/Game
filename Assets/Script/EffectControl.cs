@@ -14,8 +14,7 @@ public class EffectControl : MonoBehaviour
     [SerializeField, Header("回復エフェクト")]
     private GameObject healEffect;
     public bool deatEffectFlag;
-    Vector3 playerPos;
-    Vector3 enemyPos;
+
     int num;
     List<EffectObject> effects = new List<EffectObject>();
     
@@ -30,77 +29,98 @@ public class EffectControl : MonoBehaviour
     {
     
     }
+    //プレイヤーのスキルのエフェクト
     public void PlayerEffect(Transform subject,string effectName)
     {
         StartCoroutine(EffectStart(subject,effectName));
     }
+    //Enemyのエフェクト
     public void effectMaker(GameObject gameObject,string name)
     {
+        //Enemyのエフェクトの種類
+        //ダメージ
         if (name== "Damage")
         {
+            //Enemyののダメージのエフェクトを取得
             GameObject damageObject = gameObject.transform.Find("DamageEffect").gameObject;
+            //セットアクティブ(true)
             damageObject.SetActive(true);
-            StartCoroutine(EffectStop(damageObject));
+            ////時間切ったらセットアクティブ(false)
+            StartCoroutine(EffectStop(damageObject, gameObject));
         }
+        //死亡
         if(name== "Death")
         {
 
-            //GameObject deathObject = gameObject.transform.Find("DeathEffect").gameObject;
-            GameObject deathObject = gameObject;
-            deathObject.transform.Find("DeathEffect").gameObject.SetActive(true);
-            StartCoroutine(EffectStop(deathObject));
+            GameObject deathObject = gameObject.transform.Find("DeathEffect").gameObject;
+            //セットアクティブ(true)
+            deathObject.SetActive(true);
+            ////時間切ったらセットアクティブ(false)
+            StartCoroutine(EffectStop(deathObject,gameObject));
 
         }
         
     }
-    IEnumerator EffectStop(GameObject effect)
+    //エフェクトをセットアクティブ(false);
+    IEnumerator EffectStop(GameObject effect,GameObject gameObject)
     {
-        if(effect.transform.Find("DeathEffect").gameObject.name== "DeathEffect")
+        if(effect.name== "DeathEffect")
         {
+            //０．５秒を待つ
             yield return new WaitForSeconds(0.5f);
-            effect.transform.Find("DeathEffect").gameObject.SetActive(false);
             effect.SetActive(false);
-            //effect.SetActive(false);
+            gameObject.SetActive(false);
+            //一回だけ処理するのBool
             deatEffectFlag = true;
         }
         else
         {
+            //1秒を待つ
             yield return new WaitForSeconds(1f);
             effect.SetActive(false);
         }
 
     }
+    //プレイヤーのスキルのエフェクトを管理する
     IEnumerator EffectStart(Transform effectpos,string name)
     {
+        //プレイヤーのポジションを保存する
         Vector3 pos = effectpos.position;
-
-
+        //保存したエフェクトはいるがどうか
         if (effects.Count > 0)
         {
+            //初期化
             objects = new EffectObject[effects.Count];
+            //名前によっての処理
             switch (name)
             {
+                //回復
                 case "Heal":
+                    //エフェクトを取り出す
                     for (int o = 0; o < effects.Count; o++)
                     {
+                        //listの中のエフェクトをObjectに入れる
                         objects[o] = effects[o];
-
+                        //中にHealEffectがあれば
                         if (objects[o].type == "HealEffect")
                         {
+                            //最初のHealeffectを取得したら
                             num++;
                             if (num > 0)
                             {
-                                EffectObject eff = objects[o];
+                                //HealEffectを出す
+                                objects[o].gameObject.EffectReatart();
+                                //ListのHealEffectを削除
                                 effects.RemoveAt(o);
-                                eff.gameObject.EffectReatart();
+                                //ループから抜けます
                                 break;
                             }
                         }
+                        //Listの中にHealEffectがないなら
                         if (num == 0)
                         {
-                            {
-                                Production(name, pos);
-                            }
+                            //HealEffectを生成します
+                            Production(name, pos);
                         }
                     }
                     num = 0;
@@ -109,12 +129,16 @@ public class EffectControl : MonoBehaviour
         }
         else
         {
+            //Listの中にはEffectがなっかたら
+            //名前によって欲しいEffectを生成します
             Production(name, pos);
         }
         yield return null;
     }
+    //Effectを生成する関数
     void Production(string name,Vector3 pos)
     {
+        //名前によって生成するEffectが変わります
         switch (name)
         {
             case "Heal":
@@ -123,12 +147,14 @@ public class EffectControl : MonoBehaviour
 
         }
     }
+    //EffectをListに保存
     public void EffectKeep(EffectObject effectObject)
     {
         effects.Add(effectObject);
     }
 
 }
+//Listに保存するEffectの形
 public class EffectObject{
 
     public string type;

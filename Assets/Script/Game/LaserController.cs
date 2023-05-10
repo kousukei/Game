@@ -7,17 +7,6 @@ public class LaserController : MonoBehaviour
     List<Laser> laserss = new List<Laser>();
     [SerializeField]
     GameObject laserPrefab;
-    int lllll = 0;
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
     public void Attack(Transform transform,  float laser_speed)
     {
         StartCoroutine(LaserMaker(transform, laser_speed));
@@ -29,12 +18,6 @@ public class LaserController : MonoBehaviour
         Vector3 pos = transform.position;
         ////保存したレザーがあったら
 
-        ////レザーを生成します。
-        //var gameObject = Instantiate(laserPrefab, pos, Quaternion.identity);
-        ////レザーの移動
-        //gameObject.GetComponent<Rigidbody>().AddForce(test, ForceMode.Impulse);
-
-
         if (laserss.Count > 0)
         {
             //保存したレザーを取得
@@ -43,9 +26,6 @@ public class LaserController : MonoBehaviour
             laserss.RemoveAt(0);
             //レザーを出す
             laser.Reatart(transform, laserSpeed);
-            
-            
-           
         }
         //保存レザーがなかったら
         else
@@ -53,8 +33,7 @@ public class LaserController : MonoBehaviour
             //レザーを生成します。
             var gameObject = Instantiate(laserPrefab, pos, Quaternion.identity);
             //レザーの移動
-            gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * laserSpeed, ForceMode.Impulse);
-
+            gameObject.GetComponent<Rigidbody>().velocity = transform.forward * laserSpeed;
         }
 
         yield return null;

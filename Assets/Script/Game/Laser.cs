@@ -41,11 +41,11 @@ public class Laser : MonoBehaviour
         
         this.gameObject.SetActive(true);
         this.gameObject.transform.rotation = Quaternion.identity;
-        this.gameObject.transform.position = pos.position;
-        //SetActive(true)‚ÌObject‚ÌRigidbody‚ğæ“¾
-        this.gameObject.GetComponent<Rigidbody>().AddForce(pos.forward * laserSpeed, ForceMode.Impulse); ;
+        this.gameObject.transform.position = pos.position;     
+        this.gameObject.GetComponent<Rigidbody>().velocity = pos.forward * laserSpeed;
 
-        
+
+
     }
     //‚Ô‚Â‚¯‚½‚ç‚Ì”½ËŠÖ”
     void Reflect(Collision collision)

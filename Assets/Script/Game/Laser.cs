@@ -11,7 +11,6 @@ public class Laser : MonoBehaviour
     public Enemy enemy;
     
     LaserController laserController;
-    Vector3 voctor;
     Rigidbody rb;
     
 
@@ -19,10 +18,6 @@ public class Laser : MonoBehaviour
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
         laserController=GameObject.Find("LaserController").GetComponent<LaserController>();
-    }
-    public void Position(Vector3 ed)
-    {
-        voctor = ed;
     }
     IEnumerator LaserStop()
     {//ボール出ない
@@ -52,11 +47,12 @@ public class Laser : MonoBehaviour
         rb.velocity = refrectVec;
         StartCoroutine(LaserStop());
     }
-
     void OnCollisionEnter(Collision collision)
     {
+        
         if (collision.gameObject.tag == "Mirror" || collision.gameObject.tag == "Laser")
         {
+            //ミラーとレーザーを衝突した時反射します。
             Reflect(collision);
         }
         else if (collision.gameObject.tag == "Enemy" && onConcaveMirror)

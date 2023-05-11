@@ -14,6 +14,7 @@ public class Enemy_start : MonoBehaviour
     List<Enemy_1> enemy=new List<Enemy_1>();
     public int pieces;
     public AudioControl audio;
+    int num;
 
     string stageName;
 
@@ -35,24 +36,23 @@ public class Enemy_start : MonoBehaviour
         vector3.z = Random.Range(transform.position.z - transform.localScale.z / 2, transform.position.z + transform.localScale.z / 2);
         return vector3;
     }
-    public void StageName(string name)
-    {
-        stageName = name;
-    }
     //Enemyを生成する関数
     public void EnemyMaker(string name,Transform transform)
     {
-        int ju = pieces;
+        num = pieces;
+        //どの場所に敵を生成するがの判断
         stageName = name;
         switch (stageName)
         {
             case "field_1":
                 if (stage1Flag)
                 {
+                    //敵を生成する
                     for(int i = 0; i < pieces; i++)
                     {
                         Instantiate(enemy_1, RandomPosition(transform), transform.rotation).name = "enemy";
                     }
+                    //音を出す
                     audio.StageSound(stage);
                     stage1Flag = false;
                 }
@@ -60,27 +60,67 @@ public class Enemy_start : MonoBehaviour
             case "field_2":
                 if (stage2Flag)
                 {
-                    if (enemy.Count > 0)
+                    //決めた生成数でループ
+                    for(int i = 0; i < pieces; i++)
                     {
-                        for(int i = 0; i < pieces; i++)
+                        //Listの敵は生成数より少ないなら
+                        //そのまま生成します
+                        if (enemy.Count < num)
                         {
-                            GameObject enemy_1 = enemy[i].gameObject;
+                            Instantiate(enemy_1, RandomPosition(transform), transform.rotation).name = "enemy";
+                            //生成数を一減らす
+                            num--;
+                        }
+                        //Listの敵は生成数より多いなら
+                        else
+                        {
+                            //Listの中から取り出して
+                            GameObject enemy_1 = enemy[0].gameObject;
+                            //Listを取り出したEnemtをListから消す
                             enemy.RemoveAt(0);
+                            //取り出したEnemyをセットアクティブTrueにします
                             enemy_1.SetActive(true);
-                            
+                            //ポジションはランダムです
+                            enemy_1.gameObject.transform.position = RandomPosition(transform);
+                            enemy_1.gameObject.transform.rotation = transform.rotation;
                         }
                     }
-                    else
-                    {
-                        Instantiate(enemy_1, RandomPosition(transform), transform.rotation).name = "enemy";
-                    }
-                    stage2Flag = false;
+                    //敵が生成した時の音
+                        audio.StageSound(stage);
+                        stage2Flag = false;
                 }
                 break;
             case "field_3":
                 if (stage3Flag)
                 {
-
+                    //決めた生成数でループ
+                    for (int i = 0; i < pieces; i++)
+                    {
+                        //Listの敵は生成数より少ないなら
+                        //そのまま生成します
+                        if (enemy.Count < num)
+                        {
+                            Instantiate(enemy_1, RandomPosition(transform), transform.rotation).name = "enemy";
+                            //生成数を一減らす
+                            num--;
+                        }
+                        //Listの敵は生成数より多いなら
+                        else
+                        {
+                            //Listの中から取り出して
+                            GameObject enemy_1 = enemy[0].gameObject;
+                            //Listを取り出したEnemtをListから消す
+                            enemy.RemoveAt(0);
+                            //取り出したEnemyをセットアクティブTrueにします
+                            enemy_1.SetActive(true);
+                            //ポジションはランダムです
+                            enemy_1.gameObject.transform.position = RandomPosition(transform);
+                            enemy_1.gameObject.transform.rotation = transform.rotation;
+                        }
+                    }
+                    //敵が生成した時の音
+                    audio.StageSound(stage);
+                    stage3Flag = false;
                 }
                 break;
         }

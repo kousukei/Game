@@ -22,7 +22,6 @@ public class effect : MonoBehaviour
     }
     void Start()
     {
-        //enemy = GameObject.Find("enemy");
         player = GameObject.Find("Player");
         effectObject = new EffectObject();
         effectControl = GameObject.Find("EffectObject").GetComponent<EffectControl>();

@@ -24,7 +24,7 @@ public class AudioControl : MonoBehaviour
 
     string skill;
     string stage;
-
+    //スキルのサウンドの関数
     public void SkillSound(SkillScript.SkillName skillName)
     {
         skill = skillName.ToString();
@@ -41,10 +41,12 @@ public class AudioControl : MonoBehaviour
                 break;
         }
     }
+    //プレイヤーのサウンドの関数
     public void PlayerSound()
     {
         playerAudioControl.PlayOneShot(mirrorSound);
     }
+    //ステージのサウンドの関数
     public void StageSound(Enemy_start.Stage stage)
     {
         this.stage = stage.ToString();

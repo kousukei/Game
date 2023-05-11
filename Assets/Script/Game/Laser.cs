@@ -27,7 +27,9 @@ public class Laser : MonoBehaviour
     IEnumerator LaserStop()
     {//ボール出ない
         yield return new WaitForSeconds(1f);
+        //レーザーをListに保存します
         laserController.EraseLaser(this);
+        //レーザーをセットアクティブfalseにします。
         this.gameObject.SetActive(false);
         
     }
@@ -38,14 +40,10 @@ public class Laser : MonoBehaviour
     }
     public void Reatart(Transform pos,float laserSpeed)
     {
-        
         this.gameObject.SetActive(true);
         this.gameObject.transform.rotation = Quaternion.identity;
         this.gameObject.transform.position = pos.position;     
         this.gameObject.GetComponent<Rigidbody>().velocity = pos.forward * laserSpeed;
-
-
-
     }
     //ぶつけたらの反射関数
     void Reflect(Collision collision)
@@ -53,7 +51,6 @@ public class Laser : MonoBehaviour
         refrectVec = Vector3.Reflect(this.lastVelocity, collision.contacts[0].normal);
         rb.velocity = refrectVec;
         StartCoroutine(LaserStop());
-
     }
 
     void OnCollisionEnter(Collision collision)

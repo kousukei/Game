@@ -26,6 +26,7 @@ public class ReflectCount : MonoBehaviour
 
     void Start()
     {
+        //ミラーの反射回数を入れる
         countPlaneMirror = mirrorBreakNum; 
         countConvexMirror = cvMirrorBreakNum;
         countConcaveMirror=ccMirrorBreakNum;
@@ -39,9 +40,11 @@ public class ReflectCount : MonoBehaviour
             CountTextChange(countPlaneMirror, mirrorBreakNum);
             if (countPlaneMirror <= 0)
             {
+                //反射回数を切ったらSetActiveをfalse
                 gameObject.SetActive(false);
                 //ミラーが壊れた音
                 audioControl.PlayerSound();
+                //ミラーの個数を引く
                 mirrorStock.planeMirrorStock--;
                 countPlaneMirror = mirrorBreakNum;
             }
@@ -51,9 +54,11 @@ public class ReflectCount : MonoBehaviour
             CountTextChange(countConvexMirror, cvMirrorBreakNum);
             if (countConvexMirror <= 0)
             {
+                //反射回数を切ったらSetActiveをfalse
                 gameObject.SetActive(false);
                 //ミラーが壊れた音
                 audioControl.PlayerSound();
+                //ミラーの個数を引く
                 mirrorStock.convexMirrorStock--;
                 countConvexMirror = cvMirrorBreakNum;
             }
@@ -63,9 +68,11 @@ public class ReflectCount : MonoBehaviour
             CountTextChange(countConcaveMirror, ccMirrorBreakNum);
             if (countConcaveMirror <= 0)
             {
+                //反射回数を切ったらSetActiveをfalse
                 gameObject.SetActive(false);
                 //ミラーが壊れた音
                 audioControl.PlayerSound();
+                //ミラーの個数を引く
                 mirrorStock.concaveMirrorStock--;
                 countConcaveMirror = ccMirrorBreakNum;
             }
@@ -76,17 +83,21 @@ public class ReflectCount : MonoBehaviour
     {
         if (collision.gameObject.tag == "Laser")
         {
+            //エネルギーを回復
             energyBar.EneHeal();
             if (mirror == Mirror.planeMirror)
             {
+                //ミラーの反射回数を減らす
                 countPlaneMirror--;
             }
             else if (mirror == Mirror.convexMirror)
             {
+                //ミラーの反射回数を減らす
                 countConvexMirror--;
             }
             else if (mirror == Mirror.concaveMirror)
             {
+                //ミラーの反射回数を減らす
                 countConcaveMirror--;
             }
         }

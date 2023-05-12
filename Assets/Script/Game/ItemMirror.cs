@@ -34,17 +34,35 @@ public class ItemMirror : MonoBehaviour
 
         if (other.tag == "Player")
         {
+            //if(mirrorstock.currentStock < mirrorstock.maxStock)
+            //{
+            //    if (mirror == Mirror.planeMirror)
+            //    {
+            //        reflectCount.countPlaneMirror = reflectCount.mirrorBreakNum;
+            //        //reflectCount.CountTextChange(reflectCount.mirrorBreakNum, reflectCount.mirrorBreakNum);
+            //    }
+            //    else if (mirror == Mirror.convexMirror)
+            //    {
+            //        reflectCount.countConvexMirror = reflectCount.cvMirrorBreakNum;
+            //        //reflectCount.CountTextChange(reflectCount.cvMirrorBreakNum, reflectCount.cvMirrorBreakNum);
+            //    }
+            //    else if (mirror == Mirror.concaveMirror)
+            //    {
+            //        reflectCount.countConcaveMirror = reflectCount.ccMirrorBreakNum;
+            //        //reflectCount.CountTextChange(reflectCount.ccMirrorBreakNum, reflectCount.ccMirrorBreakNum);
+            //    }
+            //}
             if (mirrorstock.currentStock < mirrorstock.maxStock)
             {
-                if (mirror == Mirror.planeMirror&& mirrorstock.planeMirrorStock==0)
+                if (mirror == Mirror.planeMirror && mirrorstock.planeMirrorStock == 0)
                 {
                     mirrorstock.planeMirrorStock++;
                 }
-                else if (mirror == Mirror.convexMirror&& mirrorstock.convexMirrorStock==0)
+                else if (mirror == Mirror.convexMirror && mirrorstock.convexMirrorStock == 0)
                 {
                     mirrorstock.convexMirrorStock++;
                 }
-                else if (mirror == Mirror.concaveMirror&& mirrorstock.concaveMirrorStock==0)
+                else if (mirror == Mirror.concaveMirror && mirrorstock.concaveMirrorStock == 0)
                 {
                     mirrorstock.concaveMirrorStock++;
                 }
@@ -54,17 +72,17 @@ public class ItemMirror : MonoBehaviour
                 if (mirror == Mirror.planeMirror)
                 {
                     reflectCount.countPlaneMirror = reflectCount.mirrorBreakNum;
-                    reflectCount.CountTextChange(reflectCount.mirrorBreakNum, reflectCount.mirrorBreakNum);
+                    //reflectCount.CountTextChange(reflectCount.mirrorBreakNum, reflectCount.mirrorBreakNum);
                 }
                 else if (mirror == Mirror.convexMirror)
                 {
                     reflectCount.countConvexMirror = reflectCount.cvMirrorBreakNum;
-                    reflectCount.CountTextChange(reflectCount.cvMirrorBreakNum, reflectCount.cvMirrorBreakNum);
+                    //reflectCount.CountTextChange(reflectCount.cvMirrorBreakNum, reflectCount.cvMirrorBreakNum);
                 }
                 else if (mirror == Mirror.concaveMirror)
                 {
                     reflectCount.countConcaveMirror = reflectCount.ccMirrorBreakNum;
-                    reflectCount.CountTextChange(reflectCount.ccMirrorBreakNum, reflectCount.ccMirrorBreakNum);
+                    //reflectCount.CountTextChange(reflectCount.ccMirrorBreakNum, reflectCount.ccMirrorBreakNum);
                 }
             }
             Destroy(gameObject);

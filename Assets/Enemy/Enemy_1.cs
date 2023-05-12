@@ -173,7 +173,7 @@ public class Enemy_1: MonoBehaviour
     //アイテムミラーをランダムで生成
     void MirrorProbability()
     {
-        int i = Random.Range(0, 20);
+        int i = Random.Range(0, 3);
 
         switch (i)
         {

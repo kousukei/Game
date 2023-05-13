@@ -34,24 +34,8 @@ public class ItemMirror : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            //if(mirrorstock.currentStock < mirrorstock.maxStock)
-            //{
-            //    if (mirror == Mirror.planeMirror)
-            //    {
-            //        reflectCount.countPlaneMirror = reflectCount.mirrorBreakNum;
-            //        //reflectCount.CountTextChange(reflectCount.mirrorBreakNum, reflectCount.mirrorBreakNum);
-            //    }
-            //    else if (mirror == Mirror.convexMirror)
-            //    {
-            //        reflectCount.countConvexMirror = reflectCount.cvMirrorBreakNum;
-            //        //reflectCount.CountTextChange(reflectCount.cvMirrorBreakNum, reflectCount.cvMirrorBreakNum);
-            //    }
-            //    else if (mirror == Mirror.concaveMirror)
-            //    {
-            //        reflectCount.countConcaveMirror = reflectCount.ccMirrorBreakNum;
-            //        //reflectCount.CountTextChange(reflectCount.ccMirrorBreakNum, reflectCount.ccMirrorBreakNum);
-            //    }
-            //}
+            //壊なれたアイテムを触れたら使えるようにる
+            //
             if (mirrorstock.currentStock < mirrorstock.maxStock)
             {
                 if (mirror == Mirror.planeMirror && mirrorstock.planeMirrorStock == 0)
@@ -71,18 +55,21 @@ public class ItemMirror : MonoBehaviour
             {
                 if (mirror == Mirror.planeMirror)
                 {
+                    reflectCount = other.gameObject.transform.Find("PlaneMirror").GetComponent<ReflectCount>();
                     reflectCount.countPlaneMirror = reflectCount.mirrorBreakNum;
-                    //reflectCount.CountTextChange(reflectCount.mirrorBreakNum, reflectCount.mirrorBreakNum);
+                    
                 }
                 else if (mirror == Mirror.convexMirror)
                 {
+                    reflectCount = other.gameObject.transform.Find("convexMirror").GetComponent<ReflectCount>();
                     reflectCount.countConvexMirror = reflectCount.cvMirrorBreakNum;
-                    //reflectCount.CountTextChange(reflectCount.cvMirrorBreakNum, reflectCount.cvMirrorBreakNum);
+                    
                 }
                 else if (mirror == Mirror.concaveMirror)
                 {
+                    reflectCount = other.gameObject.transform.Find("concaveMirror").GetComponent<ReflectCount>();
                     reflectCount.countConcaveMirror = reflectCount.ccMirrorBreakNum;
-                    //reflectCount.CountTextChange(reflectCount.ccMirrorBreakNum, reflectCount.ccMirrorBreakNum);
+                    
                 }
             }
             Destroy(gameObject);

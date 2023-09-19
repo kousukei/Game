@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.Serialization;
@@ -153,7 +152,7 @@ public class Enemy_1: MonoBehaviour
 
     void MirrorProbability()
     {
-        int i = Random.Range(0, 20);
+        int i = Random.Range(0, 3);
 
         switch (i)
         {

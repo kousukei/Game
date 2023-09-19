@@ -11,10 +11,10 @@ public class MirrorStock : MonoBehaviour
     [System.NonSerialized] public int convexMirrorStock = 1;
     [System.NonSerialized] public int concaveMirrorStock = 1;
     public Image[] image;
-    public GameObject mirrer;
-    public Text planeMirrorText;
-    public Text convexMirrorText;
-    public Text concaveMirrorText;
+    //public GameObject mirrer;
+    //public Text planeMirrorText;
+    //public Text convexMirrorText;
+    //public Text concaveMirrorText;
 
     void Update()
     {

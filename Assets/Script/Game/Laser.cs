@@ -37,10 +37,11 @@ public class Laser : MonoBehaviour
         {
             Reflect(collision);
         }
-        else if (collision.gameObject.tag == "Enemy" && onConcaveMirror)
-        {
-            onConcaveMirror = false;
-        }
+        ///fumei
+        //else if (collision.gameObject.tag == "Enemy" && onConcaveMirror)
+        //{
+        //    onConcaveMirror = false;
+        //}
         else
         {
             Destroy(gameObject);

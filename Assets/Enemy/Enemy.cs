@@ -65,7 +65,6 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// //Œü‚«
     /// </summary>
-    /// <param name="target"></param>
     /// <param name="Enemy"></param>
     public void Direction(GameObject Enemy)
     {

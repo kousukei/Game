@@ -22,6 +22,7 @@ public class SkillScript : MonoBehaviour
     public GameObject player;
     //エフェクト
     public GameObject healEffect;
+    public GameObject CobyEffect;
     //エフェクトのポジション
     GameObject healEffectPosioion;
     public bool CobyTime_flag;
@@ -206,8 +207,13 @@ public class SkillScript : MonoBehaviour
     void Coby()
     {
         za = player.transform.position;
-        za.x = za.x + 1.5f;
+        za.x = za.x + 1f;
         CobyObject=Instantiate(player, za, player.transform.rotation);
+        za = CobyObject.transform.position;
+        za.y += 0.2f;
+        GameObject gameObject=Instantiate(CobyEffect, za, CobyObject.transform.rotation);
+        gameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        gameObject.transform.parent = CobyObject.transform;
         CobyObject.name = "Coby";
     }
 

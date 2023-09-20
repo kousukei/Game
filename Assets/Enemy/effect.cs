@@ -11,7 +11,8 @@ public class effect : MonoBehaviour
     {
         DamageEffect,
         DeathEffect,
-        HealEffect
+        HealEffect,
+        CobyEffect,
     }
     void Start()
     {
@@ -41,6 +42,13 @@ public class effect : MonoBehaviour
                 break;
             case Effect.HealEffect:
                 if (time >= 1)
+                {
+                    Destroy(this.gameObject);
+                    time = 0;
+                }
+                break;
+            case Effect.CobyEffect:
+                if (time >= 5)
                 {
                     Destroy(this.gameObject);
                     time = 0;

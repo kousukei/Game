@@ -23,12 +23,12 @@ public class GameClear : MonoBehaviour
     CanvasScaler scaler;
 
     Ranking ranking;
-    Animator animator;
+    Animator rankingAnimetor;
     Score_Script score;
     void Start()
     {
-        //ranking = GameObject.Find("Ranking").GetComponent<Ranking>();
-        //animator = GameObject.Find("Ranking").GetComponent<Animator>();
+        ranking = GameObject.Find("Ranking").GetComponent<Ranking>();
+        rankingAnimetor = GameObject.Find("Ranking").GetComponent<Animator>();
         score = GameObject.Find("ScriptObject").GetComponent<Score_Script>();
         vcam = cmvcam.GetComponent<CinemachineVirtualCamera>();
         scaler = canvas.GetComponent<CanvasScaler>();
@@ -43,25 +43,27 @@ public class GameClear : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         //SceneManager.LoadScene("StartScene");
-        //ranking.Get();
-        //ranking.Set(score.Score);
-        //animator.SetBool("start", true);
+
+        
         isGameClear = true;
     }
 
     void Clear ()
     {
+        
         if (isGameClear )
         {
+            Time.timeScale = 0;
             if (vcam.m_Lens.FieldOfView < maxFOVSpread)
             {
                 scaler.referenceResolution += new Vector2(scaleChangeSpeed, 0);
-                vcam.m_Lens.FieldOfView += Time.deltaTime * zoomOutSpeed;
+                vcam.m_Lens.FieldOfView += Time.unscaledDeltaTime * zoomOutSpeed;
             }
             else
             {
                 Time.timeScale = 0;
-                gameClearPanel.SetActive(true);
+                rankingAnimetor.SetBool("start", true);
+                //gameClearPanel.SetActive(true);
             }
         }
 

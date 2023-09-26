@@ -46,6 +46,7 @@ public class GameClear : MonoBehaviour
 
         
         isGameClear = true;
+        Time.timeScale = 0;
     }
 
     void Clear ()
@@ -53,16 +54,18 @@ public class GameClear : MonoBehaviour
         
         if (isGameClear )
         {
-            Time.timeScale = 0;
+            
             if (vcam.m_Lens.FieldOfView < maxFOVSpread)
             {
                 scaler.referenceResolution += new Vector2(scaleChangeSpeed, 0);
                 vcam.m_Lens.FieldOfView += Time.unscaledDeltaTime * zoomOutSpeed;
+                
             }
             else
             {
-                Time.timeScale = 0;
+                
                 rankingAnimetor.SetBool("start", true);
+                isGameClear = false;
                 //gameClearPanel.SetActive(true);
             }
         }

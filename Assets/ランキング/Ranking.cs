@@ -10,9 +10,11 @@ public class Ranking : MonoBehaviour
     string []rank = new string[5] { "1.","2.","3.","4.","5."};
     public Text[] rankingText = new Text[5];
     Score_Script sco_Script;
+    
     void Start()
     {
         sco_Script = GameObject.Find("ScriptObject").GetComponent<Score_Script>();
+        
         point = sco_Script.Score;
         Get();
         Set(point);

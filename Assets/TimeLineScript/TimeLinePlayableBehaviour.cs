@@ -6,10 +6,15 @@ using UnityEngine.Playables;
 // A behaviour that is attached to a playable
 public class TimeLinePlayableBehaviour : PlayableBehaviour
 {
+    Camera camera;
+    GameObject gameControl;
     // Called when the owning graph starts playing
     public override void OnGraphStart(Playable playable)
     {
-        
+        gameControl = GameObject.Find("GameControl");
+        gameControl.transform.Find("StartMovie").gameObject.SetActive(true);
+        camera = GameObject.Find("Camera").GetComponent<Camera>();
+        camera.depth = 2;
     }
 
     // Called when the owning graph stops playing
@@ -21,16 +26,23 @@ public class TimeLinePlayableBehaviour : PlayableBehaviour
     // Called when the state of the playable is set to Play
     public override void OnBehaviourPlay(Playable playable, FrameData info)
     {
-        //カメラ1を設置
-        
+        //Debug.Log("111");
+        ////カメラ1を設置
+        //gameControl = GameObject.Find("GameControl");
+        //gameControl.transform.Find("StartMovie").gameObject.SetActive(true);
+        //camera = GameObject.Find("Camera").GetComponent<Camera>();
+        //camera.depth = 2;
     }
 
     // Called when the state of the playable is set to Paused
     public override void OnBehaviourPause(Playable playable, FrameData info)
     {
-        Debug.Log("222");
-        //カメラ２に変更
-        //TimeLineをActive(False)にします。
+        //Debug.Log("222");
+        //camera = GameObject.Find("Camera").GetComponent<Camera>();
+        //camera.depth = 0;
+        //gameControl = GameObject.Find("GameControl");
+        //gameControl.transform.Find("StartMovie").gameObject.SetActive(false);
+
     }
 
     // Called each frame while the state is set to Play

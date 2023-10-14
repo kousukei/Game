@@ -5,20 +5,19 @@ using UnityEngine.UI;
 
 public class MirrorStock : MonoBehaviour
 {
-    [System.NonSerialized] public int maxStock = 3;
-    [System.NonSerialized] public int currentStock;
-    [System.NonSerialized] public int planeMirrorStock = 1;
-    [System.NonSerialized] public int convexMirrorStock = 1;
-    [System.NonSerialized] public int concaveMirrorStock = 1;
-    public Image[] image;
-    //public GameObject mirrer;
-    //public Text planeMirrorText;
-    //public Text convexMirrorText;
-    //public Text concaveMirrorText;
+    [System.NonSerialized] public int maxStock = 3;//鏡最大持て数
+    [System.NonSerialized] public int currentStock;//現在鏡持て数
+    [System.NonSerialized] public int planeMirrorStock = 1;//平面鏡初期化＝１
+    [System.NonSerialized] public int convexMirrorStock = 1;//凸面鏡初期化＝１
+    [System.NonSerialized] public int concaveMirrorStock = 1;//凹面鏡初期化＝１
+    public Image[] image;//各鏡のアイコン
+
 
     void Update()
     {
-        currentStock = planeMirrorStock + concaveMirrorStock + convexMirrorStock;
+        currentStock = planeMirrorStock + concaveMirrorStock + convexMirrorStock;//ミラーの現在数計算
+
+        //<-------------ミラーアイコンUIの色変わり--------------->
         if (planeMirrorStock == 0)
         {
             image[0].color = Color.black;

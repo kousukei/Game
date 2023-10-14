@@ -19,7 +19,6 @@ public class ConvexMirror : MonoBehaviour
     {
         if (collision.gameObject.tag == "Laser")
         {
-            //òAë±Ç≈î≠ê∂ÇµÇ»Ç¢ÇÊÇ§Ç…Ç∑ÇÈ(0.2ïbÇ≤Ç∆)
             if (timeleft <= 0.0)
             {
                 timeleft = 1f;

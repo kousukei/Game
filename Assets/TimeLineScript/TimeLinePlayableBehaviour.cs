@@ -30,10 +30,7 @@ public class TimeLinePlayableBehaviour : PlayableBehaviour
     // Called when the state of the playable is set to Play
     public override void OnBehaviourPlay(Playable playable, FrameData info)
     {
-        //gameControl = GameObject.Find("GameControl");
-        //gameControl.transform.Find("StartMovie").gameObject.SetActive(true);
-        //camera = GameObject.Find("Camera").GetComponent<Camera>();
-        //camera.depth = 2;
+
     }
 
     // Called when the state of the playable is set to Paused
@@ -48,6 +45,7 @@ public class TimeLinePlayableBehaviour : PlayableBehaviour
             playerObject = GameObject.Find("Player").transform.Find("Mirror").gameObject;
             playerObject.SetActive(true);
             GameControl Control = gameControl.GetComponent<GameControl>();
+            GameObject.Find("StartGame").transform.Find("BGMObject").gameObject.SetActive(true);
             Control.end = true;
         }
         start = true;

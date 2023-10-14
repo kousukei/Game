@@ -27,12 +27,9 @@ public class Enemy_1: MonoBehaviour
     public float OutOfRange;
     public float HP;
     public bool hit=false;
-    //死亡フラグ
-    public bool deathFlag;
-    //エフェクト
-    public GameObject deathEffect;
-    //アイテムミラー
-    public GameObject[] mirror;
+    public bool deathFlag;//死亡フラグ
+    public GameObject deathEffect;//エフェクト
+    public GameObject[] mirror;//アイテムミラー
     public GameObject damageEffect;
     GameObject damageEffectPosition;
     SkillScript skillScript;
@@ -71,8 +68,7 @@ public class Enemy_1: MonoBehaviour
                 //移動目標
                 enemy.random_move(this.gameObject, speed);
                 enemy.Direction(this.gameObject);
-                //敵の目の前
-                if (enemy.Attack_range(Player, this.gameObject))
+                if (enemy.Attack_range(Player, this.gameObject))//敵の目の前
                 {
                     switch (enemy.tracking_range(Player, this.gameObject, withinRange, OutOfRange))
                     {
@@ -89,13 +85,11 @@ public class Enemy_1: MonoBehaviour
                 //分身している時間内分身を攻撃
                 if (skillScript.CobyTime_flag)
                 {
-                    //分身を目標します。
-                    Player = GameObject.Find("Coby");
+                    Player = GameObject.Find("Coby");//分身を目標します。
                 }
                 else
                 {
-                    //じゃなかったらプレイヤーにします。
-                    Player = GameObject.Find("Player");
+                    Player = GameObject.Find("Player");//じゃなかったらプレイヤーにします。
                 }
                 //敵の角度内
                 if (enemy.Attack_range(Player, this.gameObject))
@@ -118,12 +112,9 @@ public class Enemy_1: MonoBehaviour
 
         if (HP <= 0)
         {
-            //エフェクト
-            Instantiate(deathEffect, this.transform.position, this.transform.rotation);
-            //スコア
-            score.score(100);
-            //アイテムミラーを生成します。
-            MirrorProbability();
+            Instantiate(deathEffect, this.transform.position, this.transform.rotation);//エフェクト
+            score.score(100);//スコア
+            MirrorProbability();//アイテムミラーを生成します。
             Destroy(this.gameObject);
         }
         //ダメージを受けたエフェクトのposition

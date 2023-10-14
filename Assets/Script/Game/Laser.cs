@@ -11,7 +11,7 @@ public class Laser : MonoBehaviour
 
 
     Rigidbody rb;
-    float destroyTime = 3f;
+    float destroyTime = 3f;//çÌèúïbêî
 
     void Start()
     {
@@ -24,6 +24,10 @@ public class Laser : MonoBehaviour
         lastVelocity = rb.velocity;
     }
 
+    /// <summary>
+    /// îΩéÀã@î\
+    /// </summary>
+    /// <param name="collision"></param>
     void Reflect(Collision collision)
     {
         refrectVec = Vector3.Reflect(this.lastVelocity, collision.contacts[0].normal);
@@ -37,11 +41,6 @@ public class Laser : MonoBehaviour
         {
             Reflect(collision);
         }
-        ///fumei
-        //else if (collision.gameObject.tag == "Enemy" && onConcaveMirror)
-        //{
-        //    onConcaveMirror = false;
-        //}
         else
         {
             Destroy(gameObject);

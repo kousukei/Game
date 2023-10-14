@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour
 {
-    public Canvas canvas;
-    public GameObject cmvcam;
-    public GameObject gameOverPanel;
+    public Canvas canvas;//カメラ
+    public GameObject cmvcam;//バーチャルカメラ
+    public GameObject gameOverPanel;//ゲームオーバーオブジェクト
 
     [System.NonSerialized] public bool isGameOver = false;
     [System.NonSerialized] public bool isDead = false;
-    float maxFOVSpread = 50f;
-    float zoomOutSpeed = 3f;
+    float maxFOVSpread = 50f;//視野の最大値
+    float zoomOutSpeed = 3f;//カメラ視野移動スピード
     float scaleChangeSpeed = 0.15f;
     CinemachineVirtualCamera vcam;
     CanvasScaler scaler;
@@ -29,6 +29,7 @@ public class GameOver : MonoBehaviour
     {
         if (isGameOver)
         {
+            //時間を止める
             Time.timeScale = 0;
         }
     }
@@ -37,6 +38,7 @@ public class GameOver : MonoBehaviour
     {
         if (vcam.m_Lens.FieldOfView < maxFOVSpread)
         {
+            //カメラ視野が時間によって広め
             scaler.referenceResolution += new Vector2(scaleChangeSpeed, 0);
             vcam.m_Lens.FieldOfView += Time.deltaTime * zoomOutSpeed ;
             isDead = true;

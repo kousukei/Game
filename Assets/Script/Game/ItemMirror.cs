@@ -28,14 +28,18 @@ public class ItemMirror : MonoBehaviour
         rotateValue = Time.deltaTime * spinVelocity ;
         transform.Rotate(new Vector3(0f, rotateValue, 0f)) ;
     }
-
+    /// <summary>
+    /// アイテムミラーを取得
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag == "Player")
+        if (other.tag == "Player")//プレイヤーに当てた
         {
-            if (mirrorstock.currentStock < mirrorstock.maxStock)
+            if (mirrorstock.currentStock < mirrorstock.maxStock)//現在ミラー数＜ミラー総数
             {
+                //ミラーの種類が一致し、ミラーの耐久は0の時
                 if (mirror == Mirror.planeMirror&& mirrorstock.planeMirrorStock==0)
                 {
                     mirrorstock.planeMirrorStock++;
@@ -51,10 +55,11 @@ public class ItemMirror : MonoBehaviour
             }
             else
             {
-                if (mirror == Mirror.planeMirror)
+                //ミラーの現在残る反射回数を戻す
+                if (mirror == Mirror.planeMirror)//ミラーの種類が一致
                 {
                     GameObject gameObject = GameObject.Find("Mirror");
-                    if (gameObject.transform.Find("PlaneMirror").gameObject.activeSelf)
+                    if (gameObject.transform.Find("PlaneMirror").gameObject.activeSelf)//アクティブの確認
                     {
                         reflectCount = gameObject.transform.Find("PlaneMirror").GetComponent<ReflectCount>();
 

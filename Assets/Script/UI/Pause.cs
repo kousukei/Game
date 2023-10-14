@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
-	[SerializeField]GameObject pauseUI;
+	[SerializeField]GameObject pauseUI;//停止オブジェクト
 
     void Start()
     {
@@ -17,21 +17,22 @@ public class Pause : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
+			//キーを押した時一時停止
 			pauseUI.SetActive(!pauseUI.activeSelf);
 
 			if (pauseUI.activeSelf)
 			{
-				Time.timeScale = 0f;
+				Time.timeScale = 0f;//ゲーム時間停止
 			}
 			else
 			{
-				Time.timeScale = 1f;
+				Time.timeScale = 1f;//ゲーム時間開始
 			}
 		}
 	}
 	
 	/// <summary>
-	/// Restartを押す
+	/// ゲーム時間開始ボタンの処理
 	/// </summary>
 	public void RestartButton()
     {

@@ -8,6 +8,7 @@ public class ConcaveMirror : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //バリア三回当てると、三回めが加速で出る
         if (reflectCount.countConcaveMirror % 3 == 0 && collision.gameObject.tag == "Laser")
         {
             collision.gameObject.GetComponent<Rigidbody>().velocity=collision.gameObject.GetComponent<Laser>().refrectVec * 2f;

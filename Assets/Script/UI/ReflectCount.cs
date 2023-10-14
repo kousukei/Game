@@ -5,18 +5,17 @@ using UnityEngine.UI;
 
 public class ReflectCount : MonoBehaviour
 {
-    public MirrorStock mirrorStock;
-    public EnergyBar energyBar;
-    public Mirror mirror;
-    public Text countNum;
-    public AudioClip clip;
-    public AudioSource source;
+    public MirrorStock mirrorStock;//ミラー総数
+    public EnergyBar energyBar;//エネルギーバースクリプト
+    public Mirror mirror;//現在ミラー
+    public Text countNum;//反射残数、最大反射回数のTextUI
+    public AudioClip clip;//効果音
+    public AudioSource source;//
 
-    //反射した回数
-    [System .NonSerialized]public int countPlaneMirror, countConvexMirror, countConcaveMirror;
 
-    //耐久力
-    [System.NonSerialized] public int mirrorBreakNum =20, cvMirrorBreakNum = 15, ccMirrorBreakNum = 15;
+    [System .NonSerialized]public int countPlaneMirror, countConvexMirror, countConcaveMirror;//ミラー反射した回数
+
+    [System.NonSerialized] public int mirrorBreakNum =20, cvMirrorBreakNum = 15, ccMirrorBreakNum = 15;//各ミラーの耐久力
 
     public enum Mirror
     {
@@ -34,14 +33,14 @@ public class ReflectCount : MonoBehaviour
 
     void Update()
     {
+        //ミラーの残り反射回数、ミラーの反射回数、UIで表示
         if (mirror == Mirror.planeMirror)
         {
             CountTextChange(countPlaneMirror, mirrorBreakNum);
             if (countPlaneMirror <= 0)
             {
                 gameObject.SetActive(false);
-                //ミラー壊れたら時の音
-                source.PlayOneShot(clip);
+                source.PlayOneShot(clip);//ミラー壊れた時の音
                 mirrorStock.planeMirrorStock--;
                 countPlaneMirror = mirrorBreakNum;
             }
@@ -52,8 +51,7 @@ public class ReflectCount : MonoBehaviour
             if (countConvexMirror <= 0)
             {
                 gameObject.SetActive(false);
-                //ミラー壊れたら時の音
-                source.PlayOneShot(clip);
+                source.PlayOneShot(clip);//ミラー壊れた時の音
                 mirrorStock.convexMirrorStock--;
                 countConvexMirror = cvMirrorBreakNum;
             }
@@ -64,8 +62,7 @@ public class ReflectCount : MonoBehaviour
             if (countConcaveMirror <= 0)
             {
                 gameObject.SetActive(false);
-                //ミラー壊れたら時の音
-                source.PlayOneShot(clip);
+                source.PlayOneShot(clip);//ミラー壊れた時の音
                 mirrorStock.concaveMirrorStock--;
                 countConcaveMirror = ccMirrorBreakNum;
             }

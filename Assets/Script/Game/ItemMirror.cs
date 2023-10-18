@@ -39,7 +39,7 @@ public class ItemMirror : MonoBehaviour
         {
             if (mirrorstock.currentStock < mirrorstock.maxStock)//現在ミラー数＜ミラー総数
             {
-                //ミラーの種類が一致し、ミラーの耐久は0の時
+                //ミラーの種類が一致し、ミラーの残数は0の時
                 if (mirror == Mirror.planeMirror&& mirrorstock.planeMirrorStock==0)
                 {
                     mirrorstock.planeMirrorStock++;

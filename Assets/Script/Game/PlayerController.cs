@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
             transform.LookAt(lookPoint);
         }
         //<-------------------------------------------------------->
+
         //<-----------------ミラーの切り替え----------------------->
         if (mirror == Mirror.planeMirror)
         {
@@ -69,6 +70,7 @@ public class PlayerController : MonoBehaviour
             MirrorChange(mirrorStock.concaveMirrorStock, isFalse, isFalse, isTrue, Mirror.planeMirror);
         }
         //<--------------------------------------------------------->
+
         //<--------------------アニメション------------------------->
         if (vec3 != new Vector3(0,0,0))
         {

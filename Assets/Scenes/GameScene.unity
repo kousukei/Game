@@ -874,6 +874,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5102411452346843132, guid: 496a0a5eca789fe4b828bee9f8ba53c1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5585792307299673414, guid: 496a0a5eca789fe4b828bee9f8ba53c1, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -5472,6 +5476,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy01
       objectReference: {fileID: 0}
+    - target: {fileID: 5102411452346843132, guid: 496a0a5eca789fe4b828bee9f8ba53c1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5585792307299673414, guid: 496a0a5eca789fe4b828bee9f8ba53c1, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -7143,11 +7151,11 @@ PlayableDirector:
   - key: {fileID: -1500670507685109865, guid: ef6ac146836aa2e46bacf13dd8b1909e, type: 2}
     value: {fileID: 1446244148}
   - key: {fileID: 9117606947685243565, guid: ef6ac146836aa2e46bacf13dd8b1909e, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1092391279}
   - key: {fileID: 395035060054033435, guid: ef6ac146836aa2e46bacf13dd8b1909e, type: 2}
     value: {fileID: 1092391278}
   - key: {fileID: -1669738281578627559, guid: ef6ac146836aa2e46bacf13dd8b1909e, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 148197003}
   - key: {fileID: 4343358778109790093, guid: ef6ac146836aa2e46bacf13dd8b1909e, type: 2}
     value: {fileID: 148197002}
   - key: {fileID: -7024536842219434795, guid: ef6ac146836aa2e46bacf13dd8b1909e, type: 2}
@@ -7184,6 +7192,8 @@ PlayableDirector:
     value: {fileID: 322428721}
   - key: {fileID: 5651725148008074615, guid: ef6ac146836aa2e46bacf13dd8b1909e, type: 2}
     value: {fileID: 43645161}
+  - key: {fileID: 7522444023388984088, guid: ef6ac146836aa2e46bacf13dd8b1909e, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1554899410

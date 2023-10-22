@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TutorialController : MonoBehaviour
 {
+    [System.NonSerialized]
     public int progress=0;
-    GameObject circle, arrow, explanation, letter,keyObject,mouse,space;//UIオブジェクト
+    GameObject circle, arrow, explanation, letter,keyObject,mouse,space, start, again;//UIオブジェクト
+    public GameObject enemy;//チュートリアル用敵
+    GameObject tutoriaCamera;
     Text letterText;//Textコンポーネント
     int gameTime=1;//ゲーム時間
-    public GameObject enemy;
-    GameObject tutoriaCamera;
     void Start()
     {
         circle = this.transform.Find("Circle").gameObject;//丸オブジェクト
@@ -21,7 +23,9 @@ public class TutorialController : MonoBehaviour
         keyObject = this.transform.Find("ButtonKey").gameObject;//キーボードオブジェクト
         mouse = this.transform.Find("Mouse").gameObject;//マウスオブジェクト
         space = this.transform.Find("Space").gameObject;//スペースオブジェクト
-        tutoriaCamera = this.transform.Find("TutorialCamera").gameObject;
+        tutoriaCamera = this.transform.Find("TutorialCamera").gameObject;//
+        start = this.transform.Find("Start").gameObject;
+        again = this.transform.Find("Again").gameObject;
         //<----------初期化----------->
         circle.SetActive(false);
         arrow.SetActive(false);
@@ -31,6 +35,8 @@ public class TutorialController : MonoBehaviour
         mouse.SetActive(false);
         space.SetActive(false);
         enemy.SetActive(false);
+        start.SetActive(false);
+        again.SetActive(false);
         //<--------------------------->
         g(progress);
     }
@@ -119,6 +125,7 @@ public class TutorialController : MonoBehaviour
                 break;
             case 17:
                 tutoriaCamera.GetComponent<Camera>().depth = 0;
+                Message(p);
                 break;
         }
     }
@@ -328,9 +335,28 @@ public class TutorialController : MonoBehaviour
                 letter.transform.localPosition = new Vector3(-429f, 254f, 0f);
                 letter.transform.localRotation = new Quaternion(0f, 0f, 1f, -1.08f);
                 letter.GetComponent<RectTransform>().sizeDelta = new Vector2(308f, 157f);
-                letterText.text = "これは脱走装置です\n目標として進めてください。";
+                letterText.text = "これは脱走装置です。\n目標として進めてください。";
+                break;
+            case 17:
+                start.SetActive(true);
+                again.SetActive(true);
+                explanation.transform.localPosition = new Vector3(-268f, 269f, 0f);
+                explanation.transform.localRotation = new Quaternion(0f, 0f, 1f, 0.93f);
+                explanation.transform.localScale = new Vector3(3.5f, 2.4f, 1.2f);
+                letter.transform.localPosition = new Vector3(-268f, 267f, 0f);
+                letter.transform.localRotation = new Quaternion(0f, 0f, 1f, -1.08f);
+                letter.GetComponent<RectTransform>().sizeDelta = new Vector2(308f, 212f);
+                letterText.text = "チュートリアルは以上です。\nゲームゲームを始めましょうか";
                 break;
         }
+    }
+    public void TutorialStartButton()
+    { 
+        SceneManager.LoadScene("GameScene");
+    }
+    public void TutorialAgainButton()
+    {
+        SceneManager.LoadScene("TutorialScene");
     }
 }
     

@@ -532,7 +532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5585792307299673414
 Transform:
   m_ObjectHideFlags: 0
@@ -640,9 +640,6 @@ MonoBehaviour:
   laser_speed: 20
   withinRange: 10
   OutOfRange: 30
-  audio:
-  - {fileID: 8300000, guid: 561c1363b6b72db42a4a7a6391bb2e9e, type: 3}
-  source: {fileID: 3672773058840678066}
   HP: 3
   hit: 0
   deathFlag: 0

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.VirtualTexturing;
 using UnityEngine.Serialization;
+using UnityEngine.SceneManagement;
 
 
 
@@ -38,7 +39,7 @@ public class Enemy_1: MonoBehaviour
 
     enum Mode
     {
-        開始,移動,攻撃
+        開始,移動,攻撃, チュートリアル
     }
      Mode mode = Mode.開始;
     void Start()
@@ -63,12 +64,15 @@ public class Enemy_1: MonoBehaviour
             case Mode.開始:
                 time += Time.deltaTime;
                 if (time >= 2) { mode = Mode.移動; }
+                if (SceneManager.GetActiveScene().name== "TutorialScene")
+                {
+                    mode = Mode.チュートリアル;
+                }
                 break;
             case Mode.移動:
-                //移動目標
-                enemy.random_move(this.gameObject, speed);
-                enemy.Direction(this.gameObject);
-                if (enemy.Attack_range(Player, this.gameObject))//敵の目の前
+                enemy.random_move(this.gameObject, speed);//移動
+                enemy.Direction(this.gameObject);//向き
+                if (enemy.Attack_range(Player, this.gameObject))//プレイヤーの判定
                 {
                     switch (enemy.tracking_range(Player, this.gameObject, withinRange, OutOfRange))
                     {
@@ -108,6 +112,21 @@ public class Enemy_1: MonoBehaviour
                     }
                 }
                 break;
+            case Mode.チュートリアル:
+                enemy.Direction(this.gameObject);//向き
+                if (enemy.Attack_range(Player, this.gameObject))//プレイヤーの判定
+                {
+                    switch (enemy.tracking_range(Player, this.gameObject, withinRange, OutOfRange))
+                    {
+                        case 1:
+                            mode = Mode.攻撃;
+                            break;
+                        case 2:
+                            enemy.Player_move(Player, this.gameObject);
+                            break;
+                    }
+                }
+                break;
         }
 
         if (HP <= 0)
@@ -122,8 +141,6 @@ public class Enemy_1: MonoBehaviour
         {
             damageEffectPosition.transform.position = this.transform.position;
         }
-
-
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -157,7 +174,14 @@ public class Enemy_1: MonoBehaviour
                 Instantiate(mirror[2], this.transform.position, this.transform.rotation);
                 break;
         }
-            
+        if (SceneManager.GetActiveScene().name == "TutorialScene")
+        {
+            GameObject.Find("TutorialUI").GetComponent<TutorialController>().g(15);
+            GameObject.Find("TutorialUI").GetComponent<TutorialController>().progress = 15;
+            Instantiate(mirror[0], this.transform.position, this.transform.rotation);
+        }
+
+
     }
 
 }

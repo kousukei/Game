@@ -106,11 +106,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb = GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.constraints = RigidbodyConstraints.FreezePositionY;
-                rb.constraints = RigidbodyConstraints.FreezeRotationY;
-            }
+
         }
     }
     void OnCollisionEnter(Collision collision)

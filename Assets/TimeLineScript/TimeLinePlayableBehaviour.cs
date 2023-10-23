@@ -14,7 +14,6 @@ public class TimeLinePlayableBehaviour : PlayableBehaviour
     // Called when the owning graph starts playing
     public override void OnGraphStart(Playable playable)
     {
-        Debug.Log("11111");
         gameControl = GameObject.Find("GameControl");
         gameControl.transform.Find("StartMovie").gameObject.SetActive(true);
         camera = GameObject.Find("Camera").GetComponent<Camera>();
@@ -44,6 +43,7 @@ public class TimeLinePlayableBehaviour : PlayableBehaviour
             gameControl.transform.Find("StartMovie").gameObject.SetActive(false);
             playerObject = GameObject.Find("Player");
             playerObject.AddComponent<Rigidbody>();
+            playerObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             playerObject.transform.Find("Mirror").gameObject.SetActive(true);
             GameControl Control = gameControl.GetComponent<GameControl>();
             GameObject.Find("StartGame").transform.Find("BGMObject").gameObject.SetActive(true);

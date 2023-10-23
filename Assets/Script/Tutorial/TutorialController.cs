@@ -8,7 +8,7 @@ public class TutorialController : MonoBehaviour
 {
     [System.NonSerialized]
     public int progress=0;
-    GameObject circle, arrow, explanation, letter,keyObject,mouse,space, start, again;//UIオブジェクト
+    GameObject circle, arrow, explanation, letter,keyObject,mouse,space, start, again,player;//UIオブジェクト
     public GameObject enemy;//チュートリアル用敵
     GameObject tutoriaCamera;
     Text letterText;//Textコンポーネント
@@ -26,6 +26,7 @@ public class TutorialController : MonoBehaviour
         tutoriaCamera = this.transform.Find("TutorialCamera").gameObject;//
         start = this.transform.Find("Start").gameObject;
         again = this.transform.Find("Again").gameObject;
+        player = GameObject.Find("Player");
         //<----------初期化----------->
         circle.SetActive(false);
         arrow.SetActive(false);
@@ -64,7 +65,7 @@ public class TutorialController : MonoBehaviour
         {
             case 0:
                 gameTime++;
-                TimeStop(gameTime);
+                player.GetComponent<PlayerController>().enabled = false;
                 Message(p);
                 break;
             case 1:
@@ -93,7 +94,7 @@ public class TutorialController : MonoBehaviour
                 break;
             case 9:
                 gameTime++;
-                TimeStop(gameTime);
+                player.GetComponent<PlayerController>().enabled = true;
                 Message(p);
                 break;
             case 10:
@@ -105,13 +106,11 @@ public class TutorialController : MonoBehaviour
             case 12:
                 Message(p);
                 gameTime++;
-                TimeStop(gameTime);
                 enemy.SetActive(true);
                 enemy.transform.position = GameObject.Find("Player").transform.position + new Vector3(-7f, 0f, 0f);
                 break;
             case 13:
                 gameTime++;
-                TimeStop(gameTime);
                 break;
             case 14:
                 break;

@@ -39,7 +39,7 @@ public class ButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     }
     public void start()
     {
-        SceneManager.LoadScene("GameScene");//ゲームシーンへ移動
+        SceneManager.LoadScene("TutorialScene");//チュートリアルへ移動
         Time.timeScale = 1f;;
     }
     public void OnPointerEnter(PointerEventData eventData)

@@ -88,16 +88,28 @@ public class PlayerController : MonoBehaviour
     {
         vec3 = new Vector3(horizontalKey, 0, verticalKey);
 
-        if (isGround)//地面判定
+        if (rb != null)
         {
-            //プレイヤー移動
-            if (rb.velocity.magnitude > 1)
+            if (isGround)//地面判定
             {
-                rb.velocity = vec3.normalized * speed;
+                //プレイヤー移動
+                if (rb.velocity.magnitude > 1)
+                {
+                    rb.velocity = vec3.normalized * speed;
+                }
+                else
+                {
+                    rb.velocity = vec3 * speed;
+                }
             }
-            else
+        }
+        else
+        {
+            rb = GetComponent<Rigidbody>();
+            if (rb != null)
             {
-                rb.velocity = vec3 * speed;
+                rb.constraints = RigidbodyConstraints.FreezePositionY;
+                rb.constraints = RigidbodyConstraints.FreezeRotationY;
             }
         }
     }

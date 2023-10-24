@@ -23,7 +23,7 @@ public class TutorialController : MonoBehaviour
         keyObject = this.transform.Find("ButtonKey").gameObject;//キーボードオブジェクト
         mouse = this.transform.Find("Mouse").gameObject;//マウスオブジェクト
         space = this.transform.Find("Space").gameObject;//スペースオブジェクト
-        tutoriaCamera = this.transform.Find("TutorialCamera").gameObject;//
+        tutoriaCamera = GameObject.Find("TutorialCamera");
         start = this.transform.Find("Start").gameObject;
         again = this.transform.Find("Again").gameObject;
         player = GameObject.Find("Player");

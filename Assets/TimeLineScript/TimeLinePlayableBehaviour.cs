@@ -8,7 +8,7 @@ public class TimeLinePlayableBehaviour : PlayableBehaviour
 {
     Camera camera;
     GameObject gameControl;
-    GameObject playerObject;
+    GameObject playerObject,timeLinePlayer;
     public bool end = false;
     bool start = false;
     // Called when the owning graph starts playing
@@ -17,6 +17,11 @@ public class TimeLinePlayableBehaviour : PlayableBehaviour
         gameControl = GameObject.Find("GameControl");
         gameControl.transform.Find("StartMovie").gameObject.SetActive(true);
         camera = GameObject.Find("Camera").GetComponent<Camera>();
+        playerObject = GameObject.Find("Player");
+        playerObject.transform.Find("Robot").gameObject.SetActive(false);
+        playerObject.transform.Find("mixamorig:Hips").gameObject.SetActive(false);
+        playerObject.transform.Find("Mirror").gameObject.SetActive(false);
+        playerObject.GetComponent<PlayerController>().enabled = false;
         camera.depth = 2;
     }
 
@@ -41,10 +46,11 @@ public class TimeLinePlayableBehaviour : PlayableBehaviour
             camera.depth = 0;
             gameControl = GameObject.Find("GameControl");
             gameControl.transform.Find("StartMovie").gameObject.SetActive(false);
-            playerObject = GameObject.Find("Player");
-            playerObject.AddComponent<Rigidbody>();
-            playerObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            playerObject.transform.Find("Robot").gameObject.SetActive(true);
+            playerObject.transform.Find("mixamorig:Hips").gameObject.SetActive(true);
             playerObject.transform.Find("Mirror").gameObject.SetActive(true);
+            playerObject.GetComponent<PlayerController>().enabled = true;
+            GameObject.Find("Player (1)").SetActive(false);
             GameControl Control = gameControl.GetComponent<GameControl>();
             GameObject.Find("StartGame").transform.Find("BGMObject").gameObject.SetActive(true);
             Control.end = true;

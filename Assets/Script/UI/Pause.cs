@@ -15,18 +15,25 @@ public class Pause : MonoBehaviour
 
     void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			//キーを押した時一時停止
-			pauseUI.SetActive(!pauseUI.activeSelf);
+        if (SceneManager.GetActiveScene().name== "TutorialScene")
+        {
 
-			if (pauseUI.activeSelf)
+        }
+        else
+        {
+			if (Input.GetKeyDown(KeyCode.Escape))
 			{
-				Time.timeScale = 0f;//ゲーム時間停止
-			}
-			else
-			{
-				Time.timeScale = 1f;//ゲーム時間開始
+				//キーを押した時一時停止
+				pauseUI.SetActive(!pauseUI.activeSelf);
+
+				if (pauseUI.activeSelf)
+				{
+					Time.timeScale = 0f;//ゲーム時間停止
+				}
+				else
+				{
+					Time.timeScale = 1f;//ゲーム時間開始
+				}
 			}
 		}
 	}

@@ -16,6 +16,10 @@ public class Ranking : MonoBehaviour
         sco_Script = GameObject.Find("ScriptObject").GetComponent<Score_Script>();
         
         point = sco_Script.Score;
+        for(int i = 0; i < 6; i++)
+        {
+            Set(i * 50);
+        }
         Get();
         Set(point);
         for(int i = 0; i < rankingText.Length; i++)

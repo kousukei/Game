@@ -303,7 +303,7 @@ public class TutorialController : MonoBehaviour
                 letter.transform.localPosition = new Vector3(-521f, 567f, 0f);
                 letter.transform.localRotation = new Quaternion(0f, 0f, 1f, -1.08f);
                 letter.GetComponent<RectTransform>().sizeDelta = new Vector2(308f, 308f);
-                letterText.text = "スペース：\nスペースを押せばミラーの種類を変える。";
+                letterText.text = "スペース：\nスペースを押せばミラーの種類を変えられる。";
 
                 break;
             case 12:
@@ -325,7 +325,7 @@ public class TutorialController : MonoBehaviour
                 letter.transform.localPosition = new Vector3(-429f, 254f, 0f);
                 letter.transform.localRotation = new Quaternion(0f, 0f, 1f, -1.08f);
                 letter.GetComponent<RectTransform>().sizeDelta = new Vector2(308f, 157f);
-                letterText.text = "敵を倒したらアイテムミラーがランダムで落ちます。\n拾ったら壊れたミラーを回復できます。";
+                letterText.text = "敵を倒したらアイテムミラーがランダムに落ちます。\n拾ったら壊れたミラーを回復できます。";
                 break;
             case 16:
                 explanation.transform.localPosition = new Vector3(-427f, 257f, 0f);
